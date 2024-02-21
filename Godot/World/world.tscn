@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=3 uid="uid://crvfdfx87deoe"]
+
+[ext_resource type="PackedScene" uid="uid://e5kjlct80fip" path="res://World/FirstLevel.tscn" id="1_cyrdo"]
+[ext_resource type="Script" path="res://World/world.gd" id="1_fqgdq"]
+[ext_resource type="PackedScene" uid="uid://mtiuug5u0dfd" path="res://Menus/pause_menu.tscn" id="2_6vfhy"]
+[ext_resource type="PackedScene" uid="uid://cain44mo621tg" path="res://Menus/skills_menu.tscn" id="4_qthm1"]
+
+[node name="World" type="Node"]
+process_mode = 3
+script = ExtResource("1_fqgdq")
+
+[node name="FirstLevel" parent="." instance=ExtResource("1_cyrdo")]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="PauseMenu" parent="CanvasLayer" node_paths=PackedStringArray("game") instance=ExtResource("2_6vfhy")]
+visible = false
+game = NodePath("../..")
+
+[node name="Skills" parent="CanvasLayer" instance=ExtResource("4_qthm1")]

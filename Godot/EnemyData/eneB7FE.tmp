@@ -1,0 +1,213 @@
+[gd_scene load_steps=25 format=3 uid="uid://bc430eqauqkbh"]
+
+[ext_resource type="Script" path="res://EnemyData/enemy.gd" id="1_130ig"]
+[ext_resource type="Texture2D" uid="uid://bduwcxk46nf8p" path="res://Playerdata/player.png" id="1_ekegp"]
+[ext_resource type="Script" path="res://EnemyData/finite_state_machine.gd" id="3_owxu8"]
+[ext_resource type="Script" path="res://EnemyData/enemy_idle_state.gd" id="4_n4w73"]
+[ext_resource type="Script" path="res://EnemyData/enemy_aggro_state.gd" id="5_yk2jx"]
+[ext_resource type="Script" path="res://EnemyData/EnemyMovementData.gd" id="8_lnv5w"]
+[ext_resource type="Script" path="res://EnemyData/EnemyMaxStats.gd" id="9_6pkpm"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_con5h"]
+atlas = ExtResource("1_ekegp")
+region = Rect2(0, 0, 24, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o8xmj"]
+atlas = ExtResource("1_ekegp")
+region = Rect2(144, 0, 24, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_08byn"]
+atlas = ExtResource("1_ekegp")
+region = Rect2(24, 0, 24, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v3wc6"]
+atlas = ExtResource("1_ekegp")
+region = Rect2(48, 0, 24, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lhum2"]
+atlas = ExtResource("1_ekegp")
+region = Rect2(72, 0, 24, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hcxi2"]
+atlas = ExtResource("1_ekegp")
+region = Rect2(96, 0, 24, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g25h6"]
+atlas = ExtResource("1_ekegp")
+region = Rect2(120, 0, 24, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j73mx"]
+atlas = ExtResource("1_ekegp")
+region = Rect2(0, 0, 24, 20)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_03wu1"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_con5h")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o8xmj")
+}],
+"loop": true,
+"name": &"Jumping",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_08byn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v3wc6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lhum2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hcxi2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g25h6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j73mx")
+}],
+"loop": true,
+"name": &"Running",
+"speed": 7.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_svebg"]
+size = Vector2(8, 15)
+
+[sub_resource type="Resource" id="Resource_imqjv"]
+script = ExtResource("8_lnv5w")
+speed = 200.0
+jump_velocity = -300.0
+acceleration = 300.0
+air_resistence = 500.0
+friction = 1000.0
+gravity_scale = 1.0
+knock_back = 10
+
+[sub_resource type="Resource" id="Resource_2drwd"]
+script = ExtResource("9_6pkpm")
+hp = 300.0
+
+[sub_resource type="Resource" id="Resource_kwwha"]
+script = ExtResource("8_lnv5w")
+speed = 200.0
+jump_velocity = -300.0
+acceleration = 300.0
+air_resistence = 500.0
+friction = 1000.0
+gravity_scale = 1.0
+knock_back = 10
+
+[sub_resource type="Resource" id="Resource_svpnr"]
+script = ExtResource("9_6pkpm")
+hp = 300.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dr10h"]
+size = Vector2(8, 14)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_idlq3"]
+radius = 52.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_kg6ji"]
+radius = 80.0
+
+[node name="Enemy" type="CharacterBody2D"]
+collision_layer = 16
+collision_mask = 23
+script = ExtResource("1_130ig")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+debug_enabled = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -10)
+sprite_frames = SubResource("SpriteFrames_03wu1")
+animation = &"Idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -7.5)
+shape = SubResource("RectangleShape2D_svebg")
+
+[node name="FiniteStateMachine" type="Node" parent="."]
+script = ExtResource("3_owxu8")
+state = Object(Node,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","script":ExtResource("4_n4w73"),"movement_data":SubResource("Resource_imqjv"),"stat_data":SubResource("Resource_2drwd"),"navigation_agent_2d":Object(NavigationAgent2D,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","target_position":Vector2(0, 0),"path_desired_distance":20.0,"target_desired_distance":10.0,"path_max_distance":100.0,"navigation_layers":1,"pathfinding_algorithm":0,"path_postprocessing":0,"path_metadata_flags":7,"avoidance_enabled":false,"velocity":Vector2(0, 0),"radius":10.0,"neighbor_distance":500.0,"max_neighbors":10,"time_horizon_agents":1.0,"time_horizon_obstacles":0.0,"max_speed":100.0,"avoidance_layers":1,"avoidance_mask":1,"avoidance_priority":1.0,"debug_enabled":true,"debug_use_custom":false,"debug_path_custom_color":Color(1, 1, 1, 1),"debug_path_custom_point_size":4.0,"debug_path_custom_line_width":-1.0,"script":null)
+,"actor":Object(CharacterBody2D,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"position":Vector2(0, 0),"rotation":0.0,"scale":Vector2(1, 1),"skew":0.0,"disable_mode":0,"collision_layer":16,"collision_mask":23,"collision_priority":1.0,"input_pickable":false,"motion_mode":0,"up_direction":Vector2(0, -1),"velocity":Vector2(0, 0),"slide_on_ceiling":true,"max_slides":4,"wall_min_slide_angle":0.261799,"floor_stop_on_slope":true,"floor_constant_speed":false,"floor_block_on_wall":true,"floor_max_angle":0.785398,"floor_snap_length":1.0,"platform_on_leave":0,"platform_floor_layers":4294967295,"platform_wall_layers":0,"safe_margin":0.08,"script":ExtResource("1_130ig"))
+,"animated_sprite_2d":Object(AnimatedSprite2D,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"position":Vector2(0, -10),"rotation":0.0,"scale":Vector2(1, 1),"skew":0.0,"sprite_frames":SubResource("SpriteFrames_03wu1"),"animation":&"Idle","autoplay":"","frame":0,"frame_progress":0.0,"speed_scale":1.0,"centered":true,"offset":Vector2(0, 0),"flip_h":false,"flip_v":false,"script":null)
+,"harzard_detector":Object(Area2D,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"position":Vector2(0, 0),"rotation":0.0,"scale":Vector2(1, 1),"skew":0.0,"disable_mode":0,"collision_layer":16,"collision_mask":4,"collision_priority":1.0,"input_pickable":true,"monitoring":true,"monitorable":true,"priority":0,"gravity_space_override":0,"gravity_point":false,"gravity_point_unit_distance":0.0,"gravity_point_center":Vector2(0, 1),"gravity_direction":Vector2(0, 1),"gravity":980.0,"linear_damp_space_override":0,"linear_damp":0.1,"angular_damp_space_override":0,"angular_damp":1.0,"audio_bus_override":false,"audio_bus_name":&"Master","script":null)
+,"player_detector":Object(Area2D,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"position":Vector2(0, 0),"rotation":0.0,"scale":Vector2(1, 1),"skew":0.0,"disable_mode":0,"collision_layer":16,"collision_mask":2,"collision_priority":1.0,"input_pickable":true,"monitoring":true,"monitorable":true,"priority":0,"gravity_space_override":0,"gravity_point":false,"gravity_point_unit_distance":0.0,"gravity_point_center":Vector2(0, 1),"gravity_direction":Vector2(0, 1),"gravity":980.0,"linear_damp_space_override":0,"linear_damp":0.1,"angular_damp_space_override":0,"angular_damp":1.0,"audio_bus_override":false,"audio_bus_name":&"Master","script":null)
+,"coyote_jump_timer":Object(Timer,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","process_callback":1,"wait_time":0.1,"one_shot":true,"autostart":false,"script":null)
+,"movement_update_buffer":Object(Timer,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","process_callback":1,"wait_time":0.3,"one_shot":true,"autostart":false,"script":null)
+,"max_walk_angle":45)
+
+
+[node name="EnemyIdleState" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("navigation_agent_2d", "actor", "animated_sprite_2d", "harzard_detector", "player_detector", "coyote_jump_timer", "movement_update_buffer")]
+script = ExtResource("4_n4w73")
+movement_data = SubResource("Resource_imqjv")
+stat_data = SubResource("Resource_2drwd")
+navigation_agent_2d = NodePath("../../NavigationAgent2D")
+actor = NodePath("../..")
+animated_sprite_2d = NodePath("../../AnimatedSprite2D")
+harzard_detector = NodePath("../../HarzardDetector")
+player_detector = NodePath("../../PlayerDetector")
+coyote_jump_timer = NodePath("../../CoyoteJumpTimer")
+movement_update_buffer = NodePath("../../MovementUpdateBuffer")
+max_walk_angle = 45
+
+[node name="EnemyAggroState" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("navigation_agent_2d", "actor", "animated_sprite_2d", "harzard_detector", "player_detector", "coyote_jump_timer", "movement_update_buffer")]
+script = ExtResource("5_yk2jx")
+movement_data = SubResource("Resource_kwwha")
+stat_data = SubResource("Resource_svpnr")
+navigation_agent_2d = NodePath("../../NavigationAgent2D")
+actor = NodePath("../..")
+animated_sprite_2d = NodePath("../../AnimatedSprite2D")
+harzard_detector = NodePath("../../HarzardDetector")
+player_detector = NodePath("../../AggroRange")
+coyote_jump_timer = NodePath("../../CoyoteJumpTimer")
+movement_update_buffer = NodePath("../../MovementUpdateBuffer")
+max_walk_angle = 45
+
+[node name="CoyoteJumpTimer" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+
+[node name="HarzardDetector" type="Area2D" parent="."]
+collision_layer = 16
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HarzardDetector"]
+position = Vector2(0, -7)
+shape = SubResource("RectangleShape2D_dr10h")
+
+[node name="PlayerDetector" type="Area2D" parent="."]
+collision_layer = 16
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetector"]
+position = Vector2(0, -8)
+shape = SubResource("CircleShape2D_idlq3")
+
+[node name="AggroRange" type="Area2D" parent="."]
+collision_layer = 16
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AggroRange"]
+position = Vector2(0, -8)
+shape = SubResource("CircleShape2D_kg6ji")
+
+[node name="MovementUpdateBuffer" type="Timer" parent="."]
+wait_time = 0.3
+one_shot = true
+
+[connection signal="area_entered" from="PlayerDetector" to="FiniteStateMachine/EnemyIdleState" method="_on_player_detector_area_entered"]
+[connection signal="area_exited" from="AggroRange" to="FiniteStateMachine/EnemyAggroState" method="_on_aggro_range_area_exited"]

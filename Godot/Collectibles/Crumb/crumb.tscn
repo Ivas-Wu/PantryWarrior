@@ -1,0 +1,59 @@
+[gd_scene load_steps=10 format=3 uid="uid://0u7hykwahamt"]
+
+[ext_resource type="Script" path="res://Collectibles/Crumb/crumb.gd" id="1_dgam1"]
+[ext_resource type="Texture2D" uid="uid://dqnmo2bodbs8a" path="res://Collectibles/Crumb/Crumb-Sheet.png" id="1_h7php"]
+[ext_resource type="Script" path="res://Collectibles/Crumb/CrumbAnimation.gd" id="2_rvf3u"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8u3al"]
+atlas = ExtResource("1_h7php")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c8drd"]
+atlas = ExtResource("1_h7php")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q80dd"]
+atlas = ExtResource("1_h7php")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c7g2o"]
+atlas = ExtResource("1_h7php")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_i3l1b"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8u3al")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c8drd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q80dd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c7g2o")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_t6t3i"]
+
+[node name="Crumb" type="Area2D"]
+collision_layer = 8
+collision_mask = 2
+script = ExtResource("1_dgam1")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-2, 0)
+sprite_frames = SubResource("SpriteFrames_i3l1b")
+animation = &"Idle"
+script = ExtResource("2_rvf3u")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_t6t3i")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

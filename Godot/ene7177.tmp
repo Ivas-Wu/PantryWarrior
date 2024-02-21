@@ -1,0 +1,141 @@
+[gd_scene load_steps=18 format=3 uid="uid://bc430eqauqkbh"]
+
+[ext_resource type="Script" path="res://enemy.gd" id="1_130ig"]
+[ext_resource type="Texture2D" uid="uid://bduwcxk46nf8p" path="res://player.png" id="1_ekegp"]
+[ext_resource type="Script" path="res://finite_state_machine.gd" id="3_owxu8"]
+[ext_resource type="Script" path="res://enemy_idle_state.gd" id="4_n4w73"]
+[ext_resource type="Script" path="res://enemy_aggro_state.gd" id="5_yk2jx"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_con5h"]
+atlas = ExtResource("1_ekegp")
+region = Rect2(0, 0, 24, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o8xmj"]
+atlas = ExtResource("1_ekegp")
+region = Rect2(144, 0, 24, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_08byn"]
+atlas = ExtResource("1_ekegp")
+region = Rect2(24, 0, 24, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v3wc6"]
+atlas = ExtResource("1_ekegp")
+region = Rect2(48, 0, 24, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lhum2"]
+atlas = ExtResource("1_ekegp")
+region = Rect2(72, 0, 24, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hcxi2"]
+atlas = ExtResource("1_ekegp")
+region = Rect2(96, 0, 24, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g25h6"]
+atlas = ExtResource("1_ekegp")
+region = Rect2(120, 0, 24, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j73mx"]
+atlas = ExtResource("1_ekegp")
+region = Rect2(0, 0, 24, 20)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_03wu1"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_con5h")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o8xmj")
+}],
+"loop": true,
+"name": &"Jumping",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_08byn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v3wc6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lhum2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hcxi2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g25h6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j73mx")
+}],
+"loop": true,
+"name": &"Running",
+"speed": 7.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_svebg"]
+size = Vector2(8, 15)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dr10h"]
+size = Vector2(8, 14)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_idlq3"]
+radius = 52.0
+
+[node name="Enemy" type="CharacterBody2D"]
+script = ExtResource("1_130ig")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+debug_enabled = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -10)
+sprite_frames = SubResource("SpriteFrames_03wu1")
+animation = &"Idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -7.5)
+shape = SubResource("RectangleShape2D_svebg")
+
+[node name="FiniteStateMachine" type="Node" parent="." node_paths=PackedStringArray("state")]
+script = ExtResource("3_owxu8")
+state = NodePath("EnemyIdleState")
+
+[node name="EnemyIdleState" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("actor", "animator")]
+script = ExtResource("4_n4w73")
+actor = NodePath("../..")
+animator = NodePath("../../AnimatedSprite2D")
+
+[node name="EnemyAggroState" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("actor", "animator")]
+script = ExtResource("5_yk2jx")
+actor = NodePath("../..")
+animator = NodePath("../../AnimatedSprite2D")
+
+[node name="CoyoteJumpTimer" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+
+[node name="HarzardDetector" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HarzardDetector"]
+position = Vector2(0, -7)
+shape = SubResource("RectangleShape2D_dr10h")
+
+[node name="PlayerDetector" type="Area2D" parent="."]
+collision_layer = 16
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetector"]
+position = Vector2(0, -8)
+shape = SubResource("CircleShape2D_idlq3")
+
+[connection signal="area_entered" from="PlayerDetector" to="." method="_on_player_detector_area_entered"]

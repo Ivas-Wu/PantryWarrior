@@ -1,0 +1,287 @@
+[gd_scene load_steps=5 format=3 uid="uid://cain44mo621tg"]
+
+[ext_resource type="Script" path="res://Menus/skills_menu.gd" id="1_7jxr3"]
+[ext_resource type="Theme" uid="uid://dgdn0kpu0jxrl" path="res://my_theme.tres" id="2_y3kro"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0pokw"]
+bg_color = Color(1, 1, 1, 0)
+
+[sub_resource type="Theme" id="Theme_dcwlk"]
+Label/font_sizes/font_size = 10
+
+[node name="SkillsMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_7jxr3")
+
+[node name="Skills" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_0pokw")
+
+[node name="Open" type="PanelContainer" parent="Skills"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -31.0
+offset_top = -20.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="OpenMenu" type="Button" parent="Skills/Open"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("2_y3kro")
+theme_type_variation = &"FlatButton"
+text = "test"
+
+[node name="Menu" type="VBoxContainer" parent="Skills"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -148.0
+offset_top = -85.0
+offset_right = 148.0
+offset_bottom = 85.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Skill Menu" type="Label" parent="Skills/Menu"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Skill Menu
+"
+horizontal_alignment = 1
+
+[node name="GridContainer" type="GridContainer" parent="Skills/Menu"]
+layout_mode = 2
+theme = ExtResource("2_y3kro")
+columns = 6
+
+[node name="Label" type="VBoxContainer" parent="Skills/Menu/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 3.0
+theme = SubResource("Theme_dcwlk")
+
+[node name="Jump" type="Label" parent="Skills/Menu/GridContainer/Label"]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("2_y3kro")
+text = "Jump
+"
+horizontal_alignment = 1
+
+[node name="Attack" type="Label" parent="Skills/Menu/GridContainer/Label"]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("2_y3kro")
+text = "Attack
+"
+horizontal_alignment = 1
+
+[node name="Defense" type="Label" parent="Skills/Menu/GridContainer/Label"]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("2_y3kro")
+text = "Defense
+"
+horizontal_alignment = 1
+
+[node name="Dash" type="Label" parent="Skills/Menu/GridContainer/Label"]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("2_y3kro")
+text = "Dash
+"
+horizontal_alignment = 1
+
+[node name="Plummet" type="Label" parent="Skills/Menu/GridContainer/Label"]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("2_y3kro")
+text = "Plummet
+"
+horizontal_alignment = 1
+
+[node name="Time" type="Label" parent="Skills/Menu/GridContainer/Label"]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("2_y3kro")
+text = "Time
+"
+horizontal_alignment = 1
+
+[node name="Remove" type="VBoxContainer" parent="Skills/Menu/GridContainer"]
+layout_mode = 2
+
+[node name="Jump" type="Button" parent="Skills/Menu/GridContainer/Remove"]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("2_y3kro")
+text = "-"
+
+[node name="Attack" type="Button" parent="Skills/Menu/GridContainer/Remove"]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("2_y3kro")
+text = "-"
+
+[node name="Defense" type="Button" parent="Skills/Menu/GridContainer/Remove"]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("2_y3kro")
+text = "-"
+
+[node name="Dash" type="Button" parent="Skills/Menu/GridContainer/Remove"]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("2_y3kro")
+text = "-"
+
+[node name="Plummet" type="Button" parent="Skills/Menu/GridContainer/Remove"]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("2_y3kro")
+text = "-"
+
+[node name="Time" type="Button" parent="Skills/Menu/GridContainer/Remove"]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("2_y3kro")
+text = "-"
+
+[node name="Scale" type="VBoxContainer" parent="Skills/Menu/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 5.0
+
+[node name="Jump" type="Button" parent="Skills/Menu/GridContainer/Scale"]
+layout_mode = 2
+text = "-  -  -  -  -"
+
+[node name="Attack2" type="Button" parent="Skills/Menu/GridContainer/Scale"]
+layout_mode = 2
+text = "-  -  -  -  -"
+
+[node name="Defense" type="Button" parent="Skills/Menu/GridContainer/Scale"]
+layout_mode = 2
+text = "-  -  -  -  -"
+
+[node name="Dash" type="Button" parent="Skills/Menu/GridContainer/Scale"]
+layout_mode = 2
+text = "-  -  -  -  -"
+
+[node name="Plummet" type="Button" parent="Skills/Menu/GridContainer/Scale"]
+layout_mode = 2
+text = "-  -  -  -  -"
+
+[node name="Time" type="Button" parent="Skills/Menu/GridContainer/Scale"]
+layout_mode = 2
+text = "-  -  -  -  -"
+
+[node name="Add" type="VBoxContainer" parent="Skills/Menu/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Jump" type="Button" parent="Skills/Menu/GridContainer/Add"]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("2_y3kro")
+text = "+"
+
+[node name="Attack" type="Button" parent="Skills/Menu/GridContainer/Add"]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("2_y3kro")
+text = "+"
+
+[node name="Denfense" type="Button" parent="Skills/Menu/GridContainer/Add"]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("2_y3kro")
+text = "+"
+
+[node name="Dash" type="Button" parent="Skills/Menu/GridContainer/Add"]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("2_y3kro")
+text = "+"
+
+[node name="Plummet" type="Button" parent="Skills/Menu/GridContainer/Add"]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("2_y3kro")
+text = "+"
+
+[node name="Time" type="Button" parent="Skills/Menu/GridContainer/Add"]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("2_y3kro")
+text = "+"
+
+[node name="Control" type="Control" parent="Skills/Menu/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Placeholder" type="VBoxContainer" parent="Skills/Menu/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.89
+
+[node name="Jump" type="Button" parent="Skills/Menu/GridContainer/Placeholder"]
+layout_mode = 2
+text = "Placeholder
+"
+
+[node name="Attack" type="Button" parent="Skills/Menu/GridContainer/Placeholder"]
+layout_mode = 2
+text = "Placeholder
+"
+
+[node name="Defense" type="Button" parent="Skills/Menu/GridContainer/Placeholder"]
+layout_mode = 2
+text = "Placeholder
+"
+
+[node name="Dash" type="Button" parent="Skills/Menu/GridContainer/Placeholder"]
+layout_mode = 2
+text = "Placeholder
+"
+
+[node name="Plummet" type="Button" parent="Skills/Menu/GridContainer/Placeholder"]
+layout_mode = 2
+text = "Placeholder
+"
+
+[node name="Time" type="Button" parent="Skills/Menu/GridContainer/Placeholder"]
+layout_mode = 2
+text = "Placeholder
+"
+
+[node name="Close" type="Button" parent="Skills/Menu"]
+layout_mode = 2
+size_flags_vertical = 8
+theme = ExtResource("2_y3kro")
+text = "Close
+"
+
+[connection signal="pressed" from="Skills/Open/OpenMenu" to="." method="_on_open_menu_pressed"]
+[connection signal="pressed" from="Skills/Open/OpenMenu" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="Skills/Menu/Close" to="." method="_on_close_pressed"]
+[connection signal="pressed" from="Skills/Menu/Close" to="." method="_on_button_pressed"]

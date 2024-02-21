@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="EnemyMovementData" load_steps=2 format=3 uid="uid://b0f5do8k6ghgi"]
+
+[ext_resource type="Script" path="res://EnemyData/EnemyMovementData.gd" id="1_rpx8n"]
+
+[resource]
+script = ExtResource("1_rpx8n")
+speed = 50.0
+jump_velocity = -300.0
+acceleration = 200.0
+air_resistence = 500.0
+friction = 1000.0
+gravity_scale = 1.0
+knock_back = 10

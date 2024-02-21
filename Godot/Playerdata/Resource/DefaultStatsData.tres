@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="PlayerStatsData" load_steps=2 format=3 uid="uid://bv18tj64g6nih"]
+
+[ext_resource type="Script" path="res://Playerdata/Scripts/PlayerMaxStats.gd" id="1_daka6"]
+
+[resource]
+script = ExtResource("1_daka6")
+hp = 500.0
+invulnerability_frames = 100
+air_jump = 1

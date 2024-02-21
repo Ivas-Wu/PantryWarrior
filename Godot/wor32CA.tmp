@@ -1,0 +1,39 @@
+[gd_scene load_steps=6 format=3 uid="uid://crvfdfx87deoe"]
+
+[ext_resource type="Script" path="res://world.gd" id="1_fqgdq"]
+[ext_resource type="PackedScene" uid="uid://c8fqbcrpmtjmt" path="res://Playerdata/player.tscn" id="2_eg8rw"]
+[ext_resource type="PackedScene" uid="uid://cpcjq1gqxeewa" path="res://spikes.tscn" id="3_wymc2"]
+[ext_resource type="PackedScene" uid="uid://bc430eqauqkbh" path="res://EnemyData/enemy.tscn" id="4_wxt7k"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_c8u45"]
+vertices = PackedVector2Array(64, 101, 34, 113, 34, 26, 134, 126, 114, 126, 215, 42, 219, 118, 294, 68, 302, 98, 295, 142, 258, 142, 258, 118, 275, 42, 203, 142, 142, 142)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2), PackedInt32Array(3, 4, 0, 2, 5, 6), PackedInt32Array(7, 8, 9, 10, 11, 12), PackedInt32Array(5, 12, 11, 6), PackedInt32Array(3, 6, 13, 14)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(24, 16, 24, 128, 64, 112, 112, 136, 128, 136, 136, 152, 208, 152, 224, 128, 248, 128, 248, 152, 304, 152, 312, 96, 304, 64, 280, 32, 216, 32)])
+source_geometry_group_name = &"navigation_polygon_source_group"
+
+[node name="World" type="Node2D"]
+script = ExtResource("1_fqgdq")
+
+[node name="Level" type="StaticBody2D" parent="."]
+collision_mask = 0
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Level"]
+polygon = PackedVector2Array(0, 16, 24, 16, 24, 128, 64, 112, 106.928, 133.464, 112, 136, 128, 136, 136, 152, 208, 152, 224, 128, 248, 128, 248, 152, 304, 152, 312, 96, 304, 64, 280, 32, 216, 32, 216, 16, 320, 16, 320, 152, 320, 184, 0, 184)
+
+[node name="Polygon2D" type="Polygon2D" parent="Level/CollisionPolygon2D"]
+
+[node name="Player" parent="." instance=ExtResource("2_eg8rw")]
+position = Vector2(232, 128)
+
+[node name="Spikes" parent="." instance=ExtResource("3_wymc2")]
+position = Vector2(256, 152)
+
+[node name="Spikes2" parent="." instance=ExtResource("3_wymc2")]
+position = Vector2(120, 136)
+
+[node name="Enemy" parent="." instance=ExtResource("4_wxt7k")]
+position = Vector2(168, 152)
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+visible = false
+navigation_polygon = SubResource("NavigationPolygon_c8u45")

@@ -1,0 +1,72 @@
+[gd_scene load_steps=11 format=3 uid="uid://c8fqbcrpmtjmt"]
+
+[ext_resource type="Script" path="res://Playerdata/Scripts/Player Organization/skill_points.gd" id="1_1mxad"]
+[ext_resource type="Script" path="res://Playerdata/player.gd" id="1_b20uo"]
+[ext_resource type="Script" path="res://Playerdata/Scripts/PlayerMovementData.gd" id="2_4c75t"]
+[ext_resource type="Script" path="res://Playerdata/Scripts/PlayerMaxStats.gd" id="3_fm1bq"]
+[ext_resource type="Script" path="res://Playerdata/Scripts/Player Organization/calculate_stats.gd" id="9_7kphf"]
+[ext_resource type="Script" path="res://Playerdata/Scripts/HealthBar.gd" id="9_73uob"]
+[ext_resource type="Script" path="res://Playerdata/Scripts/Player Organization/player_level.gd" id="14_rbvmo"]
+
+[sub_resource type="Resource" id="Resource_5chmb"]
+script = ExtResource("2_4c75t")
+speed = 200.0
+jump_velocity = -300.0
+acceleration = 300.0
+air_resistence = 500.0
+friction = 1000.0
+gravity_scale = 1.0
+knock_back = 1.0
+
+[sub_resource type="Resource" id="Resource_sppp2"]
+script = ExtResource("3_fm1bq")
+hp = 300.0
+invulnerability_frames = 200
+air_jump = 1
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_un4x1"]
+size = Vector2(2, 2)
+
+[node name="Player" type="CharacterBody2D" groups=["Player"]]
+collision_layer = 2
+collision_mask = 23
+floor_constant_speed = true
+floor_snap_length = 3.0
+script = ExtResource("1_b20uo")
+movement_data = SubResource("Resource_5chmb")
+stat_data = SubResource("Resource_sppp2")
+
+[node name="CollisionShape" type="CollisionShape2D" parent="."]
+position = Vector2(0, -1)
+shape = SubResource("RectangleShape2D_un4x1")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+offset = Vector2(0, -20)
+position_smoothing_enabled = true
+
+[node name="TimeHandler" type="Node" parent="."]
+
+[node name="CoyoteJumpTimer" type="Timer" parent="TimeHandler"]
+wait_time = 0.1
+one_shot = true
+
+[node name="StunTimer" type="Timer" parent="TimeHandler"]
+one_shot = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="HealthBar" type="Container" parent="CanvasLayer"]
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("9_73uob")
+
+[node name="Scripts" type="Node2D" parent="."]
+
+[node name="calculate_stats" type="Node" parent="Scripts"]
+script = ExtResource("9_7kphf")
+
+[node name="skill_handler" type="Node" parent="Scripts"]
+script = ExtResource("1_1mxad")
+
+[node name="level_handler" type="Node" parent="Scripts"]
+script = ExtResource("14_rbvmo")

@@ -1,0 +1,206 @@
+[gd_scene load_steps=26 format=3 uid="uid://bc430eqauqkbh"]
+
+[ext_resource type="Script" path="res://EnemyData/enemy.gd" id="1_130ig"]
+[ext_resource type="Texture2D" uid="uid://bduwcxk46nf8p" path="res://Playerdata/player.png" id="1_ekegp"]
+[ext_resource type="Script" path="res://finite_state_machine.gd" id="5_rpq17"]
+[ext_resource type="Script" path="res://EnemyData/States/EnemyIdleState.gd" id="6_51giw"]
+[ext_resource type="Script" path="res://EnemyData/States/EnemyAggroState.gd" id="7_3ucyp"]
+[ext_resource type="Script" path="res://EnemyData/EnemyHurtBox.gd" id="8_dufhy"]
+[ext_resource type="Script" path="res://EnemyData/EnemyMovementData.gd" id="8_lnv5w"]
+[ext_resource type="Script" path="res://EnemyData/States/EnemyWanderState.gd" id="8_urdwy"]
+[ext_resource type="Script" path="res://EnemyData/EnemyMaxStats.gd" id="9_6pkpm"]
+[ext_resource type="Script" path="res://EnemyData/EnemyHitBox.gd" id="9_o4n50"]
+
+[sub_resource type="Resource" id="Resource_u0ddl"]
+script = ExtResource("8_lnv5w")
+speed = 100.0
+jump_velocity = -225.0
+acceleration = 100.0
+air_resistence = 500.0
+friction = 1000.0
+gravity_scale = 1.0
+knock_back = 1
+
+[sub_resource type="Resource" id="Resource_1mbvr"]
+script = ExtResource("9_6pkpm")
+hp = 300.0
+vision_range = 100.0
+max_walk_angle = 45.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_con5h"]
+atlas = ExtResource("1_ekegp")
+region = Rect2(0, 0, 24, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o8xmj"]
+atlas = ExtResource("1_ekegp")
+region = Rect2(144, 0, 24, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_08byn"]
+atlas = ExtResource("1_ekegp")
+region = Rect2(24, 0, 24, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v3wc6"]
+atlas = ExtResource("1_ekegp")
+region = Rect2(48, 0, 24, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lhum2"]
+atlas = ExtResource("1_ekegp")
+region = Rect2(72, 0, 24, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hcxi2"]
+atlas = ExtResource("1_ekegp")
+region = Rect2(96, 0, 24, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g25h6"]
+atlas = ExtResource("1_ekegp")
+region = Rect2(120, 0, 24, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j73mx"]
+atlas = ExtResource("1_ekegp")
+region = Rect2(0, 0, 24, 20)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0q8wp"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_con5h")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o8xmj")
+}],
+"loop": true,
+"name": &"Jumping",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_08byn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v3wc6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lhum2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hcxi2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g25h6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j73mx")
+}],
+"loop": true,
+"name": &"Running",
+"speed": 7.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_n7avb"]
+size = Vector2(8, 15)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dr10h"]
+size = Vector2(8, 14)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bb7ck"]
+size = Vector2(8, 14)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tqkol"]
+size = Vector2(12, 15)
+
+[node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("navigation_agent_2d", "animated_sprite_2d", "harzard_detector", "coyote_jump_timer", "movement_update_buffer", "stun_timer", "hurt_box")]
+collision_layer = 16
+collision_mask = 7
+script = ExtResource("1_130ig")
+movement_data = SubResource("Resource_u0ddl")
+stat_data = SubResource("Resource_1mbvr")
+navigation_agent_2d = NodePath("NavigationAgent2D")
+animated_sprite_2d = NodePath("AnimatedSprite2D")
+harzard_detector = NodePath("HarzardDetector")
+coyote_jump_timer = NodePath("Timers/CoyoteJumpTimer")
+movement_update_buffer = NodePath("Timers/MovementUpdateBuffer")
+stun_timer = NodePath("Timers/StunTimer")
+hurt_box = NodePath("HurtBox")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+target_desired_distance = 30.0
+debug_enabled = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -10)
+sprite_frames = SubResource("SpriteFrames_0q8wp")
+animation = &"Idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -7.5)
+shape = SubResource("RectangleShape2D_n7avb")
+
+[node name="HarzardDetector" type="Area2D" parent="."]
+collision_layer = 16
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HarzardDetector"]
+position = Vector2(0, -7)
+shape = SubResource("RectangleShape2D_dr10h")
+
+[node name="EnemyFinder" type="RayCast2D" parent="."]
+position = Vector2(0, -8)
+target_position = Vector2(-80, 0)
+collision_mask = 2
+
+[node name="Ground" type="RayCast2D" parent="."]
+position = Vector2(0, -8)
+
+[node name="Timers" type="Node" parent="."]
+
+[node name="CoyoteJumpTimer" type="Timer" parent="Timers"]
+wait_time = 0.1
+one_shot = true
+
+[node name="StunTimer" type="Timer" parent="Timers"]
+one_shot = true
+
+[node name="MovementUpdateBuffer" type="Timer" parent="Timers"]
+wait_time = 0.5
+one_shot = true
+
+[node name="FiniteStateMachine" type="Node" parent="." node_paths=PackedStringArray("state")]
+script = ExtResource("5_rpq17")
+state = NodePath("EnemyIdleState")
+
+[node name="EnemyIdleState" type="Node" parent="FiniteStateMachine"]
+script = ExtResource("6_51giw")
+
+[node name="EnemyAggroState" type="Node" parent="FiniteStateMachine"]
+script = ExtResource("7_3ucyp")
+
+[node name="enemy_wander_state" type="Node" parent="FiniteStateMachine"]
+script = ExtResource("8_urdwy")
+
+[node name="HurtBox" type="Area2D" parent="."]
+collision_layer = 256
+collision_mask = 32
+script = ExtResource("8_dufhy")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+position = Vector2(0, -7)
+shape = SubResource("RectangleShape2D_bb7ck")
+
+[node name="EnemyHitBox" type="Area2D" parent="."]
+script = ExtResource("9_o4n50")
+damage = 100
+knock_back = 200
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyHitBox"]
+position = Vector2(0, -7.5)
+shape = SubResource("RectangleShape2D_tqkol")
+
+[connection signal="area_entered" from="HarzardDetector" to="." method="_on_harzard_detector_area_entered"]
+[connection signal="area_exited" from="HarzardDetector" to="." method="_on_harzard_detector_area_exited"]
+[connection signal="area_entered" from="HurtBox" to="." method="_on_hurt_box_area_entered"]
+[connection signal="area_entered" from="EnemyHitBox" to="." method="_on_enemy_hit_box_area_entered"]
