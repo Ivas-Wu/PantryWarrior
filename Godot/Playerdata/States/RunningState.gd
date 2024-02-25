@@ -5,6 +5,7 @@ signal jump
 signal idle
 signal fall
 signal roll
+signal dash
 
 var player : Player
 
@@ -22,12 +23,8 @@ func _exit_state() -> void:
 	set_physics_process(false)
 
 func _physics_process(delta):
-	if player.input_axis == 0:
-		idle.emit()
-	else:
+	if not handle_state():
 		handle_animation()
-		handle_jump()
-		handle_roll()
 		var just_on_ground = player.is_on_floor()
 		player.move_and_slide()
 		if just_on_ground and not player.is_on_floor() and player.velocity.y >= 0:
@@ -37,10 +34,18 @@ func _physics_process(delta):
 func handle_animation():
 	player.animated_sprite_2d.set_speed_scale((abs(player.velocity.x)+abs(player.velocity.x))/(player.speed+abs(player.velocity.x)))
 
-func handle_jump():
-	if Input.is_action_just_pressed("Up"):
+func handle_state():
+	var emitted = false
+	if player.input_axis == 0:
+		emitted = true
+		idle.emit()
+	elif Input.is_action_just_pressed("Up"):
+		emitted = true
 		jump.emit()
-
-func handle_roll():
-	if Input.is_action_just_pressed("Roll"):
+	elif Input.is_action_just_pressed("Roll"):
+		emitted = true
 		roll.emit()
+	elif Input.is_action_just_pressed("Dash"):
+		emitted = true
+		dash.emit()
+	return emitted

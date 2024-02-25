@@ -13,6 +13,7 @@ func _ready():
 	
 func _enter_state() -> void:
 	set_physics_process(true)
+	player.hit_box_col.disabled = false
 	flip = player.animated_sprite_2d.flip_h
 	flip_scale()
 	var attack = player.attack_queue[0]
@@ -22,17 +23,22 @@ func _enter_state() -> void:
 		"Attack":
 			player.animation_player.play("Basic_Attack")
 		"BigAttack":
-			player.animation_player.play("Big_Attack")
+			if player.skill_handler.offense > 0:
+				player.animation_player.play("Big_Attack")
+			else:
+				prev()
 		"SpecialAttack":
-			player.animation_player.play("Special_Attack")
+			if player.skill_handler.offense > 1:
+				player.animation_player.play("Special_Attack")
+			else:
+				prev()
 
 func _exit_state() -> void:
 	player.attack_queue.clear()
 	player.animated_sprite_2d.visible = true
 	player.attack_animation.visible = false
 	player.animation_player.stop()
-	player.hit_box.monitorable = false
-	player.hit_box.monitoring = false
+	player.hit_box_col.disabled = true
 	flip_scale()
 	set_physics_process(false)
 
@@ -43,6 +49,10 @@ func _physics_process(delta):
 func flip_scale():
 	if flip:
 		player.scale.x *= -1
-		
+
+func prev():
+	set_physics_process(false)
+	previous.emit()
+	
 func _on_attacking_animation_player_animation_finished(anim_name):
 	idle.emit()

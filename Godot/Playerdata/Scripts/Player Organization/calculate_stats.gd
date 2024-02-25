@@ -8,9 +8,12 @@ func _ready():
 	set_physics_process(false)
 	
 func calculate_agility():
-	player.speed = player.movement_data.speed + player.skill_handler.agility * (5 + player.skill_handler.agility)
-	player.jump = player.movement_data.jump_velocity - player.skill_handler.agility * (3 + player.skill_handler.agility)
-	player.acceleration = player.movement_data.acceleration + player.skill_handler.agility * (35 + player.skill_handler.agility)
+	player.speed = player.movement_data.speed
+	player.jump = player.movement_data.jump_velocity 
+	player.acceleration = player.movement_data.acceleration
+	#player.speed = player.movement_data.speed + player.skill_handler.agility * (5 + player.skill_handler.agility)
+	#player.jump = player.movement_data.jump_velocity - player.skill_handler.agility * (3 + player.skill_handler.agility)
+	#player.acceleration = player.movement_data.acceleration + player.skill_handler.agility * (35 + player.skill_handler.agility)
 	
 func calculate_offense():
 	player.damage = 1 + player.skill_handler.offense/10

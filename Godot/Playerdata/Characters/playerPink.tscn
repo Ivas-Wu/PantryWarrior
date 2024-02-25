@@ -1,14 +1,15 @@
-[gd_scene load_steps=87 format=3 uid="uid://cypcocvbiby87"]
+[gd_scene load_steps=97 format=3 uid="uid://cypcocvbiby87"]
 
 [ext_resource type="Texture2D" uid="uid://chjmsjtdmus5a" path="res://Playerdata/Pink/PinkBugJumpOutlinedWhite-Sheet.png" id="6_4q6vm"]
 [ext_resource type="Texture2D" uid="uid://cfdx0csp5joyp" path="res://Playerdata/Pink/PinkBugrunningoutlinedWhite-Sheet.png" id="6_51nfq"]
 [ext_resource type="Script" path="res://Playerdata/Scripts/HurtBox.gd" id="7_2nxao"]
+[ext_resource type="Texture2D" uid="uid://sbux3ue0ipeq" path="res://Playerdata/Pink/PlummetOutlined-Sheet.png" id="7_eh5ai"]
 [ext_resource type="Texture2D" uid="uid://dwwvvid8bwqbm" path="res://Playerdata/Pink/PinkBugIdleOutlined-Sheet.png" id="7_fthkm"]
 [ext_resource type="Texture2D" uid="uid://04mf2pwpu05i" path="res://Playerdata/Pink/PinkBugRollOutlined-Sheet.png" id="7_hq282"]
 [ext_resource type="Script" path="res://Playerdata/Scripts/Hitbox.gd" id="8_crlak"]
 [ext_resource type="Texture2D" uid="uid://rih703ddkuht" path="res://Playerdata/Pink/PinkBugJumpOutlined-Sheet.png" id="8_rkqrp"]
 [ext_resource type="Texture2D" uid="uid://ca8da81cuvg82" path="res://Playerdata/Pink/PinkBugrunningoutlinedG-Sheet.png" id="8_sexm6"]
-[ext_resource type="Texture2D" uid="uid://bajupkgng1geh" path="res://Playerdata/Pink/PinkBugAttacks.png" id="9_rt71g"]
+[ext_resource type="Texture2D" uid="uid://b3yx5a2sef6lr" path="res://Playerdata/Pink/output.png" id="10_pwch6"]
 [ext_resource type="Script" path="res://finite_state_machine.gd" id="11_b02sp"]
 [ext_resource type="PackedScene" uid="uid://c8fqbcrpmtjmt" path="res://Playerdata/player.tscn" id="11_x64b6"]
 [ext_resource type="Script" path="res://Playerdata/States/JumpingState.gd" id="12_4657u"]
@@ -17,18 +18,19 @@
 [ext_resource type="Script" path="res://Playerdata/States/IdleState.gd" id="15_wy141"]
 [ext_resource type="Script" path="res://Playerdata/States/AttackState.gd" id="16_quyg4"]
 [ext_resource type="Script" path="res://Playerdata/States/RollingState.gd" id="17_iuqsj"]
+[ext_resource type="Script" path="res://Playerdata/States/DashState.gd" id="18_od1wa"]
+[ext_resource type="Script" path="res://Playerdata/States/PlummetState.gd" id="19_lpxuq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_prvjc"]
-size = Vector2(8, 15)
+size = Vector2(12, 15)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jfbfm"]
-size = Vector2(8, 15)
+size = Vector2(12, 15.5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dv3bk"]
-size = Vector2(6, 14)
+size = Vector2(10, 15)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_setf6"]
-size = Vector2(13.05, 9)
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_uu1t3"]
 load_path = "res://.godot/imported/PinkBugIdleOutlined-Sheet.png-106c7bafea3dd92267dfe4c64e30e9d1.ctex"
@@ -168,6 +170,33 @@ region = Rect2(64, 0, 64, 64)
 [sub_resource type="AtlasTexture" id="AtlasTexture_k3q7f"]
 atlas = ExtResource("8_rkqrp")
 region = Rect2(32, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kakg5"]
+atlas = ExtResource("7_eh5ai")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lg5rm"]
+atlas = ExtResource("7_eh5ai")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_vi78m"]
+load_path = "res://.godot/imported/PlummetOutlined-Sheet.png-2865ee049e9172f4e92145c36360ea58.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u0mfx"]
+atlas = SubResource("CompressedTexture2D_vi78m")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ee2sp"]
+atlas = SubResource("CompressedTexture2D_vi78m")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y5p42"]
+atlas = SubResource("CompressedTexture2D_vi78m")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yy4ve"]
+atlas = SubResource("CompressedTexture2D_vi78m")
+region = Rect2(320, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bj5vd"]
 atlas = ExtResource("7_hq282")
@@ -424,6 +453,34 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_kakg5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lg5rm")
+}],
+"loop": true,
+"name": &"PlummetFall",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u0mfx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ee2sp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y5p42")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yy4ve")
+}],
+"loop": false,
+"name": &"PlummetLand",
+"speed": 15.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_bj5vd")
 }, {
 "duration": 1.0,
@@ -533,10 +590,10 @@ tracks/1/path = NodePath("HitBox/CollisionShape2D:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.3),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 0.05, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
-"values": [Vector2(10, -9), Vector2(14, -11)]
+"values": [Vector2(10, -9), Vector2(10, -9.4375), Vector2(13.375, -12.5)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -545,10 +602,10 @@ tracks/2/path = NodePath("HitBox/CollisionShape2D:scale")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.3),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 0.05, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
-"values": [Vector2(1, 0.8), Vector2(1, 2)]
+"values": [Vector2(1, 1), Vector2(1, 1), Vector2(1, 2)]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -586,6 +643,18 @@ tracks/5/keys = {
 "update": 1,
 "values": [100]
 }
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("HitBox/CollisionShape2D:shape:size")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [Vector2(20, 20), Vector2(15, 10), Vector2(15, 10)]
+}
 
 [sub_resource type="Animation" id="Animation_b4d4e"]
 resource_name = "Big_Attack"
@@ -613,7 +682,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.35),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [Vector2(14, -11), Vector2(7, -9)]
+"values": [Vector2(14, -11), Vector2(7.5, -8.5)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -673,7 +742,19 @@ tracks/6/keys = {
 "times": PackedFloat32Array(0.3),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [150]
+"values": [300]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("HitBox/CollisionShape2D:shape:size")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 0.35),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [Vector2(15, 10), Vector2(20.4, 10)]
 }
 
 [sub_resource type="Animation" id="Animation_f6mfw"]
@@ -761,6 +842,18 @@ tracks/6/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [true]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("HitBox/CollisionShape2D:shape:size")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(20, 20)]
 }
 
 [sub_resource type="Animation" id="Animation_jhw26"]
@@ -851,6 +944,18 @@ tracks/6/keys = {
 "update": 1,
 "values": [false, true]
 }
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("HitBox/CollisionShape2D:shape:size")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0.75),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(20.4, 10.7143)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ufbjt"]
 _data = {
@@ -867,7 +972,6 @@ _data = {
 [node name="CharacterAttributes" type="Node2D" parent="Player"]
 
 [node name="HarzardDetector" type="Area2D" parent="Player/CharacterAttributes"]
-visible = false
 collision_layer = 2
 collision_mask = 4
 
@@ -876,10 +980,9 @@ position = Vector2(0, -7.5)
 shape = SubResource("RectangleShape2D_prvjc")
 
 [node name="CharacterCollisionShape" type="Area2D" parent="Player/CharacterAttributes"]
-visible = false
 
 [node name="CollisionShape" type="CollisionShape2D" parent="Player/CharacterAttributes/CharacterCollisionShape"]
-position = Vector2(0, -8)
+position = Vector2(0, -7.75)
 shape = SubResource("RectangleShape2D_jfbfm")
 
 [node name="HurtBox" type="Area2D" parent="Player/CharacterAttributes"]
@@ -888,14 +991,14 @@ collision_mask = 0
 script = ExtResource("7_2nxao")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player/CharacterAttributes/HurtBox"]
-position = Vector2(0, -7)
+position = Vector2(0, -7.5)
 shape = SubResource("RectangleShape2D_dv3bk")
 
 [node name="HitBox" type="Area2D" parent="Player/CharacterAttributes"]
 collision_layer = 32
 collision_mask = 256
 script = ExtResource("8_crlak")
-damage = 150
+damage = 100
 stun_time = 0.5
 knock_back = 100
 
@@ -905,16 +1008,16 @@ scale = Vector2(2.8, 6.5)
 shape = SubResource("RectangleShape2D_setf6")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Player/CharacterAttributes"]
-visible = false
 position = Vector2(0.406248, -8.45312)
 scale = Vector2(0.599609, 0.59668)
 sprite_frames = SubResource("SpriteFrames_a3m6q")
-animation = &"JumpStart"
+animation = &"JumpAirUp"
 
 [node name="Attacking" type="Sprite2D" parent="Player/CharacterAttributes"]
+visible = false
 position = Vector2(0.499999, -8.5)
 scale = Vector2(0.640625, 0.609375)
-texture = ExtResource("9_rt71g")
+texture = ExtResource("10_pwch6")
 hframes = 23
 vframes = 4
 frame = 72
@@ -923,6 +1026,22 @@ frame = 72
 libraries = {
 "": SubResource("AnimationLibrary_ufbjt")
 }
+
+[node name="left" type="RayCast2D" parent="Player/CharacterAttributes"]
+position = Vector2(-6, -14)
+target_position = Vector2(0, -11)
+
+[node name="middleleft" type="RayCast2D" parent="Player/CharacterAttributes"]
+position = Vector2(-3, -14)
+target_position = Vector2(0, -11)
+
+[node name="middleright" type="RayCast2D" parent="Player/CharacterAttributes"]
+position = Vector2(3, -14)
+target_position = Vector2(0, -11)
+
+[node name="right" type="RayCast2D" parent="Player/CharacterAttributes"]
+position = Vector2(6, -14)
+target_position = Vector2(0, -11)
 
 [node name="States" type="Node" parent="Player"]
 script = ExtResource("11_b02sp")
@@ -945,13 +1064,22 @@ script = ExtResource("16_quyg4")
 [node name="rolling_state" type="Node" parent="Player/States"]
 script = ExtResource("17_iuqsj")
 
+[node name="dash_state" type="Node" parent="Player/States"]
+script = ExtResource("18_od1wa")
+
+[node name="plummet_state" type="Node" parent="Player/States"]
+script = ExtResource("19_lpxuq")
+
 [connection signal="area_entered" from="Player/CharacterAttributes/HarzardDetector" to="Player" method="_on_harzard_detector_area_entered"]
 [connection signal="area_exited" from="Player/CharacterAttributes/HarzardDetector" to="Player" method="_on_harzard_detector_area_exited"]
 [connection signal="area_entered" from="Player/CharacterAttributes/HurtBox" to="Player" method="_on_hurt_box_area_entered"]
 [connection signal="area_exited" from="Player/CharacterAttributes/HurtBox" to="Player" method="_on_hurt_box_area_exited"]
 [connection signal="property_list_changed" from="Player/CharacterAttributes/HitBox" to="Player/CharacterAttributes/HitBox" method="_on_property_list_changed"]
 [connection signal="animation_finished" from="Player/CharacterAttributes/AnimatedSprite2D" to="Player/States/falling_state" method="_on_animated_sprite_2d_animation_finished"]
+[connection signal="animation_finished" from="Player/CharacterAttributes/AnimatedSprite2D" to="Player/States/rolling_state" method="_on_animated_sprite_2d_animation_finished"]
+[connection signal="animation_finished" from="Player/CharacterAttributes/AnimatedSprite2D" to="Player/States/plummet_state" method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="frame_changed" from="Player/CharacterAttributes/AnimatedSprite2D" to="Player/States/falling_state" method="_on_animated_sprite_2d_frame_changed"]
+[connection signal="frame_changed" from="Player/CharacterAttributes/AnimatedSprite2D" to="Player/States/plummet_state" method="_on_animated_sprite_2d_frame_changed"]
 [connection signal="animation_finished" from="Player/CharacterAttributes/AttackingAnimationPlayer" to="Player/States/attack_state" method="_on_attacking_animation_player_animation_finished"]
 
 [editable path="Player"]

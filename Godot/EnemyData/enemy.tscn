@@ -350,8 +350,8 @@ position = Vector2(0, -11.5)
 shape = SubResource("RectangleShape2D_bb7ck")
 
 [node name="EnemyHitBox" type="Area2D" parent="."]
-monitoring = false
-monitorable = false
+collision_layer = 128
+collision_mask = 64
 script = ExtResource("9_o4n50")
 damage = 100
 knock_back = 200
@@ -359,6 +359,7 @@ knock_back = 200
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyHitBox"]
 position = Vector2(0, -15)
 shape = SubResource("RectangleShape2D_tqkol")
+disabled = true
 
 [node name="HealthBar" parent="." instance=ExtResource("17_gm6l8")]
 offset_left = -6.0

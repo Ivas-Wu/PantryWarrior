@@ -21,7 +21,7 @@ knock_back = 1.0
 [sub_resource type="Resource" id="Resource_sppp2"]
 script = ExtResource("3_fm1bq")
 hp = 300.0
-invulnerability_frames = 200
+invulnerability_frames = 20
 air_jump = 1
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_un4x1"]

@@ -62,13 +62,13 @@ grow_vertical = 2
 
 [node name="Skill Menu" type="Label" parent="Skills/Menu"]
 layout_mode = 2
-size_flags_vertical = 3
-text = "Skill Menu
-"
+size_flags_vertical = 6
+text = "Skill Menu"
 horizontal_alignment = 1
 
 [node name="GridContainer" type="GridContainer" parent="Skills/Menu"]
 layout_mode = 2
+size_flags_vertical = 6
 theme = ExtResource("2_y3kro")
 columns = 6
 
@@ -119,6 +119,7 @@ text = "Plummet
 horizontal_alignment = 1
 
 [node name="Time" type="Label" parent="Skills/Menu/GridContainer/Label"]
+visible = false
 layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("2_y3kro")
@@ -129,37 +130,38 @@ horizontal_alignment = 1
 [node name="Remove" type="VBoxContainer" parent="Skills/Menu/GridContainer"]
 layout_mode = 2
 
-[node name="Jump" type="Button" parent="Skills/Menu/GridContainer/Remove"]
+[node name="JumpSub" type="Button" parent="Skills/Menu/GridContainer/Remove"]
 layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("2_y3kro")
 text = "-"
 
-[node name="Attack" type="Button" parent="Skills/Menu/GridContainer/Remove"]
+[node name="AttackSub" type="Button" parent="Skills/Menu/GridContainer/Remove"]
 layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("2_y3kro")
 text = "-"
 
-[node name="Defense" type="Button" parent="Skills/Menu/GridContainer/Remove"]
+[node name="DefenseSub" type="Button" parent="Skills/Menu/GridContainer/Remove"]
 layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("2_y3kro")
 text = "-"
 
-[node name="Dash" type="Button" parent="Skills/Menu/GridContainer/Remove"]
+[node name="DashSub" type="Button" parent="Skills/Menu/GridContainer/Remove"]
 layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("2_y3kro")
 text = "-"
 
-[node name="Plummet" type="Button" parent="Skills/Menu/GridContainer/Remove"]
+[node name="PlummetSub" type="Button" parent="Skills/Menu/GridContainer/Remove"]
 layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("2_y3kro")
 text = "-"
 
-[node name="Time" type="Button" parent="Skills/Menu/GridContainer/Remove"]
+[node name="TimeSub" type="Button" parent="Skills/Menu/GridContainer/Remove"]
+visible = false
 layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("2_y3kro")
@@ -174,7 +176,7 @@ size_flags_stretch_ratio = 5.0
 layout_mode = 2
 text = "-  -  -  -  -"
 
-[node name="Attack2" type="Button" parent="Skills/Menu/GridContainer/Scale"]
+[node name="Attack" type="Button" parent="Skills/Menu/GridContainer/Scale"]
 layout_mode = 2
 text = "-  -  -  -  -"
 
@@ -191,6 +193,7 @@ layout_mode = 2
 text = "-  -  -  -  -"
 
 [node name="Time" type="Button" parent="Skills/Menu/GridContainer/Scale"]
+visible = false
 layout_mode = 2
 text = "-  -  -  -  -"
 
@@ -198,37 +201,38 @@ text = "-  -  -  -  -"
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="Jump" type="Button" parent="Skills/Menu/GridContainer/Add"]
+[node name="JumpAdd" type="Button" parent="Skills/Menu/GridContainer/Add"]
 layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("2_y3kro")
 text = "+"
 
-[node name="Attack" type="Button" parent="Skills/Menu/GridContainer/Add"]
+[node name="AttackAdd" type="Button" parent="Skills/Menu/GridContainer/Add"]
 layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("2_y3kro")
 text = "+"
 
-[node name="Denfense" type="Button" parent="Skills/Menu/GridContainer/Add"]
+[node name="DenfenseAdd" type="Button" parent="Skills/Menu/GridContainer/Add"]
 layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("2_y3kro")
 text = "+"
 
-[node name="Dash" type="Button" parent="Skills/Menu/GridContainer/Add"]
+[node name="DashAdd" type="Button" parent="Skills/Menu/GridContainer/Add"]
 layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("2_y3kro")
 text = "+"
 
-[node name="Plummet" type="Button" parent="Skills/Menu/GridContainer/Add"]
+[node name="PlummetAdd" type="Button" parent="Skills/Menu/GridContainer/Add"]
 layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("2_y3kro")
 text = "+"
 
-[node name="Time" type="Button" parent="Skills/Menu/GridContainer/Add"]
+[node name="TimeAdd" type="Button" parent="Skills/Menu/GridContainer/Add"]
+visible = false
 layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("2_y3kro")
@@ -270,18 +274,31 @@ text = "Placeholder
 "
 
 [node name="Time" type="Button" parent="Skills/Menu/GridContainer/Placeholder"]
+visible = false
 layout_mode = 2
 text = "Placeholder
 "
 
 [node name="Close" type="Button" parent="Skills/Menu"]
 layout_mode = 2
-size_flags_vertical = 8
+size_flags_vertical = 6
 theme = ExtResource("2_y3kro")
 text = "Close
 "
 
-[connection signal="pressed" from="Skills/Open/OpenMenu" to="." method="_on_open_menu_pressed"]
 [connection signal="pressed" from="Skills/Open/OpenMenu" to="." method="_on_button_pressed"]
-[connection signal="pressed" from="Skills/Menu/Close" to="." method="_on_close_pressed"]
+[connection signal="pressed" from="Skills/Open/OpenMenu" to="." method="_on_open_menu_pressed"]
+[connection signal="pressed" from="Skills/Menu/GridContainer/Remove/JumpSub" to="." method="_on_jump_sub_pressed"]
+[connection signal="pressed" from="Skills/Menu/GridContainer/Remove/AttackSub" to="." method="_on_attack_sub_pressed"]
+[connection signal="pressed" from="Skills/Menu/GridContainer/Remove/DefenseSub" to="." method="_on_defense_sub_pressed"]
+[connection signal="pressed" from="Skills/Menu/GridContainer/Remove/DashSub" to="." method="_on_dash_sub_pressed"]
+[connection signal="pressed" from="Skills/Menu/GridContainer/Remove/PlummetSub" to="." method="_on_plummet_sub_pressed"]
+[connection signal="pressed" from="Skills/Menu/GridContainer/Remove/TimeSub" to="." method="_on_time_sub_pressed"]
+[connection signal="pressed" from="Skills/Menu/GridContainer/Add/JumpAdd" to="." method="_on_jump_add_pressed"]
+[connection signal="pressed" from="Skills/Menu/GridContainer/Add/AttackAdd" to="." method="_on_attack_add_pressed"]
+[connection signal="pressed" from="Skills/Menu/GridContainer/Add/DenfenseAdd" to="." method="_on_denfense_add_pressed"]
+[connection signal="pressed" from="Skills/Menu/GridContainer/Add/DashAdd" to="." method="_on_dash_add_pressed"]
+[connection signal="pressed" from="Skills/Menu/GridContainer/Add/PlummetAdd" to="." method="_on_plummet_add_pressed"]
+[connection signal="pressed" from="Skills/Menu/GridContainer/Add/TimeAdd" to="." method="_on_time_add_pressed"]
 [connection signal="pressed" from="Skills/Menu/Close" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="Skills/Menu/Close" to="." method="_on_close_pressed"]

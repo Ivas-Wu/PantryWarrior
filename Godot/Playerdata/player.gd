@@ -22,7 +22,9 @@ extends CharacterBody2D
 @onready var animated_sprite_2d = $CharacterAttributes/AnimatedSprite2D
 @onready var animation_player = $CharacterAttributes/AttackingAnimationPlayer as AnimationPlayer
 @onready var hit_box = $CharacterAttributes/HitBox
+@onready var hit_box_col = $CharacterAttributes/HitBox/CollisionShape2D
 @onready var hurt_box = $CharacterAttributes/HurtBox
+@onready var hurt_box_col = $CharacterAttributes/HurtBox/CollisionShape2D
 @onready var character_collision_shape = $CharacterAttributes/CharacterCollisionShape/CollisionShape
 @onready var attack_animation = $CharacterAttributes/Attacking
 
@@ -34,6 +36,8 @@ extends CharacterBody2D
 @onready var idle_state = $States/idle_state as idle_state
 @onready var attack_state = $States/attack_state as attack_state
 @onready var rolling_state = $States/rolling_state as rolling_state
+@onready var dash_state = $States/dash_state as dash_state
+@onready var plummet_state = $States/plummet_state as plummet_state
 
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
@@ -54,9 +58,9 @@ var input_axis : int = 0
 var attack_queue : Array = []
 
 func _ready():
+	calculate_character_stats()
 	reset_values()
 	set_health_bar()
-	calculate_character_stats()
 	set_states()
 	
 func set_collision_shape():
@@ -66,16 +70,19 @@ func set_collision_shape():
 func set_states():
 	fsm.change_state(fsm.state)
 	jump_state.falling.connect(fsm.change_state.bind(falling_state))
+	jump_state.plummet.connect(fsm.change_state.bind(plummet_state))
 	jump_state.previous.connect(fsm.change_to_previous_state.bind())
 	
 	falling_state.jump.connect(fsm.change_state.bind(jump_state))
 	falling_state.landed.connect(fsm.change_state.bind(idle_state))
+	falling_state.plummet.connect(fsm.change_state.bind(plummet_state))
 	falling_state.previous.connect(fsm.change_to_previous_state.bind())
 	
 	running_state.jump.connect(fsm.change_state.bind(jump_state))
 	running_state.idle.connect(fsm.change_state.bind(idle_state))
 	running_state.fall.connect(fsm.change_state.bind(falling_state))
 	running_state.roll.connect(fsm.change_state.bind(rolling_state))
+	running_state.dash.connect(fsm.change_state.bind(dash_state))
 	
 	idle_state.jump.connect(fsm.change_state.bind(jump_state))
 	idle_state.run.connect(fsm.change_state.bind(running_state))
@@ -83,9 +90,17 @@ func set_states():
 	idle_state.roll.connect(fsm.change_state.bind(rolling_state))
 	
 	attack_state.idle.connect(fsm.change_state.bind(idle_state))
+	attack_state.previous.connect(fsm.change_to_previous_state.bind())
 	
 	rolling_state.idle.connect(fsm.change_state.bind(idle_state))
 	rolling_state.previous.connect(fsm.change_to_previous_state.bind())
+	
+	dash_state.idle.connect(fsm.change_state.bind(idle_state))
+	
+	plummet_state.jump.connect(fsm.change_state.bind(jump_state))
+	plummet_state.landed.connect(fsm.change_state.bind(idle_state))
+	plummet_state.fall.connect(fsm.change_state.bind(falling_state))
+	plummet_state.previous.connect(fsm.change_to_previous_state.bind())
 	
 func reset_values():
 	#Innate
@@ -157,7 +172,7 @@ func flip_animation(input_axis):
 	
 func add_gravity(delta):
 	if not is_on_floor():
-		velocity.y += gravity * delta * movement_data.gravity_scale	
+		velocity.y += gravity * delta * movement_data.gravity_scale
 		
 func handle_friction(input_axis, delta):
 	if input_axis: return

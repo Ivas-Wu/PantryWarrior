@@ -24,6 +24,7 @@ extends CharacterBody2D
 
 @onready var enemy_hit_box = $EnemyHitBox as EnemyHitBox
 @onready var starting_position = global_position
+@onready var hit_box_col = $EnemyHitBox/CollisionShape2D
 
 #Raycasts
 @onready var enemy_finder_ray : RayCast2D = $EnemyFinder
