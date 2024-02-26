@@ -5,6 +5,7 @@ signal jump
 signal run
 signal fall
 signal roll
+signal attack
 
 var player : Player
 
@@ -30,7 +31,10 @@ func _physics_process(delta):
 
 func handle_state():
 	var sig = false
-	if Input.is_action_just_pressed("Up"):
+	if not player.attack_queue.is_empty():
+		attack.emit()
+		sig = true
+	elif Input.is_action_just_pressed("Up"):
 		jump.emit()
 		sig = true
 	elif Input.is_action_just_pressed("Roll"):

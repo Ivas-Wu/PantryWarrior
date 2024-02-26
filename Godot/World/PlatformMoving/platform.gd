@@ -13,5 +13,5 @@ func _ready():
 		animation_player.speed_scale = speed_scale
 		set_process(false)
 
-func _process(delta):
+func _process(_delta):
 	path.progress += speed

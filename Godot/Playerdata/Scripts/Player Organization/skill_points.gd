@@ -3,14 +3,14 @@ extends Node
 
 var skill_pts : int = 0
 var agility : int = 5
-var offense : int = 0
-var defense : int = 0
-var dash : int = 0
-var special : int = 0
+var offense : int = 1
+var defense : int = 1
+var dash : int = 1
+var special : int = 1
 #var ult : int = 0
 
 func _ready():	
 	set_physics_process(false)
 
-func save(data):
+func save(_data):
 	pass

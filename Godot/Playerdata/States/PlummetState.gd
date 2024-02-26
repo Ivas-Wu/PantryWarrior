@@ -17,15 +17,13 @@ func _enter_state() -> void:
 	else:
 		player.animated_sprite_2d.play("PlummetFall")
 		player.velocity.y += 300
-		player.hit_box_col.shape.size.x = 5
-		player.hit_box_col.shape.size.y = 2.5
-		player.hit_box_col.position.x = 0.5
-		player.hit_box_col.position.y = -1.25
-		player.hit_box_col.scale.x = 2
-		player.hit_box_col.scale.y = 2
+		#set the size of the hitbox
+		player.hit_box_col.set_x_y_size(Vector2(5,2.5), Vector2(0.5,-1.25), Vector2(2,2))
+		#reset values to let it hit
+		player.hit_box.already_hit = false
 		player.hit_box_col.disabled = false
-		player.hit_box.damage = 100
-		player.hit_box.knock_back = 300
+		#edit hitbox exports
+		player.hit_box.set_export_values(50 + 50 * player.skill_handler.special, 5, 1, 0.1, player.random_number, player.damage)
 		player.hurt_box_col.disabled = true
 		player.collision_mask = 7
 		set_physics_process(true)
@@ -50,6 +48,10 @@ func _physics_process(delta):
 
 func handle_landing():
 	player.animated_sprite_2d.play("PlummetLand")
+	if player.skill_handler.special == 5:
+		#set the size of the hitbox
+		player.hit_box_col.set_x_y_size(Vector2(30,30), Vector2(0,-12), Vector2(1,0.8))
+		player.hit_box.set_export_values(500, 15, 1, 0.3, player.random_number, player.damage)
 
 func _on_animated_sprite_2d_animation_finished():
 	if player.animated_sprite_2d.animation == "PlummetLand":

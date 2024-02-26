@@ -10,9 +10,11 @@ func _ready():
 	
 func _enter_state() -> void:
 	actor.animated_sprite_2d.play("Damaged")
+	actor.hurt_box_col.set_deferred("disabled", true)
 	set_physics_process(true)
 
 func _exit_state() -> void:
+	actor.hurt_box_col.disabled = false
 	set_physics_process(false)
 
 func _physics_process(delta):

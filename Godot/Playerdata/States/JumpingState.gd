@@ -12,7 +12,7 @@ signal plummet
 
 var player : Player
 var charge : float = 0
-var gravity : int = 1
+var gravity : float = 1
 func _ready():
 	set_physics_process(false)
 	player = get_tree().get_first_node_in_group("Player")
@@ -63,8 +63,8 @@ func handle_jump(delta):
 				player.air_jump -= 1
 				player.velocity.y = player.jump * 0.9
 		if Input.is_action_just_released("Up"):
-			if player.velocity.y < player.jump/2:
-				player.velocity.y = player.jump/2
+			if player.velocity.y < float(player.jump)/2:
+				player.velocity.y = float(player.jump)/2
 
 func handle_animation():
 	if player.is_on_floor():

@@ -1,10 +1,5 @@
 class_name EnemyHitBox
-extends Area2D
-
-@export var damage: int
-@export var stun_time : float
-@export var knock_back : int
-var already_hit : bool = false;
+extends hitbox_base
 
 func _ready():
 	collision_layer = 128

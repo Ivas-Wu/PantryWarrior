@@ -12,8 +12,8 @@ func _ready():
 	
 func _enter_state() -> void:
 	actor.animated_sprite_2d.play("Attack")
-	actor.enemy_hit_box.already_hit = false
-	actor.enemy_hit_box.visible = true
+	actor.hit_box.already_hit = false
+	actor.hit_box.visible = true
 	set_physics_process(true)
 
 func _exit_state() -> void:
@@ -22,7 +22,7 @@ func _exit_state() -> void:
 
 func _physics_process(delta):
 	actor.velocity = Vector2.ZERO
-	actor.enemy_hit_box.position.x = 14 * actor.input_axis
+	actor.hit_box.position.x = 14 * actor.input_axis
 	actor.move_and_slide()
 
 func _on_animated_sprite_2d_animation_finished():

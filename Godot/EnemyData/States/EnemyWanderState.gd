@@ -16,11 +16,11 @@ func _enter_state() -> void:
 	set_physics_process(true)
 	actor.direction.x = 1 if actor.current_direction else -1
 	actor.animated_sprite_2d.play("Idle")
-	actor.movement_data.speed *= 0.5
+	actor.speed *= 0.5
 
 func _exit_state() -> void:
 	set_physics_process(false)
-	actor.movement_data.speed *= 2
+	actor.speed *= 2
 
 func _physics_process(delta):
 	prev_position = actor.global_position

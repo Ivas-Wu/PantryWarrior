@@ -6,6 +6,7 @@ signal idle
 signal fall
 signal roll
 signal dash
+signal attack 
 
 var player : Player
 
@@ -39,13 +40,16 @@ func handle_state():
 	if player.input_axis == 0:
 		emitted = true
 		idle.emit()
+	elif not player.attack_queue.is_empty():
+		emitted = true
+		attack.emit()
 	elif Input.is_action_just_pressed("Up"):
 		emitted = true
 		jump.emit()
 	elif Input.is_action_just_pressed("Roll"):
 		emitted = true
 		roll.emit()
-	elif Input.is_action_just_pressed("Dash"):
+	elif Input.is_action_just_pressed("Dash") and player.skill_handler.dash > 0 and abs(player.velocity.x) > player.speed/2:
 		emitted = true
 		dash.emit()
 	return emitted

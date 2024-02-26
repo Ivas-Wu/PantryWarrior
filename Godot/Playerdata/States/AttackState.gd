@@ -13,28 +13,31 @@ func _ready():
 	
 func _enter_state() -> void:
 	set_physics_process(true)
-	player.hit_box_col.disabled = false
+	player.hit_box.already_hit = false
+	#flip animation to face direction player is facing
 	flip = player.animated_sprite_2d.flip_h
 	flip_scale()
+	#take first attack in the queue
 	var attack = player.attack_queue[0]
+	#handle animations
 	player.animated_sprite_2d.visible = false
 	player.attack_animation.visible = true
 	match attack:
 		"Attack":
-			player.animation_player.play("Basic_Attack")
+			handle_basic_attack()
 		"BigAttack":
 			if player.skill_handler.offense > 0:
-				player.animation_player.play("Big_Attack")
+				handle_big_attack()
 			else:
 				prev()
 		"SpecialAttack":
 			if player.skill_handler.offense > 1:
-				player.animation_player.play("Special_Attack")
+				handle_special_attack()
 			else:
 				prev()
 
 func _exit_state() -> void:
-	player.attack_queue.clear()
+	player.attack_queue.pop_front()
 	player.animated_sprite_2d.visible = true
 	player.attack_animation.visible = false
 	player.animation_player.stop()
@@ -54,5 +57,19 @@ func prev():
 	set_physics_process(false)
 	previous.emit()
 	
+func handle_basic_attack(): 
+	player.animation_player.play("Basic_Attack")
+	player.hit_box.set_export_values(100, 5, 0, 0, player.random_number, player.damage)
+	
+func handle_big_attack(): 
+	player.animation_player.play("Big_Attack")
+	player.hit_box.set_export_values(300, 8, 1, 0.5, player.random_number, player.damage)
+	
+func handle_special_attack(): 
+	player.animation_player.play("Special_Attack")
+	player.hit_box.set_export_values(100, 5, 1, 0, player.random_number, player.damage)
+	
+func handle_ground_attack(): pass
+
 func _on_attacking_animation_player_animation_finished(anim_name):
 	idle.emit()

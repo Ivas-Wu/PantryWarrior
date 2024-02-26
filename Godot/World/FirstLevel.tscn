@@ -245,7 +245,7 @@ position = Vector2(728, 504)
 position = Vector2(1216, 920)
 
 [node name="Player" parent="." instance=ExtResource("9_liy2e")]
-position = Vector2(1024, 750)
+position = Vector2(1120, 733)
 
 [node name="Platforms" type="Node2D" parent="."]
 
