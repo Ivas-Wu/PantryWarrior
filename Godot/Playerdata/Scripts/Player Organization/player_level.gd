@@ -8,12 +8,14 @@ var experience : int
 func _ready():
 	set_physics_process(false)
 
-func gain_exp(gain : int):
+func gain_exp(gain : int) -> int:
+	var levels = 0
 	experience += gain
-	if experience >= max_exp:
+	while experience >= max_exp:
 		level_up()
+		levels += 1
+	return levels
 		
 func level_up():
 	level += 1
 	experience -= max_exp
-	

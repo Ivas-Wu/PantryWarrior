@@ -286,8 +286,8 @@ theme = ExtResource("2_y3kro")
 text = "Close
 "
 
-[connection signal="pressed" from="Skills/Open/OpenMenu" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="Skills/Open/OpenMenu" to="." method="_on_open_menu_pressed"]
+[connection signal="pressed" from="Skills/Open/OpenMenu" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="Skills/Menu/GridContainer/Remove/JumpSub" to="." method="_on_jump_sub_pressed"]
 [connection signal="pressed" from="Skills/Menu/GridContainer/Remove/AttackSub" to="." method="_on_attack_sub_pressed"]
 [connection signal="pressed" from="Skills/Menu/GridContainer/Remove/DefenseSub" to="." method="_on_defense_sub_pressed"]

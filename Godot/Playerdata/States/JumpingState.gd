@@ -42,6 +42,8 @@ func _exit_state() -> void:
 	set_physics_process(false)
 
 func _physics_process(delta):
+	if player.is_on_floor():
+		player.velocity.x = 0
 	handle_jump(delta)
 	handle_animation()
 	handle_slide()
@@ -63,8 +65,8 @@ func handle_jump(delta):
 				player.air_jump -= 1
 				player.velocity.y = player.jump * 0.9
 		if Input.is_action_just_released("Up"):
-			if player.velocity.y < float(player.jump)/2:
-				player.velocity.y = float(player.jump)/2
+			if player.velocity.y < 0:
+				player.velocity.y /= 3
 
 func handle_animation():
 	if player.is_on_floor():

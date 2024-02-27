@@ -183,6 +183,9 @@ func heal(value: int):
 func set_health_bar():
 	health_bar.set_health_bar(current_hp)
 
+func gain_exp(experience: int):
+	skill_handler.add_skill_pts(level_handler.gain_exp(experience))
+
 func _input(event : InputEvent):
 	if is_on_floor():
 		if event.is_action_pressed("Down") :

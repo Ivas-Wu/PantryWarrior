@@ -14,6 +14,8 @@ extends CharacterBody2D
 @export var hurt_box_col: CollisionShape2D
 @export var animated_sprite_2d : AnimatedSprite2D
 
+@export var exp_on_kill : int = 0
+
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 #changes as you play
@@ -39,6 +41,7 @@ func _process(delta):
 func handle_knockback(source_location: Vector2, knock_back: int): pass
 func take_damage(damage: float) -> bool: return false
 func handle_stun(duration: float): pass
+func gain_exp(experience: int): pass
 
 func handle_physics(input_axis, delta):
 	add_gravity(delta)
@@ -80,12 +83,14 @@ func _on_harzard_detector_area_entered(hazard: Hazard):
 	if invulnerability_frames > 0 or take_damage(hazard.damage): return
 	handle_knockback(hazard.source, hazard.knock_back)
 
-func _on_hurt_box_area_entered(hitbox : Area2D):
+func _on_hurt_box_area_entered(hitbox : hitbox_base):
 	if invulnerability_frames > 0 or hitbox.already_hit: return
 	Engine.time_scale = 0
 	await(get_tree().create_timer(hitbox.freeze_frames, true, false, true).timeout)
 	Engine.time_scale = 1
-	take_damage(hitbox.damage)
-	hitbox.already_hit = true
-	handle_knockback(hitbox.source.global_position, hitbox.knock_back)
-	handle_stun(hitbox.stun_time)
+	if take_damage(hitbox.damage):
+		hitbox.parent.gain_exp(exp_on_kill)
+	else:
+		hitbox.already_hit = true
+		handle_knockback(hitbox.source.global_position, hitbox.knock_back)
+		handle_stun(hitbox.stun_time)

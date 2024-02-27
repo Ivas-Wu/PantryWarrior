@@ -22,8 +22,8 @@ func _enter_state() -> void:
 	player.hit_box.already_hit = false
 	player.hit_box_col.disabled = false
 	player.hit_box_col.set_x_y_size(Vector2(20,20), Vector2(0,-8), Vector2(1,0.8))
-	player.hit_box.set_export_values(100, 1, 1, 0, player.random_number, player.damage)
-	player.animated_sprite_2d.play("Rolling")
+	player.hit_box.set_export_values(100, 10, 1, 0, player.random_number, player.damage)
+	player.animated_sprite_2d.play("Dash")
 	set_physics_process(true)
 
 func _exit_state() -> void:
@@ -34,9 +34,9 @@ func _exit_state() -> void:
 	set_physics_process(false)
 
 func _physics_process(delta):
-	player.velocity.x = dir * 150
+	player.velocity.x = dir * 200
 	player.move_and_slide()
 
 func _on_animated_sprite_2d_animation_finished():
-	if player.animated_sprite_2d.animation == "Rolling":
+	if player.animated_sprite_2d.animation == "Dash":
 		idle.emit()

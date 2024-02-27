@@ -257,7 +257,7 @@ size = Vector2(28, 36)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_n7avb"]
 size = Vector2(8, 24)
 
-[node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("navigation_agent_2d", "coyote_jump_timer", "movement_update_buffer", "stun_timer", "attack_cd", "harzard_detector", "harzard_detector_col", "hit_box", "hit_box_col", "hurt_box", "hurt_box_col", "animated_sprite_2d")]
+[node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("navigation_agent_2d", "coyote_jump_timer", "movement_update_buffer", "stun_timer", "attack_cd", "harzard_detector", "harzard_detector_col", "character_collision_shape", "hit_box", "hit_box_col", "hurt_box", "hurt_box_col", "animated_sprite_2d")]
 collision_layer = 16
 collision_mask = 5
 script = ExtResource("1_130ig")
@@ -270,11 +270,13 @@ movement_data = SubResource("Resource_u0ddl")
 stat_data = SubResource("Resource_1mbvr")
 harzard_detector = NodePath("HarzardDetector")
 harzard_detector_col = NodePath("HarzardDetector/CollisionShape2D")
+character_collision_shape = NodePath("CollisionShape2D")
 hit_box = NodePath("HitBox")
 hit_box_col = NodePath("HitBox/CollisionShape2D")
 hurt_box = NodePath("HurtBox")
 hurt_box_col = NodePath("HurtBox/CollisionShape2D")
 animated_sprite_2d = NodePath("AnimatedSprite2D")
+exp_on_kill = 100
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 target_desired_distance = 30.0
@@ -352,13 +354,13 @@ script = ExtResource("8_dufhy")
 position = Vector2(0, -11.5)
 shape = SubResource("RectangleShape2D_bb7ck")
 
-[node name="HitBox" type="Area2D" parent="." node_paths=PackedStringArray("source")]
+[node name="HitBox" type="Area2D" parent="." node_paths=PackedStringArray("parent")]
 collision_layer = 128
 collision_mask = 64
 script = ExtResource("9_o4n50")
 damage = 100
 knock_back = 8.0
-source = NodePath("../CollisionShape2D")
+parent = NodePath("..")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
 position = Vector2(0, -15)
