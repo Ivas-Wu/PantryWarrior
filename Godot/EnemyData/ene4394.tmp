@@ -1,8 +1,7 @@
-[gd_scene load_steps=52 format=3 uid="uid://bc430eqauqkbh"]
+[gd_scene load_steps=51 format=3 uid="uid://bc430eqauqkbh"]
 
 [ext_resource type="Script" path="res://EnemyData/enemy.gd" id="1_130ig"]
 [ext_resource type="Texture2D" uid="uid://cc2i0llxciqcj" path="res://EnemyData/RAT/RatIdle-Sheet.png" id="4_58ly6"]
-[ext_resource type="PackedScene" uid="uid://bro83g0782mr4" path="res://Effects/hit_effect.tscn" id="4_k5dxr"]
 [ext_resource type="Texture2D" uid="uid://c2rd8s78vo87s" path="res://EnemyData/RAT/RatAttack-Sheet.png" id="4_tp5h3"]
 [ext_resource type="Texture2D" uid="uid://bb8tqxlp4mjw" path="res://EnemyData/RAT/rATDamage-Sheet.png" id="5_jc471"]
 [ext_resource type="Script" path="res://finite_state_machine.gd" id="5_rpq17"]
@@ -258,7 +257,7 @@ size = Vector2(28, 36)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_n7avb"]
 size = Vector2(8, 24)
 
-[node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("navigation_agent_2d", "coyote_jump_timer", "movement_update_buffer", "stun_timer", "attack_cd", "harzard_detector", "harzard_detector_col", "character_collision_shape", "hit_box", "hit_box_col", "hurt_box", "hurt_box_col", "animated_sprite_2d")]
+[node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("navigation_agent_2d", "coyote_jump_timer", "movement_update_buffer", "stun_timer", "attack_cd", "harzard_detector", "harzard_detector_col", "character_collision_shape", "hit_box", "hit_box_col", "hurt_box", "hurt_box_col", "animated_sprite_2d", "damaged_state")]
 collision_layer = 16
 collision_mask = 5
 script = ExtResource("1_130ig")
@@ -277,8 +276,8 @@ hit_box_col = NodePath("HitBox/CollisionShape2D")
 hurt_box = NodePath("HurtBox")
 hurt_box_col = NodePath("HurtBox/CollisionShape2D")
 animated_sprite_2d = NodePath("AnimatedSprite2D")
+damaged_state = NodePath("FiniteStateMachine/enemy_damaged_state")
 exp_on_kill = 100
-hit_effect = ExtResource("4_k5dxr")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 target_desired_distance = 30.0

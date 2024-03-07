@@ -9,7 +9,7 @@ func set_health_bar(hp: int):
 		n.queue_free()
 		
 	for n in ceil(float(hp)/100):
-		var heart: HeartAnimation = heart_animation_scene.instantiate()
+		var heart:  = heart_animation_scene.instantiate()
 		heart.centered = false
 		heart.offset.x = current_count * 20
 		add_child(heart)

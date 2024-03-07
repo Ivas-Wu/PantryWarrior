@@ -26,7 +26,6 @@ extends base_character_class
 @onready var attack_range_ray : RayCast2D = $AttackRange
 
 var player : Player
-var harzards_list : Dictionary
 var direction : Vector2
 var current_direction : int
 
@@ -106,17 +105,17 @@ func handle_attack_ray() -> bool:
 
 func take_damage(damage) -> bool:
 	var is_dead = false
-	damage = damage * player.damage #TODO
 	if current_hp <= damage: 
 		handle_death()
 		is_dead = true
 	else: 
-		fsm.change_state(enemy_damaged_state)  #TODO move to end of physics process
-		invulnerability_frames = 20
 		current_hp -= damage
 		set_healthbar()
 	return is_dead
 
+func enter_damaged_state():
+	fsm.change_state(enemy_damaged_state)
+	
 func handle_knockback(source_location: Vector2, knock_back: int):
 	var launch_direction = source_location.direction_to(hurt_box.global_position).normalized()
 	velocity.x = move_toward(velocity.x, launch_direction.x * knock_back * 200 * movement_data.knock_back, knock_back * 30)

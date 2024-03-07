@@ -2,10 +2,11 @@ class_name stage_base
 extends Node
 
 @onready var player: Player = $Player/Player
-@onready var crumb: Area2D = $Collectibles/Crumb
+@export var crumb: Area2D = null
 
 func _ready():
-	crumb.complete.connect(complete_stage.bind())
+	if crumb:
+		crumb.complete.connect(complete_stage.bind())
 
 func _process(delta):
 	pass

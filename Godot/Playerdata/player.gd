@@ -51,6 +51,7 @@ func set_states():
 	fsm.change_state(fsm.state)
 	jump_state.falling.connect(fsm.change_state.bind(falling_state))
 	jump_state.plummet.connect(fsm.change_state.bind(plummet_state))
+	jump_state.landed.connect(fsm.change_state.bind(idle_state))
 	jump_state.previous.connect(fsm.change_to_previous_state.bind())
 	
 	falling_state.jump.connect(fsm.change_state.bind(jump_state))
@@ -61,6 +62,7 @@ func set_states():
 	running_state.jump.connect(fsm.change_state.bind(jump_state))
 	running_state.idle.connect(fsm.change_state.bind(idle_state))
 	running_state.fall.connect(fsm.change_state.bind(falling_state))
+	running_state.up.connect(fsm.change_state.bind(jump_state))
 	running_state.roll.connect(fsm.change_state.bind(rolling_state))
 	running_state.dash.connect(fsm.change_state.bind(dash_state))
 	running_state.attack.connect(fsm.change_state.bind(attack_state))
@@ -68,6 +70,7 @@ func set_states():
 	idle_state.jump.connect(fsm.change_state.bind(jump_state))
 	idle_state.run.connect(fsm.change_state.bind(running_state))
 	idle_state.fall.connect(fsm.change_state.bind(falling_state))
+	idle_state.up.connect(fsm.change_state.bind(jump_state))
 	idle_state.roll.connect(fsm.change_state.bind(rolling_state))
 	idle_state.attack.connect(fsm.change_state.bind(attack_state))
 	
@@ -151,6 +154,9 @@ func take_damage(damage) -> bool:
 	set_health_bar()
 	return is_dead
 
+func enter_damaged_state():
+	fsm.change_state(idle_state)
+	
 func disabled_hurt_boxes():
 	hurt_box_col.set_deferred("disabled", true)
 	harzard_detector_col.set_deferred("disabled", true)
@@ -172,6 +178,10 @@ func handle_stun(duration: float):
 func handle_death() :
 	#TODO changes after death like item loss etc..
 	handle_respawn()
+
+func handle_push(direction: Vector2):
+	velocity.x += direction.x
+	velocity.y += direction.y
 	
 func handle_respawn():
 	reset_values()
@@ -190,10 +200,10 @@ func _input(event : InputEvent):
 	if is_on_floor():
 		if event.is_action_pressed("Down") :
 			position.y += 1
-	#if attack_queue.is_empty(): #currently only takes one action at a time due to long animations
-	if event.is_action_pressed("Attack"):
-		attack_queue.append("Attack")
-	elif event.is_action_pressed("BigAttack"):
-		attack_queue.append("BigAttack")
-	elif event.is_action_pressed("SpecialAttack"):
-		attack_queue.append("SpecialAttack")
+	if attack_queue.is_empty(): #currently only takes one action at a time due to long animations
+		if event.is_action_pressed("Attack"):
+			attack_queue.append("Attack")
+		elif event.is_action_pressed("BigAttack"):
+			attack_queue.append("BigAttack")
+		elif event.is_action_pressed("SpecialAttack"):
+			attack_queue.append("SpecialAttack")

@@ -300,5 +300,5 @@ text = "Close
 [connection signal="pressed" from="Skills/Menu/GridContainer/Add/DashAdd" to="." method="_on_dash_add_pressed"]
 [connection signal="pressed" from="Skills/Menu/GridContainer/Add/SpecialAdd" to="." method="_on_special_add_pressed"]
 [connection signal="pressed" from="Skills/Menu/GridContainer/Add/TimeAdd" to="." method="_on_time_add_pressed"]
-[connection signal="pressed" from="Skills/Menu/Close" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="Skills/Menu/Close" to="." method="_on_close_pressed"]
+[connection signal="pressed" from="Skills/Menu/Close" to="." method="_on_button_pressed"]

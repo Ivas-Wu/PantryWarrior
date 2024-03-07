@@ -71,5 +71,5 @@ func handle_special_attack():
 	
 func handle_ground_attack(): pass
 
-func _on_attacking_animation_player_animation_finished(anim_name):
+func attack_finished():
 	idle.emit()

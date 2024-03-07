@@ -697,6 +697,20 @@ tracks/4/keys = {
 "update": 1,
 "values": [Vector2(10, -9), Vector2(10, -9.4375), Vector2(13.375, -12.5)]
 }
+tracks/5/type = "method"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("../States/attack_state")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"attack_finished"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_b4d4e"]
 resource_name = "Big_Attack"
@@ -717,86 +731,64 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("HitBox:freeze_frames")
+tracks/1/path = NodePath("HitBox/CollisionShape2D:disabled")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0.1, 0.55),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 0.35, 0.55),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
-"values": [0.5, 0.0]
+"values": [true, false, true]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("HitBox/CollisionShape2D:disabled")
+tracks/2/path = NodePath("HitBox/CollisionShape2D:shape:size")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0.35, 0.55),
+"times": PackedFloat32Array(0, 0.35),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [false, true]
+"values": [Vector2(15, 10), Vector2(20.4, 10)]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("HitBox/CollisionShape2D:shape:size")
+tracks/3/path = NodePath("HitBox/CollisionShape2D:scale")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
 "times": PackedFloat32Array(0, 0.35),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [Vector2(15, 10), Vector2(20.4, 10)]
+"values": [Vector2(1, 0.8), Vector2(2.5, 2)]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("HitBox:damage")
+tracks/4/path = NodePath("HitBox/CollisionShape2D:position")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0.3, 0.55),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [300, 100]
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("HitBox:knock_back")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"times": PackedFloat32Array(0.3, 0.55),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [8.0, 5]
-}
-tracks/6/type = "value"
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/path = NodePath("HitBox/CollisionShape2D:scale")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/keys = {
-"times": PackedFloat32Array(0, 0.35),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [Vector2(1, 0.8), Vector2(2.5, 2)]
-}
-tracks/7/type = "value"
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/path = NodePath("HitBox/CollisionShape2D:position")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
-tracks/7/keys = {
 "times": PackedFloat32Array(0, 0.35),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [Vector2(14, -11), Vector2(7.5, -8.5)]
+}
+tracks/5/type = "method"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("../States/attack_state")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0.9),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"attack_finished"
+}]
 }
 
 [sub_resource type="Animation" id="Animation_f6mfw"]
@@ -926,6 +918,20 @@ tracks/5/keys = {
 "update": 1,
 "values": [true, false]
 }
+tracks/6/type = "method"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("../States/attack_state")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(1.6),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"attack_finished"
+}]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ufbjt"]
 _data = {
@@ -946,12 +952,6 @@ hit_box_col = NodePath("CharacterAttributes/HitBox/CollisionShape2D")
 hurt_box = NodePath("CharacterAttributes/HurtBox")
 hurt_box_col = NodePath("CharacterAttributes/HurtBox/CollisionShape2D")
 animated_sprite_2d = NodePath("CharacterAttributes/AnimatedSprite2D")
-
-[node name="Camera2D" parent="Player" index="1"]
-visible = false
-
-[node name="CanvasLayer" parent="Player" index="3"]
-visible = false
 
 [node name="CharacterAttributes" type="Node2D" parent="Player"]
 
@@ -977,22 +977,20 @@ script = ExtResource("7_2nxao")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player/CharacterAttributes/HurtBox"]
 position = Vector2(0, -7.5)
 shape = SubResource("RectangleShape2D_dv3bk")
-disabled = true
 
 [node name="HitBox" type="Area2D" parent="Player/CharacterAttributes" node_paths=PackedStringArray("parent")]
 collision_layer = 32
 collision_mask = 256
 script = ExtResource("8_crlak")
-damage = 300
+damage = 100
 stun_time = 0.5
-knock_back = 8.0
-freeze_frames = 0.5
 parent = NodePath("../..")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player/CharacterAttributes/HitBox"]
 position = Vector2(10.475, -9)
 scale = Vector2(2.8, 6.5)
 shape = SubResource("RectangleShape2D_setf6")
+disabled = true
 script = ExtResource("4_7pw5j")
 
 [node name="source" type="Area2D" parent="Player/CharacterAttributes/HitBox"]
@@ -1002,13 +1000,13 @@ position = Vector2(0, -7)
 shape = SubResource("CircleShape2D_f17js")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Player/CharacterAttributes"]
+visible = false
 position = Vector2(0.406248, -8.45312)
 scale = Vector2(0.599609, 0.59668)
 sprite_frames = SubResource("SpriteFrames_a3m6q")
 animation = &"Dash"
 
 [node name="Attacking" type="Sprite2D" parent="Player/CharacterAttributes"]
-visible = false
 z_index = 1
 position = Vector2(0.499999, -8.5)
 scale = Vector2(0.640625, 0.609375)
@@ -1076,6 +1074,5 @@ script = ExtResource("19_lpxuq")
 [connection signal="animation_finished" from="Player/CharacterAttributes/AnimatedSprite2D" to="Player/States/plummet_state" method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="frame_changed" from="Player/CharacterAttributes/AnimatedSprite2D" to="Player/States/falling_state" method="_on_animated_sprite_2d_frame_changed"]
 [connection signal="frame_changed" from="Player/CharacterAttributes/AnimatedSprite2D" to="Player/States/plummet_state" method="_on_animated_sprite_2d_frame_changed"]
-[connection signal="animation_finished" from="Player/CharacterAttributes/AttackingAnimationPlayer" to="Player/States/attack_state" method="_on_attacking_animation_player_animation_finished"]
 
 [editable path="Player"]

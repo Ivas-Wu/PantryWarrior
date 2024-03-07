@@ -6,7 +6,7 @@ var agility : int = 5
 var offense : int = 1
 var defense : int = 1
 var dash : int = 1
-var special : int = 1
+var special : int = 5
 #var ult : int = 0
 
 func _ready():	

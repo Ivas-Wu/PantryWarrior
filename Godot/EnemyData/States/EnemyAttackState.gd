@@ -18,6 +18,7 @@ func _enter_state() -> void:
 
 func _exit_state() -> void:
 	actor.hit_box_col.disabled = true
+	actor.animated_sprite_2d.stop()
 	set_physics_process(false)
 
 func _physics_process(delta):

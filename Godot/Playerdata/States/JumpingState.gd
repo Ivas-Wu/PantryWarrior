@@ -4,6 +4,7 @@ extends State
 signal falling
 signal previous
 signal plummet
+signal landed
 
 @onready var left = $"../../CharacterAttributes/left"
 @onready var right = $"../../CharacterAttributes/right"
@@ -19,30 +20,30 @@ func _ready():
 	
 func _enter_state() -> void:
 	gravity = player.movement_data.gravity_scale
-	var can_jump = player.is_on_floor() or player.coyote_jump_timer.time_left > 0.0
-	if can_jump:
-		set_physics_process(true)
-		player.animated_sprite_2d.play("JumpStart")
-		if player.is_on_floor():
-			if Input.is_action_pressed("Down") and player.skill_handler.agility > 0:
-				player.velocity = Vector2.ZERO
+	set_physics_process(true)
+	if Input.is_action_pressed("Up"):
+		var can_jump = player.is_on_floor() or player.coyote_jump_timer.time_left > 0.0
+		if can_jump:
+			player.animated_sprite_2d.play("JumpStart")
+			if player.is_on_floor():
+				if Input.is_action_pressed("Down") and player.skill_handler.agility > 0:
+					player.velocity = Vector2.ZERO
+				else:
+					player.velocity.y += player.jump
 			else:
-				player.velocity.y = player.jump
+				player.velocity.y += player.jump
+		elif player.air_jump > 0:
+			player.air_jump -= 1
+			player.velocity.y = player.jump * 0.9
 		else:
-			player.velocity.y = player.jump
-	elif player.air_jump > 0:
-		set_physics_process(true)
-		player.air_jump -= 1
-		player.velocity.y = player.jump * 0.7
-	else:
-		previous.emit()
+			previous.emit()
 
 func _exit_state() -> void:
 	player.movement_data.gravity_scale = gravity
 	set_physics_process(false)
 
 func _physics_process(delta):
-	if player.is_on_floor():
+	if player.is_on_floor()and Input.is_action_pressed("Down"):
 		player.velocity.x = 0
 	handle_jump(delta)
 	handle_animation()
@@ -53,7 +54,7 @@ func _physics_process(delta):
 func handle_jump(delta):
 	if player.is_on_floor() and player.skill_handler.agility > 0:
 		if Input.is_action_pressed("Down") and Input.is_action_pressed("Up"):
-			player.velocity = Vector2.ZERO
+			player.velocity.x = 0
 			charge += delta
 		if Input.is_action_just_released("Down"):
 			player.velocity.y = player.jump * min(1 + charge, 1 + player.skill_handler.agility)
@@ -78,10 +79,9 @@ func handle_state_changes():
 	if Input.is_action_just_pressed("Down") and player.skill_handler.special > 0:
 		plummet.emit()
 	elif player.velocity.y > 0:
-		handle_falling()
-
-func handle_falling():
-	falling.emit()
+		falling.emit()
+	elif player.animated_sprite_2d.animation == "JumpAirUp" and player.is_on_floor():
+		landed.emit()
 
 func handle_slide():
 	var left_col = left.is_colliding()

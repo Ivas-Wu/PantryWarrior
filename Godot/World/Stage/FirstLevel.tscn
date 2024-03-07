@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://0u7hykwahamt" path="res://Collectibles/Crumb/crumb.tscn" id="4_21k0n"]
 [ext_resource type="PackedScene" uid="uid://cf5xfl8a2kggl" path="res://Collectibles/Heart/heart.tscn" id="5_sjjjk"]
 [ext_resource type="PackedScene" uid="uid://b5pnitf8agbaw" path="res://Collectibles/Upgrade/upgrade.tscn" id="6_sr3yk"]
-[ext_resource type="PackedScene" uid="uid://cpcjq1gqxeewa" path="res://spikes.tscn" id="7_vm7gp"]
+[ext_resource type="PackedScene" uid="uid://cpcjq1gqxeewa" path="res://Hazards/spikes.tscn" id="7_7uxfp"]
 [ext_resource type="PackedScene" uid="uid://bc430eqauqkbh" path="res://EnemyData/enemy.tscn" id="8_o86ri"]
 [ext_resource type="PackedScene" uid="uid://c8fqbcrpmtjmt" path="res://Playerdata/player.tscn" id="9_lkiyg"]
 [ext_resource type="Script" path="res://Playerdata/Scripts/HurtBox.gd" id="10_2d57q"]
@@ -750,82 +750,46 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("HitBox:freeze_frames")
+tracks/1/path = NodePath("HitBox/CollisionShape2D:disabled")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0.1, 0.55),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [0.5, 0.0]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("HitBox/CollisionShape2D:disabled")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
 "times": PackedFloat32Array(0.35, 0.55),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [false, true]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("HitBox/CollisionShape2D:shape:size")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.35),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [Vector2(15, 10), Vector2(20.4, 10)]
+}
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("HitBox/CollisionShape2D:shape:size")
+tracks/3/path = NodePath("HitBox/CollisionShape2D:scale")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
 "times": PackedFloat32Array(0, 0.35),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [Vector2(15, 10), Vector2(20.4, 10)]
+"values": [Vector2(1, 0.8), Vector2(2.5, 2)]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("HitBox:damage")
+tracks/4/path = NodePath("HitBox/CollisionShape2D:position")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0.3, 0.55),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [300, 100]
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("HitBox:knock_back")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"times": PackedFloat32Array(0.3, 0.55),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [8.0, 5]
-}
-tracks/6/type = "value"
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/path = NodePath("HitBox/CollisionShape2D:scale")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/keys = {
-"times": PackedFloat32Array(0, 0.35),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [Vector2(1, 0.8), Vector2(2.5, 2)]
-}
-tracks/7/type = "value"
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/path = NodePath("HitBox/CollisionShape2D:position")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
-tracks/7/keys = {
 "times": PackedFloat32Array(0, 0.35),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
@@ -1040,9 +1004,10 @@ _data = {
 }
 point_count = 15
 
-[node name="FirstLevel" type="Node"]
+[node name="FirstLevel" type="Node" node_paths=PackedStringArray("crumb")]
 process_mode = 1
 script = ExtResource("1_88m0i")
+crumb = NodePath("Collectibles/Crumb")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 process_mode = 1
@@ -1079,6 +1044,7 @@ position = Vector2(719, 680)
 navigation_polygon = SubResource("NavigationPolygon_o2yaw")
 
 [node name="NavigationRegion2D4" type="NavigationRegion2D" parent="Nav"]
+position = Vector2(-264, -139)
 navigation_polygon = SubResource("NavigationPolygon_qqmpc")
 
 [node name="Collectibles" type="Node2D" parent="."]
@@ -1110,61 +1076,61 @@ position = Vector2(1160, 256)
 
 [node name="Hazards" type="Node2D" parent="."]
 
-[node name="Spikes" parent="Hazards" instance=ExtResource("7_vm7gp")]
+[node name="Spikes" parent="Hazards" instance=ExtResource("7_7uxfp")]
 position = Vector2(336, 368)
 
-[node name="Spikes2" parent="Hazards" instance=ExtResource("7_vm7gp")]
+[node name="Spikes2" parent="Hazards" instance=ExtResource("7_7uxfp")]
 position = Vector2(320, 368)
 
-[node name="Spikes3" parent="Hazards" instance=ExtResource("7_vm7gp")]
+[node name="Spikes3" parent="Hazards" instance=ExtResource("7_7uxfp")]
 position = Vector2(648, 368)
 
-[node name="Spikes4" parent="Hazards" instance=ExtResource("7_vm7gp")]
+[node name="Spikes4" parent="Hazards" instance=ExtResource("7_7uxfp")]
 position = Vector2(664, 368)
 
-[node name="Spikes5" parent="Hazards" instance=ExtResource("7_vm7gp")]
+[node name="Spikes5" parent="Hazards" instance=ExtResource("7_7uxfp")]
 position = Vector2(680, 368)
 
-[node name="Spikes6" parent="Hazards" instance=ExtResource("7_vm7gp")]
+[node name="Spikes6" parent="Hazards" instance=ExtResource("7_7uxfp")]
 position = Vector2(1104, 368)
 
-[node name="Spikes7" parent="Hazards" instance=ExtResource("7_vm7gp")]
+[node name="Spikes7" parent="Hazards" instance=ExtResource("7_7uxfp")]
 position = Vector2(720, 368)
 
-[node name="Spikes8" parent="Hazards" instance=ExtResource("7_vm7gp")]
+[node name="Spikes8" parent="Hazards" instance=ExtResource("7_7uxfp")]
 position = Vector2(736, 368)
 
-[node name="Spikes9" parent="Hazards" instance=ExtResource("7_vm7gp")]
+[node name="Spikes9" parent="Hazards" instance=ExtResource("7_7uxfp")]
 position = Vector2(1160, 368)
 
-[node name="Spikes10" parent="Hazards" instance=ExtResource("7_vm7gp")]
+[node name="Spikes10" parent="Hazards" instance=ExtResource("7_7uxfp")]
 position = Vector2(1144, 368)
 
-[node name="Spikes11" parent="Hazards" instance=ExtResource("7_vm7gp")]
+[node name="Spikes11" parent="Hazards" instance=ExtResource("7_7uxfp")]
 position = Vector2(1032, 976)
 
-[node name="Spikes12" parent="Hazards" instance=ExtResource("7_vm7gp")]
+[node name="Spikes12" parent="Hazards" instance=ExtResource("7_7uxfp")]
 position = Vector2(1048, 976)
 
-[node name="Spikes13" parent="Hazards" instance=ExtResource("7_vm7gp")]
+[node name="Spikes13" parent="Hazards" instance=ExtResource("7_7uxfp")]
 position = Vector2(1064, 976)
 
-[node name="Spikes14" parent="Hazards" instance=ExtResource("7_vm7gp")]
+[node name="Spikes14" parent="Hazards" instance=ExtResource("7_7uxfp")]
 position = Vector2(1096, 976)
 
-[node name="Spikes15" parent="Hazards" instance=ExtResource("7_vm7gp")]
+[node name="Spikes15" parent="Hazards" instance=ExtResource("7_7uxfp")]
 position = Vector2(1080, 976)
 
-[node name="Spikes16" parent="Hazards" instance=ExtResource("7_vm7gp")]
+[node name="Spikes16" parent="Hazards" instance=ExtResource("7_7uxfp")]
 position = Vector2(1112, 976)
 
-[node name="Spikes17" parent="Hazards" instance=ExtResource("7_vm7gp")]
+[node name="Spikes17" parent="Hazards" instance=ExtResource("7_7uxfp")]
 position = Vector2(1144, 976)
 
-[node name="Spikes18" parent="Hazards" instance=ExtResource("7_vm7gp")]
+[node name="Spikes18" parent="Hazards" instance=ExtResource("7_7uxfp")]
 position = Vector2(1128, 976)
 
-[node name="Spikes19" parent="Hazards" instance=ExtResource("7_vm7gp")]
+[node name="Spikes19" parent="Hazards" instance=ExtResource("7_7uxfp")]
 position = Vector2(1016, 976)
 
 [node name="Creatures" type="Node" parent="."]
@@ -1179,7 +1145,7 @@ position = Vector2(485, 368)
 position = Vector2(939, 783)
 
 [node name="Player" type="Node2D" parent="."]
-position = Vector2(132, -363)
+position = Vector2(1034, 733)
 
 [node name="Player" parent="Player" node_paths=PackedStringArray("harzard_detector", "harzard_detector_col", "character_collision_shape", "hit_box", "hit_box_col", "hurt_box", "hurt_box_col", "animated_sprite_2d") instance=ExtResource("9_lkiyg")]
 harzard_detector = NodePath("CharacterAttributes/HarzardDetector")
@@ -1190,12 +1156,6 @@ hit_box_col = NodePath("CharacterAttributes/HitBox/CollisionShape2D")
 hurt_box = NodePath("CharacterAttributes/HurtBox")
 hurt_box_col = NodePath("CharacterAttributes/HurtBox/CollisionShape2D")
 animated_sprite_2d = NodePath("CharacterAttributes/AnimatedSprite2D")
-
-[node name="Camera2D" parent="Player/Player" index="1"]
-visible = false
-
-[node name="CanvasLayer" parent="Player/Player" index="3"]
-visible = false
 
 [node name="CharacterAttributes" type="Node2D" parent="Player/Player"]
 

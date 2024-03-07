@@ -41,7 +41,8 @@ position = Vector2(0, -1)
 shape = SubResource("RectangleShape2D_un4x1")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-offset = Vector2(0, -20)
+offset = Vector2(0, -40)
+zoom = Vector2(0.85, 0.85)
 position_smoothing_enabled = true
 
 [node name="TimeHandler" type="Node" parent="."]
