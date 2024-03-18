@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Pantry Warrior"
-run/main_scene="res://World/Stage/SecondLevel.tscn"
+run/main_scene="res://World/Stage/1Stage.tscn"
 config/features=PackedStringArray("4.2", "Mobile")
 config/icon="res://icon.svg"
 
@@ -93,6 +93,7 @@ Dash={
 2d_physics/layer_7="Hurtbox"
 2d_physics/layer_8="EnemyHitbox"
 2d_physics/layer_9="EnemyHurtbox"
+2d_physics/layer_10="Trigger"
 
 [rendering]
 

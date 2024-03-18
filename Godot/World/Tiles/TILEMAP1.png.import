@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://debrcvh8ok8qv"
-path="res://.godot/imported/TILEMAP1.png-70db6afd9103772bd2b2088805a980b0.ctex"
+path="res://.godot/imported/TILEMAP1.png-cfbf60bdc3447eef5cf29dadaec733b2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://World/TILEMAP1.png"
-dest_files=["res://.godot/imported/TILEMAP1.png-70db6afd9103772bd2b2088805a980b0.ctex"]
+source_file="res://World/Tiles/TILEMAP1.png"
+dest_files=["res://.godot/imported/TILEMAP1.png-cfbf60bdc3447eef5cf29dadaec733b2.ctex"]
 
 [params]
 

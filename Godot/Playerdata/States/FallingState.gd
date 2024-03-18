@@ -28,7 +28,7 @@ func _physics_process(delta):
 		plummet.emit()
 	else:
 		var in_air = not player.is_on_floor()
-		player.velocity.y += player.gravity * delta * 1.1
+		player.velocity.y += player.gravity * delta * 1.07
 		player.move_and_slide()
 		if in_air and player.is_on_floor():
 			handle_landing()

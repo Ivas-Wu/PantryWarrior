@@ -63,7 +63,7 @@ func handle_basic_attack():
 	
 func handle_big_attack(): 
 	player.animation_player.play("Big_Attack")
-	player.hit_box.set_export_values(300, 8, 1, 0.5, player.random_number, player.damage)
+	player.hit_box.set_export_values(300, 8, 1, 0.3, player.random_number, player.damage)
 	
 func handle_special_attack(): 
 	player.animation_player.play("Special_Attack")

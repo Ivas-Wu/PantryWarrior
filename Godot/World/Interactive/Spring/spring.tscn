@@ -1,7 +1,46 @@
 [gd_scene load_steps=6 format=3 uid="uid://8kvss63sahw2"]
 
-[ext_resource type="Script" path="res://World/Spring/spring.gd" id="1_eniaq"]
-[ext_resource type="Texture2D" uid="uid://2q5hejhpsatj" path="res://World/Spring/SpringOutlined-Sheet.png" id="2_fnxr8"]
+[ext_resource type="Script" path="res://World/Interactive/Spring/spring.gd" id="1_eniaq"]
+[ext_resource type="Texture2D" uid="uid://2q5hejhpsatj" path="res://World/Interactive/Spring/SpringOutlined-Sheet.png" id="2_fnxr8"]
+
+[sub_resource type="Animation" id="Animation_8srqb"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatableBody2D/Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatableBody2D/CollisionPolygon2D:polygon")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [PackedVector2Array(7.6, 10, 10, 5.38462, 10, 2.30769, 5.2, -8.46154, 3.6, -10, -0.4, -10, -3.6, -8.46154, -7.6, 0.769231, -10, 3.84615, -7.6, 10)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Trigger/CollisionPolygon2D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_odrjh"]
 resource_name = "bounce"
@@ -56,45 +95,6 @@ tracks/3/keys = {
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [false, true, false]
-}
-
-[sub_resource type="Animation" id="Animation_8srqb"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatableBody2D/Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("AnimatableBody2D/CollisionPolygon2D:polygon")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [PackedVector2Array(7.6, 10, 10, 5.38462, 10, 2.30769, 5.2, -8.46154, 3.6, -10, -0.4, -10, -3.6, -8.46154, -7.6, 0.769231, -10, 3.84615, -7.6, 10)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Trigger/CollisionPolygon2D:disabled")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_huxh4"]

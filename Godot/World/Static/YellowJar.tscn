@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://cnsg2sqqw1str"]
+
+[ext_resource type="Texture2D" uid="uid://dkfqk75vhv7w4" path="res://World/Static/YellowJar2.png" id="1_ctq8q"]
+
+[node name="YellowJar" type="StaticBody2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -13)
+texture = ExtResource("1_ctq8q")
+
+[node name="CollisionShape2D" type="CollisionPolygon2D" parent="."]
+position = Vector2(0, -13)
+rotation = -0.00356298
+scale = Vector2(2.37172, -2.72082)
+polygon = PackedVector2Array(5.50977, 6.96611, 7.1933, 6.2258, 8.02605, 3.65045, 7.98549, -6.27295, 6.71608, -7.37162, -6.77617, -7.32971, -8.03656, -6.22318, -7.996, 3.70021, -7.14222, 6.27033, -5.45268, 7.00016)

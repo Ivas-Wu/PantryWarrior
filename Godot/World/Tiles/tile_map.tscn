@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://b0vy5dsyol6bn"]
 
-[ext_resource type="Texture2D" uid="uid://debrcvh8ok8qv" path="res://World/TILEMAP1.png" id="1_nauba"]
-[ext_resource type="Texture2D" uid="uid://b4iqmarl46in" path="res://World/OnewayPlatform/OneWayTile.png" id="2_c4wf0"]
+[ext_resource type="Texture2D" uid="uid://debrcvh8ok8qv" path="res://World/Tiles/TILEMAP1.png" id="1_nauba"]
+[ext_resource type="Texture2D" uid="uid://b4iqmarl46in" path="res://World/Interactive/OnewayPlatform/OneWayTile.png" id="2_c4wf0"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_bs8yg"]
 texture = ExtResource("1_nauba")
@@ -253,7 +253,6 @@ texture = ExtResource("1_nauba")
 2:2/0/terrains_peering_bit/top_side = 0
 3:2/0 = 0
 3:2/0/terrain_set = 1
-3:2/0/terrain = 0
 3:2/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 3:2/0/physics_layer_0/angular_velocity = 0.0
 3:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)

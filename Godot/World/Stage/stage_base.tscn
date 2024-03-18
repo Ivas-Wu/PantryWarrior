@@ -1,0 +1,27 @@
+[gd_scene load_steps=3 format=3 uid="uid://dbbelc5jykppy"]
+
+[ext_resource type="Script" path="res://World/Stage/stage_base.gd" id="1_latmh"]
+[ext_resource type="PackedScene" uid="uid://b0vy5dsyol6bn" path="res://World/Tiles/tile_map.tscn" id="2_l7nas"]
+
+[node name="StageBase" type="Node"]
+script = ExtResource("1_latmh")
+
+[node name="TileMap" parent="." instance=ExtResource("2_l7nas")]
+
+[node name="Enemies" type="Node" parent="."]
+
+[node name="Platforms" type="Node" parent="."]
+
+[node name="Hazards" type="Node" parent="."]
+
+[node name="Collectibles" type="Node" parent="."]
+
+[node name="Upgrades" type="Node" parent="Collectibles"]
+
+[node name="Hearts" type="Node" parent="Collectibles"]
+
+[node name="EnemyZone" type="Node" parent="."]
+
+[node name="Springs" type="Node" parent="."]
+
+[node name="TimedBlocks" type="Node" parent="."]

@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://ckkhml8ccoswj"]
 
-[ext_resource type="Script" path="res://World/PlatformMoving/platform.gd" id="1_8v85x"]
-[ext_resource type="Texture2D" uid="uid://dp2fniw4e2o3a" path="res://World/PlatformMoving/platform.png" id="2_idqkd"]
+[ext_resource type="Script" path="res://World/Interactive/PlatformMoving/platform.gd" id="1_8v85x"]
+[ext_resource type="Texture2D" uid="uid://dp2fniw4e2o3a" path="res://World/Interactive/PlatformMoving/platform.png" id="2_idqkd"]
 
 [sub_resource type="Animation" id="Animation_e7uvw"]
 resource_name = "Move"

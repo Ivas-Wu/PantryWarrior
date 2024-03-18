@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://World/Stage/stage_base.gd" id="1_88m0i"]
 [ext_resource type="Texture2D" uid="uid://demhof6yg0ua5" path="res://Backgrounds/GroundFloor.png" id="2_howhm"]
-[ext_resource type="PackedScene" uid="uid://b0vy5dsyol6bn" path="res://World/tile_map.tscn" id="3_wprgr"]
+[ext_resource type="PackedScene" uid="uid://b0vy5dsyol6bn" path="res://World/Tiles/tile_map.tscn" id="3_wprgr"]
 [ext_resource type="PackedScene" uid="uid://0u7hykwahamt" path="res://Collectibles/Crumb/crumb.tscn" id="4_21k0n"]
 [ext_resource type="PackedScene" uid="uid://cf5xfl8a2kggl" path="res://Collectibles/Heart/heart.tscn" id="5_sjjjk"]
 [ext_resource type="PackedScene" uid="uid://b5pnitf8agbaw" path="res://Collectibles/Upgrade/upgrade.tscn" id="6_sr3yk"]
@@ -10,7 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://bc430eqauqkbh" path="res://EnemyData/enemy.tscn" id="8_o86ri"]
 [ext_resource type="PackedScene" uid="uid://c8fqbcrpmtjmt" path="res://Playerdata/player.tscn" id="9_lkiyg"]
 [ext_resource type="Script" path="res://Playerdata/Scripts/HurtBox.gd" id="10_2d57q"]
-[ext_resource type="PackedScene" uid="uid://ckkhml8ccoswj" path="res://World/PlatformMoving/platform.tscn" id="10_hjpvs"]
+[ext_resource type="PackedScene" uid="uid://ckkhml8ccoswj" path="res://World/Interactive/PlatformMoving/platform.tscn" id="10_hjpvs"]
 [ext_resource type="Script" path="res://Playerdata/Scripts/Hitbox.gd" id="11_42vb6"]
 [ext_resource type="Script" path="res://character_general/hit_box_collision_base.gd" id="12_hf5ln"]
 [ext_resource type="Texture2D" uid="uid://cf24xlv35lmq4" path="res://Playerdata/Pink/PinkBugDashOutlined-Sheet.png" id="13_np4n7"]

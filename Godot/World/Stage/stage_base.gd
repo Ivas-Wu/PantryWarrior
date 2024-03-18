@@ -1,7 +1,7 @@
 class_name stage_base
 extends Node
 
-@onready var player: Player = $Player/Player
+@onready var player: Player = $Player
 @export var crumb: Area2D = null
 
 func _ready():

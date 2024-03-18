@@ -34,7 +34,7 @@ func _enter_state() -> void:
 				player.velocity.y += player.jump
 		elif player.air_jump > 0:
 			player.air_jump -= 1
-			player.velocity.y = player.jump * 0.9
+			player.velocity.y = player.jump * 0.8
 		else:
 			previous.emit()
 
@@ -64,7 +64,7 @@ func handle_jump(delta):
 		if Input.is_action_just_pressed("Up"):
 			if player.air_jump > 0:
 				player.air_jump -= 1
-				player.velocity.y = player.jump * 0.9
+				player.velocity.y = player.jump * 0.8
 		if Input.is_action_just_released("Up"):
 			if player.velocity.y < 0:
 				player.velocity.y /= 3

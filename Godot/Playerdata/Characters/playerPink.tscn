@@ -1,10 +1,17 @@
-[gd_scene load_steps=108 format=3 uid="uid://cypcocvbiby87"]
+[gd_scene load_steps=117 format=3 uid="uid://cypcocvbiby87"]
 
+[ext_resource type="Script" path="res://Playerdata/player.gd" id="1_pypjj"]
+[ext_resource type="Script" path="res://Playerdata/Scripts/PlayerMovementData.gd" id="2_5p0ot"]
+[ext_resource type="Script" path="res://Playerdata/Scripts/PlayerMaxStats.gd" id="3_cc8eu"]
 [ext_resource type="Script" path="res://character_general/hit_box_collision_base.gd" id="4_7pw5j"]
+[ext_resource type="Script" path="res://Playerdata/Scripts/HealthBar.gd" id="4_cj8jf"]
+[ext_resource type="Script" path="res://Playerdata/Scripts/Player Organization/calculate_stats.gd" id="5_ckmjd"]
 [ext_resource type="Texture2D" uid="uid://cf24xlv35lmq4" path="res://Playerdata/Pink/PinkBugDashOutlined-Sheet.png" id="5_o7f74"]
 [ext_resource type="Texture2D" uid="uid://chjmsjtdmus5a" path="res://Playerdata/Pink/PinkBugJumpOutlinedWhite-Sheet.png" id="6_4q6vm"]
 [ext_resource type="Texture2D" uid="uid://cfdx0csp5joyp" path="res://Playerdata/Pink/PinkBugrunningoutlinedWhite-Sheet.png" id="6_51nfq"]
+[ext_resource type="Script" path="res://Playerdata/Scripts/Player Organization/skill_points.gd" id="6_yvkpx"]
 [ext_resource type="Script" path="res://Playerdata/Scripts/HurtBox.gd" id="7_2nxao"]
+[ext_resource type="Script" path="res://Playerdata/Scripts/Player Organization/player_level.gd" id="7_dmt8y"]
 [ext_resource type="Texture2D" uid="uid://sbux3ue0ipeq" path="res://Playerdata/Pink/PlummetOutlined-Sheet.png" id="7_eh5ai"]
 [ext_resource type="Texture2D" uid="uid://dwwvvid8bwqbm" path="res://Playerdata/Pink/PinkBugIdleOutlined-Sheet.png" id="7_fthkm"]
 [ext_resource type="Texture2D" uid="uid://04mf2pwpu05i" path="res://Playerdata/Pink/PinkBugRollOutlined-Sheet.png" id="7_hq282"]
@@ -13,7 +20,6 @@
 [ext_resource type="Texture2D" uid="uid://ca8da81cuvg82" path="res://Playerdata/Pink/PinkBugrunningoutlinedG-Sheet.png" id="8_sexm6"]
 [ext_resource type="Texture2D" uid="uid://b3yx5a2sef6lr" path="res://Playerdata/Pink/output.png" id="10_pwch6"]
 [ext_resource type="Script" path="res://finite_state_machine.gd" id="11_b02sp"]
-[ext_resource type="PackedScene" uid="uid://c8fqbcrpmtjmt" path="res://Playerdata/player.tscn" id="11_x64b6"]
 [ext_resource type="Script" path="res://Playerdata/States/JumpingState.gd" id="12_4657u"]
 [ext_resource type="Script" path="res://Playerdata/States/FallingState.gd" id="13_vvtk1"]
 [ext_resource type="Script" path="res://Playerdata/States/RunningState.gd" id="14_mh330"]
@@ -22,6 +28,25 @@
 [ext_resource type="Script" path="res://Playerdata/States/RollingState.gd" id="17_iuqsj"]
 [ext_resource type="Script" path="res://Playerdata/States/DashState.gd" id="18_od1wa"]
 [ext_resource type="Script" path="res://Playerdata/States/PlummetState.gd" id="19_lpxuq"]
+
+[sub_resource type="Resource" id="Resource_5chmb"]
+script = ExtResource("2_5p0ot")
+speed = 200.0
+jump_velocity = -300.0
+acceleration = 300.0
+air_resistence = 500.0
+friction = 1000.0
+gravity_scale = 1.0
+knock_back = 1.0
+
+[sub_resource type="Resource" id="Resource_sppp2"]
+script = ExtResource("3_cc8eu")
+hp = 300.0
+invulnerability_frames = 20
+air_jump = 1
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_un4x1"]
+size = Vector2(2, 2)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_prvjc"]
 size = Vector2(12, 15)
@@ -941,9 +966,14 @@ _data = {
 "Special_Attack": SubResource("Animation_jhw26")
 }
 
-[node name="playerPink" type="Node2D"]
-
-[node name="Player" parent="." node_paths=PackedStringArray("harzard_detector", "harzard_detector_col", "character_collision_shape", "hit_box", "hit_box_col", "hurt_box", "hurt_box_col", "animated_sprite_2d") instance=ExtResource("11_x64b6")]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("harzard_detector", "harzard_detector_col", "character_collision_shape", "hit_box", "hit_box_col", "hurt_box", "hurt_box_col", "animated_sprite_2d") groups=["Player"]]
+collision_layer = 2
+collision_mask = 23
+floor_constant_speed = true
+floor_snap_length = 3.0
+script = ExtResource("1_pypjj")
+movement_data = SubResource("Resource_5chmb")
+stat_data = SubResource("Resource_sppp2")
 harzard_detector = NodePath("CharacterAttributes/HarzardDetector")
 harzard_detector_col = NodePath("CharacterAttributes/HarzardDetector/CollisionShape2D")
 character_collision_shape = NodePath("CharacterAttributes/CharacterCollisionShape/CollisionShape")
@@ -953,32 +983,68 @@ hurt_box = NodePath("CharacterAttributes/HurtBox")
 hurt_box_col = NodePath("CharacterAttributes/HurtBox/CollisionShape2D")
 animated_sprite_2d = NodePath("CharacterAttributes/AnimatedSprite2D")
 
-[node name="CharacterAttributes" type="Node2D" parent="Player"]
+[node name="CollisionShape" type="CollisionShape2D" parent="."]
+position = Vector2(0, -1)
+shape = SubResource("RectangleShape2D_un4x1")
 
-[node name="HarzardDetector" type="Area2D" parent="Player/CharacterAttributes"]
+[node name="Camera2D" type="Camera2D" parent="."]
+offset = Vector2(0, -40)
+zoom = Vector2(0.85, 0.85)
+position_smoothing_enabled = true
+
+[node name="TimeHandler" type="Node" parent="."]
+
+[node name="CoyoteJumpTimer" type="Timer" parent="TimeHandler"]
+wait_time = 0.1
+one_shot = true
+
+[node name="StunTimer" type="Timer" parent="TimeHandler"]
+one_shot = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="HealthBar" type="Container" parent="CanvasLayer"]
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("4_cj8jf")
+
+[node name="Scripts" type="Node2D" parent="."]
+
+[node name="calculate_stats" type="Node" parent="Scripts"]
+script = ExtResource("5_ckmjd")
+
+[node name="skill_handler" type="Node" parent="Scripts"]
+script = ExtResource("6_yvkpx")
+
+[node name="level_handler" type="Node" parent="Scripts"]
+script = ExtResource("7_dmt8y")
+
+[node name="CharacterAttributes" type="Node2D" parent="."]
+
+[node name="HarzardDetector" type="Area2D" parent="CharacterAttributes"]
 collision_layer = 2
 collision_mask = 4
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/CharacterAttributes/HarzardDetector"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterAttributes/HarzardDetector"]
 position = Vector2(0, -7.5)
 shape = SubResource("RectangleShape2D_prvjc")
 
-[node name="CharacterCollisionShape" type="Area2D" parent="Player/CharacterAttributes"]
+[node name="CharacterCollisionShape" type="Area2D" parent="CharacterAttributes"]
 
-[node name="CollisionShape" type="CollisionShape2D" parent="Player/CharacterAttributes/CharacterCollisionShape"]
+[node name="CollisionShape" type="CollisionShape2D" parent="CharacterAttributes/CharacterCollisionShape"]
 position = Vector2(0, -7.75)
 shape = SubResource("RectangleShape2D_jfbfm")
 
-[node name="HurtBox" type="Area2D" parent="Player/CharacterAttributes"]
+[node name="HurtBox" type="Area2D" parent="CharacterAttributes"]
 collision_layer = 64
 collision_mask = 0
 script = ExtResource("7_2nxao")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/CharacterAttributes/HurtBox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterAttributes/HurtBox"]
 position = Vector2(0, -7.5)
 shape = SubResource("RectangleShape2D_dv3bk")
 
-[node name="HitBox" type="Area2D" parent="Player/CharacterAttributes" node_paths=PackedStringArray("parent")]
+[node name="HitBox" type="Area2D" parent="CharacterAttributes" node_paths=PackedStringArray("parent")]
 collision_layer = 32
 collision_mask = 256
 script = ExtResource("8_crlak")
@@ -986,27 +1052,26 @@ damage = 100
 stun_time = 0.5
 parent = NodePath("../..")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/CharacterAttributes/HitBox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterAttributes/HitBox"]
 position = Vector2(10.475, -9)
 scale = Vector2(2.8, 6.5)
 shape = SubResource("RectangleShape2D_setf6")
-disabled = true
 script = ExtResource("4_7pw5j")
 
-[node name="source" type="Area2D" parent="Player/CharacterAttributes/HitBox"]
+[node name="source" type="Area2D" parent="CharacterAttributes/HitBox"]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/CharacterAttributes/HitBox/source"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterAttributes/HitBox/source"]
 position = Vector2(0, -7)
 shape = SubResource("CircleShape2D_f17js")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Player/CharacterAttributes"]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterAttributes"]
 visible = false
 position = Vector2(0.406248, -8.45312)
 scale = Vector2(0.599609, 0.59668)
 sprite_frames = SubResource("SpriteFrames_a3m6q")
 animation = &"Dash"
 
-[node name="Attacking" type="Sprite2D" parent="Player/CharacterAttributes"]
+[node name="Attacking" type="Sprite2D" parent="CharacterAttributes"]
 z_index = 1
 position = Vector2(0.499999, -8.5)
 scale = Vector2(0.640625, 0.609375)
@@ -1015,64 +1080,62 @@ hframes = 23
 vframes = 4
 frame = 72
 
-[node name="AttackingAnimationPlayer" type="AnimationPlayer" parent="Player/CharacterAttributes"]
+[node name="AttackingAnimationPlayer" type="AnimationPlayer" parent="CharacterAttributes"]
 libraries = {
 "": SubResource("AnimationLibrary_ufbjt")
 }
 
-[node name="left" type="RayCast2D" parent="Player/CharacterAttributes"]
+[node name="left" type="RayCast2D" parent="CharacterAttributes"]
 position = Vector2(-6, -14)
 target_position = Vector2(0, -11)
 
-[node name="middleleft" type="RayCast2D" parent="Player/CharacterAttributes"]
+[node name="middleleft" type="RayCast2D" parent="CharacterAttributes"]
 position = Vector2(-3, -14)
 target_position = Vector2(0, -11)
 
-[node name="middleright" type="RayCast2D" parent="Player/CharacterAttributes"]
+[node name="middleright" type="RayCast2D" parent="CharacterAttributes"]
 position = Vector2(3, -14)
 target_position = Vector2(0, -11)
 
-[node name="right" type="RayCast2D" parent="Player/CharacterAttributes"]
+[node name="right" type="RayCast2D" parent="CharacterAttributes"]
 position = Vector2(6, -14)
 target_position = Vector2(0, -11)
 
-[node name="States" type="Node" parent="Player" node_paths=PackedStringArray("state")]
+[node name="States" type="Node" parent="." node_paths=PackedStringArray("state")]
 script = ExtResource("11_b02sp")
 state = NodePath("idle_state")
 
-[node name="jump_state" type="Node" parent="Player/States"]
+[node name="jump_state" type="Node" parent="States"]
 script = ExtResource("12_4657u")
 
-[node name="falling_state" type="Node" parent="Player/States"]
+[node name="falling_state" type="Node" parent="States"]
 script = ExtResource("13_vvtk1")
 
-[node name="running_state" type="Node" parent="Player/States"]
+[node name="running_state" type="Node" parent="States"]
 script = ExtResource("14_mh330")
 
-[node name="idle_state" type="Node" parent="Player/States"]
+[node name="idle_state" type="Node" parent="States"]
 script = ExtResource("15_wy141")
 
-[node name="attack_state" type="Node" parent="Player/States"]
+[node name="attack_state" type="Node" parent="States"]
 script = ExtResource("16_quyg4")
 
-[node name="rolling_state" type="Node" parent="Player/States"]
+[node name="rolling_state" type="Node" parent="States"]
 script = ExtResource("17_iuqsj")
 
-[node name="dash_state" type="Node" parent="Player/States"]
+[node name="dash_state" type="Node" parent="States"]
 script = ExtResource("18_od1wa")
 
-[node name="plummet_state" type="Node" parent="Player/States"]
+[node name="plummet_state" type="Node" parent="States"]
 script = ExtResource("19_lpxuq")
 
-[connection signal="area_entered" from="Player/CharacterAttributes/HarzardDetector" to="Player" method="_on_harzard_detector_area_entered"]
-[connection signal="area_exited" from="Player/CharacterAttributes/HarzardDetector" to="Player" method="_on_harzard_detector_area_exited"]
-[connection signal="area_entered" from="Player/CharacterAttributes/HurtBox" to="Player" method="_on_hurt_box_area_entered"]
-[connection signal="property_list_changed" from="Player/CharacterAttributes/HitBox" to="Player/CharacterAttributes/HitBox" method="_on_property_list_changed"]
-[connection signal="animation_finished" from="Player/CharacterAttributes/AnimatedSprite2D" to="Player/States/falling_state" method="_on_animated_sprite_2d_animation_finished"]
-[connection signal="animation_finished" from="Player/CharacterAttributes/AnimatedSprite2D" to="Player/States/rolling_state" method="_on_animated_sprite_2d_animation_finished"]
-[connection signal="animation_finished" from="Player/CharacterAttributes/AnimatedSprite2D" to="Player/States/dash_state" method="_on_animated_sprite_2d_animation_finished"]
-[connection signal="animation_finished" from="Player/CharacterAttributes/AnimatedSprite2D" to="Player/States/plummet_state" method="_on_animated_sprite_2d_animation_finished"]
-[connection signal="frame_changed" from="Player/CharacterAttributes/AnimatedSprite2D" to="Player/States/falling_state" method="_on_animated_sprite_2d_frame_changed"]
-[connection signal="frame_changed" from="Player/CharacterAttributes/AnimatedSprite2D" to="Player/States/plummet_state" method="_on_animated_sprite_2d_frame_changed"]
-
-[editable path="Player"]
+[connection signal="area_entered" from="CharacterAttributes/HarzardDetector" to="." method="_on_harzard_detector_area_entered"]
+[connection signal="area_exited" from="CharacterAttributes/HarzardDetector" to="." method="_on_harzard_detector_area_exited"]
+[connection signal="area_entered" from="CharacterAttributes/HurtBox" to="." method="_on_hurt_box_area_entered"]
+[connection signal="property_list_changed" from="CharacterAttributes/HitBox" to="CharacterAttributes/HitBox" method="_on_property_list_changed"]
+[connection signal="animation_finished" from="CharacterAttributes/AnimatedSprite2D" to="States/falling_state" method="_on_animated_sprite_2d_animation_finished"]
+[connection signal="animation_finished" from="CharacterAttributes/AnimatedSprite2D" to="States/rolling_state" method="_on_animated_sprite_2d_animation_finished"]
+[connection signal="animation_finished" from="CharacterAttributes/AnimatedSprite2D" to="States/dash_state" method="_on_animated_sprite_2d_animation_finished"]
+[connection signal="animation_finished" from="CharacterAttributes/AnimatedSprite2D" to="States/plummet_state" method="_on_animated_sprite_2d_animation_finished"]
+[connection signal="frame_changed" from="CharacterAttributes/AnimatedSprite2D" to="States/falling_state" method="_on_animated_sprite_2d_frame_changed"]
+[connection signal="frame_changed" from="CharacterAttributes/AnimatedSprite2D" to="States/plummet_state" method="_on_animated_sprite_2d_frame_changed"]

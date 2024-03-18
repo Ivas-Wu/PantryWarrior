@@ -90,7 +90,7 @@ func create_effect(effect: PackedScene, location: Vector2 = global_position):
 		ef.global_position = location
 		ef.get_node("AnimationPlayer").play("Hit")
 	
-func handle_time_slow(duration : int):
+func handle_time_slow(duration : float):
 	set_physics_process(false)
 	Engine.time_scale = 0
 	await(get_tree().create_timer(duration, true, false, true).timeout)
