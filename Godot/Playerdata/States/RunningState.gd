@@ -37,7 +37,7 @@ func _physics_process(delta):
 				up.emit()
 
 func handle_animation():
-	player.animated_sprite_2d.set_speed_scale((abs(player.velocity.x)+abs(player.velocity.x))/(player.speed+abs(player.velocity.x)))
+	player.animated_sprite_2d.set_speed_scale( max( (abs(player.velocity.x)+abs(player.velocity.x))/(player.speed+abs(player.velocity.x)), 1 if player.is_on_wall() else 0.5) )
 
 func handle_state():
 	var emitted = false

@@ -8,7 +8,7 @@ extends Area2D
 @export var parent : base_character_class
 
 var already_hit : bool = false;
-var source : CollisionShape2D
+var source : CollisionPolygon2D
 
 func _ready():
 	pass
@@ -17,7 +17,7 @@ func _process(delta):
 	pass
 
 func init():
-	source = parent.character_collision_shape
+	source = parent.character_collision_polygon
 	
 func set_export_values(damage: int, knock: float, stun: float, freeze: float, rand: float, multiplier: float = 1) :
 	generate_damage(damage * multiplier, rand)

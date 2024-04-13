@@ -3,6 +3,7 @@ extends base_character_class
 
 #default to character class
 @onready var collision_shape = $CollisionShape
+@onready var collision_polygon = $CollisionPolygon 
 @onready var coyote_jump_timer = $TimeHandler/CoyoteJumpTimer as Timer
 @onready var stun_timer = $TimeHandler/StunTimer
 @onready var health_bar = $CanvasLayer/HealthBar
@@ -44,8 +45,8 @@ func _ready():
 	set_states()
 	
 func set_collision_shape():
-	collision_shape.shape = character_collision_shape.shape
-	collision_shape.transform = character_collision_shape.transform
+	collision_polygon.polygon = character_collision_polygon.polygon
+	collision_polygon.transform = character_collision_polygon.transform
 
 func set_states():
 	fsm.change_state(fsm.state)

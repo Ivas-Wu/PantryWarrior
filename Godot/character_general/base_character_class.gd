@@ -6,7 +6,7 @@ extends CharacterBody2D
 @export var stat_data: Resource
 @export var harzard_detector: Area2D
 @export var harzard_detector_col: CollisionShape2D
-@export var character_collision_shape: CollisionShape2D
+@export var character_collision_polygon: CollisionPolygon2D
 
 @export var hit_box: hitbox_base
 @export var hit_box_col: hitbox_collision_shape_base
@@ -105,7 +105,7 @@ func _on_hurt_box_area_entered(hitbox : hitbox_base):
 	if invulnerability_frames > 0: return
 	#hitbox.already_hit = true
 	enter_damaged_state()
-	create_effect(hit_effect, character_collision_shape.global_position)
+	create_effect(hit_effect, character_collision_polygon.global_position)
 	await(handle_time_slow(hitbox.freeze_frames if hitbox else 0))
 	if take_damage(hitbox.damage if hitbox else 0):
 		hitbox.parent.gain_exp(exp_on_kill)

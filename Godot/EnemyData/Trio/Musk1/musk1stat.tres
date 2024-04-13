@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="BossStatsData" load_steps=2 format=3 uid="uid://buwd8otayu3mo"]
+
+[ext_resource type="Script" path="res://EnemyData/Trio/BossMaxStats.gd" id="1_afu5x"]
+
+[resource]
+script = ExtResource("1_afu5x")
+hp = 300.0
+vision_range = 100.0
+attack_range_short = 57.0
+attack_range_long = 83.0
+max_walk_angle = 45.0

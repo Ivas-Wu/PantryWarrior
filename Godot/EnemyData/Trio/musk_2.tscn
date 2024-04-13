@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://c2at3kyj2ay1n"]
+
+[ext_resource type="Texture2D" uid="uid://byl10biu2i8c8" path="res://EnemyData/Trio/Musk2.2OutlinedScaled.png" id="1_00svo"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6iqac"]
+size = Vector2(86, 83)
+
+[node name="Musk2" type="CharacterBody2D"]
+collision_layer = 16
+collision_mask = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(7, -42)
+texture = ExtResource("1_00svo")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(13, -41.5)
+shape = SubResource("RectangleShape2D_6iqac")
