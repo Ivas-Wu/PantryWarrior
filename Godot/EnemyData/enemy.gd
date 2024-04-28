@@ -67,6 +67,7 @@ func _physics_process(delta):
 	if invulnerability_frames == 0:
 		handle_movement(input_axis, delta)
 		flip_animation(input_axis)
+		set_hurtbox_col()
 	else:
 		invulnerability_frames -= 1
 

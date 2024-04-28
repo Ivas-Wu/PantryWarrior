@@ -487,6 +487,7 @@ tile_set = SubResource("TileSet_if72t")
 rendering_quadrant_size = 8
 format = 2
 layer_0/name = "Base"
+layer_0/z_index = 1
 layer_1/name = "Slope"
 layer_1/z_index = 2
 layer_1/tile_data = PackedInt32Array()

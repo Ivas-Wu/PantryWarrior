@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=3 uid="uid://bc430eqauqkbh"]
+[gd_scene load_steps=50 format=3 uid="uid://bc430eqauqkbh"]
 
 [ext_resource type="Script" path="res://EnemyData/enemy.gd" id="1_130ig"]
 [ext_resource type="Texture2D" uid="uid://cc2i0llxciqcj" path="res://EnemyData/RAT/RatIdle-Sheet.png" id="4_58ly6"]
@@ -249,9 +249,6 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dr10h"]
 size = Vector2(8, 23)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_bb7ck"]
-size = Vector2(8, 23)
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tqkol"]
 size = Vector2(28, 36)
 
@@ -272,7 +269,7 @@ character_collision_polygon = NodePath("CollisionPolygon")
 hit_box = NodePath("HitBox")
 hit_box_col = NodePath("HitBox/CollisionShape2D")
 hurt_box = NodePath("HurtBox")
-hurt_box_col = NodePath("HurtBox/CollisionShape2D")
+hurt_box_col = NodePath("HurtBox/CollisionPolygon2D")
 animated_sprite_2d = NodePath("AnimatedSprite2D")
 exp_on_kill = 100
 hit_effect = ExtResource("4_k5dxr")
@@ -349,9 +346,9 @@ collision_layer = 256
 collision_mask = 32
 script = ExtResource("8_dufhy")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="HurtBox"]
 position = Vector2(0, -11.5)
-shape = SubResource("RectangleShape2D_bb7ck")
+polygon = PackedVector2Array(-4, -11.5, -4, 11.5, 4, 11.5, 4, -11.5)
 
 [node name="HitBox" type="Area2D" parent="." node_paths=PackedStringArray("parent")]
 collision_layer = 128

@@ -2,7 +2,6 @@ class_name Player
 extends base_character_class
 
 #default to character class
-@onready var collision_shape = $CollisionShape
 @onready var collision_polygon = $CollisionPolygon 
 @onready var coyote_jump_timer = $TimeHandler/CoyoteJumpTimer as Timer
 @onready var stun_timer = $TimeHandler/StunTimer
@@ -122,6 +121,7 @@ func _physics_process(delta):
 		handle_speed(input_axis, delta)
 	handle_damage()
 	flip_animation(input_axis)
+	set_hurtbox_col()
 
 func handle_damage():
 	if invulnerability_frames == 0:

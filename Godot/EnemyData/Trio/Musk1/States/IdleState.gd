@@ -3,6 +3,7 @@ extends State
 
 signal jump
 signal run
+signal dodge
 
 var musk1 : musk1
 

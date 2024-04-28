@@ -1,4 +1,4 @@
-class_name BossMovementData
+class_name PlayerMovementData
 extends Resource
 
 @export var speed = 200.0

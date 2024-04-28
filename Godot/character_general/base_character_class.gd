@@ -11,7 +11,7 @@ extends CharacterBody2D
 @export var hit_box: hitbox_base
 @export var hit_box_col: hitbox_collision_shape_base
 @export var hurt_box: Area2D
-@export var hurt_box_col: CollisionShape2D
+@export var hurt_box_col: CollisionPolygon2D
 @export var animated_sprite_2d : AnimatedSprite2D
 
 @export var exp_on_kill : int = 0
@@ -97,6 +97,11 @@ func handle_time_slow(duration : float):
 	Engine.time_scale = 1
 	set_physics_process(true)
 	
+	
+func set_hurtbox_col():
+	hurt_box_col.polygon = character_collision_polygon.polygon
+	hurt_box_col.scale.x = character_collision_polygon.scale.x
+
 func _on_harzard_detector_area_entered(hazard: Hazard):
 	if invulnerability_frames > 0 or take_damage(hazard.damage): return
 	handle_knockback(hazard.source, hazard.knock_back)
