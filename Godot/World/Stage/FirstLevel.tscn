@@ -1147,10 +1147,9 @@ position = Vector2(939, 783)
 [node name="Player" type="Node2D" parent="."]
 position = Vector2(1034, 733)
 
-[node name="Player" parent="Player" node_paths=PackedStringArray("harzard_detector", "harzard_detector_col", "character_collision_shape", "hit_box", "hit_box_col", "hurt_box", "hurt_box_col", "animated_sprite_2d") instance=ExtResource("9_lkiyg")]
+[node name="Player" parent="Player" node_paths=PackedStringArray("harzard_detector", "harzard_detector_col", "hit_box", "hit_box_col", "hurt_box", "hurt_box_col", "animated_sprite_2d") instance=ExtResource("9_lkiyg")]
 harzard_detector = NodePath("CharacterAttributes/HarzardDetector")
 harzard_detector_col = NodePath("CharacterAttributes/HarzardDetector/CollisionShape2D")
-character_collision_shape = NodePath("CharacterAttributes/CharacterCollisionShape/CollisionShape")
 hit_box = NodePath("CharacterAttributes/HitBox")
 hit_box_col = NodePath("CharacterAttributes/HitBox/CollisionShape2D")
 hurt_box = NodePath("CharacterAttributes/HurtBox")

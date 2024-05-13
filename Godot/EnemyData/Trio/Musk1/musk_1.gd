@@ -36,6 +36,7 @@ extends base_character_class
 @onready var movement_cd = $Timers/MovementCoolDown
 
 @onready var starting_position = global_position
+@onready var health_bar = $HealthBar
 
 var direction : Vector2
 var player : Player
@@ -57,6 +58,9 @@ func reset_values():
 	current_hp = hp
 	velocity = Vector2.ZERO
 	global_position = starting_position
+	health_bar.min_value = 0
+	health_bar.max_value = hp
+	set_healthbar()
 
 func set_states():
 	fsm.change_state(fsm.state)
@@ -170,11 +174,23 @@ func flip_animation(input_axis):
 			hit_box.scale.x = abs(hit_box.scale.x)
 			stab_extension.position.x = abs(stab_extension.position.x)
 
-func take_damage(damage: float) -> bool: return false
+func take_damage(damage: float) -> bool: 
+	var is_dead = false
+	if current_hp <= damage: 
+		handle_death()
+		is_dead = true
+	else: 
+		current_hp -= damage
+		set_healthbar()
+	return is_dead
+	
 func handle_stun(duration: float): pass
 
+func set_healthbar():
+	health_bar.value = current_hp 
+	
 #end round
-func handle_death(): pass
+func handle_death(): queue_free()
 
-func _on_hurt_box_area_entered(hitbox : hitbox_base):
+func _on_enemy_hurt_box_area_entered(hitbox : hitbox_base):
 	take_damage(hitbox.damage if hitbox else 0)

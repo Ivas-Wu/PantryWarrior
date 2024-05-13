@@ -4,7 +4,7 @@ extends State
 signal idle
 
 var musk1 : musk1
-var extension: int = 8
+var extension: int = 16
 
 func _ready():
 	musk1 = get_tree().get_first_node_in_group("Boss")

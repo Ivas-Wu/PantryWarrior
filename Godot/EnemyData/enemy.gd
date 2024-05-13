@@ -130,5 +130,5 @@ func handle_stun(duration: float):
 func set_healthbar():
 	health_bar.value = current_hp 
 	
-func handle_death() :
+func handle_death():
 	queue_free()

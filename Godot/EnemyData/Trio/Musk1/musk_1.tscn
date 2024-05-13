@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://cp1pnfen3w5qw"]
+[gd_scene load_steps=34 format=3 uid="uid://cp1pnfen3w5qw"]
 
 [ext_resource type="Script" path="res://EnemyData/Trio/Musk1/musk_1.gd" id="1_gn5ba"]
 [ext_resource type="Texture2D" uid="uid://1vkodbryeyxm" path="res://EnemyData/Trio/Musk1/Musk1Outlined.png" id="1_p3f44"]
@@ -21,6 +21,7 @@
 [ext_resource type="Texture2D" uid="uid://cvwjmixitvbn1" path="res://EnemyData/Trio/Musk1/Animations/BladeExtended-Sheet.png" id="17_wt1y0"]
 [ext_resource type="Script" path="res://EnemyData/EnemyHitBox.gd" id="19_v1tnt"]
 [ext_resource type="Script" path="res://character_general/hit_box_collision_base.gd" id="20_lcd1v"]
+[ext_resource type="PackedScene" uid="uid://d2lcx734h0ln8" path="res://EnemyData/health_bar.tscn" id="22_1f7xq"]
 
 [sub_resource type="Animation" id="Animation_kalfe"]
 resource_name = "Basic Attack"
@@ -797,7 +798,6 @@ one_shot = true
 polygon = PackedVector2Array(4, 0, 5, -2, 3, -4, 9, -9, 7, -26, 9, -28, 13, -35, 13, -36, 12, -37, 7, -37, 7, -40, 6, -41, -1, -41, -5, -41, -6, -40, -7, -36, -9, -33, -9, -32, -8, -31, -4, -31, -4, -29, -6, -29, -9, -26, -10, -23, -11, -10, -7, -6, -7, -2, -5, 0)
 
 [node name="EnemyHurtBox" type="Area2D" parent="."]
-visible = false
 script = ExtResource("14_ijy17")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="EnemyHurtBox"]
@@ -814,3 +814,7 @@ parent = NodePath("..")
 shape = SubResource("RectangleShape2D_16h4m")
 disabled = true
 script = ExtResource("20_lcd1v")
+
+[node name="HealthBar" parent="." instance=ExtResource("22_1f7xq")]
+
+[connection signal="area_entered" from="EnemyHurtBox" to="." method="_on_enemy_hurt_box_area_entered"]
