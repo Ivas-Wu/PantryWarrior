@@ -2,8 +2,8 @@ extends Node2D
 
 @onready var player = $Player
 var stages = [
-	["res://World/Stage/musk1stage.tscn"], #0
-	["res://World/Stage/1Stage.tscn"], #1
+	#["res://World/Stage/World/stage1.tscn"], #0
+	["res://World/Stage/World/musk1stage.tscn"], #1
 	["res://World/Stage/1Stage.tscn"], #2
 	["res://World/Stage/1Stage.tscn"], #3
 	["res://World/Stage/1Stage.tscn"], #4

@@ -188,8 +188,7 @@ func handle_stun(duration: float): pass
 
 func set_healthbar():
 	health_bar.value = current_hp 
-	
-#end round
+
 func handle_death(): queue_free()
 
 func _on_enemy_hurt_box_area_entered(hitbox : hitbox_base):

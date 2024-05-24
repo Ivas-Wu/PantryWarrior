@@ -1,15 +1,17 @@
-[gd_scene load_steps=5 format=3 uid="uid://n1c3dublsw7"]
+[gd_scene load_steps=6 format=3 uid="uid://crvfdfx87deoe"]
 
 [ext_resource type="Script" path="res://World/world.gd" id="1_fqgdq"]
 [ext_resource type="PackedScene" uid="uid://mtiuug5u0dfd" path="res://Menus/pause_menu.tscn" id="2_6vfhy"]
-[ext_resource type="PackedScene" uid="uid://3if8eaqnjp72" path="res://World/Stage/home.tscn" id="4_7s0sk"]
+[ext_resource type="PackedScene" uid="uid://beay471ymatrq" path="res://World/Stage/1Stage.tscn" id="2_hpmc2"]
 [ext_resource type="PackedScene" uid="uid://cain44mo621tg" path="res://Menus/skills_menu.tscn" id="4_qthm1"]
+[ext_resource type="PackedScene" uid="uid://dx53tl2jyh3e0" path="res://Menus/stage_complete_menu.tscn" id="5_3jw7r"]
 
-[node name="World" type="Node"]
+[node name="World" type="Node" node_paths=PackedStringArray("stage")]
 process_mode = 3
 script = ExtResource("1_fqgdq")
+stage = NodePath("StageBase")
 
-[node name="home" parent="." instance=ExtResource("4_7s0sk")]
+[node name="StageBase" parent="." instance=ExtResource("2_hpmc2")]
 process_mode = 1
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
@@ -17,4 +19,7 @@ process_mode = 1
 [node name="Skills" parent="CanvasLayer" instance=ExtResource("4_qthm1")]
 
 [node name="PauseMenu" parent="CanvasLayer" node_paths=PackedStringArray("game") instance=ExtResource("2_6vfhy")]
+game = NodePath("../..")
+
+[node name="StageCompleteMenu" parent="CanvasLayer" node_paths=PackedStringArray("game") instance=ExtResource("5_3jw7r")]
 game = NodePath("../..")

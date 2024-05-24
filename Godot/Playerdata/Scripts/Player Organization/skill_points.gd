@@ -57,5 +57,6 @@ func sub_point(match_int: int):
 		4:
 			if special == 0: success = false
 			else: special -= 1
-	skill_pts += 1
+	if success:
+		skill_pts += 1
 	return true

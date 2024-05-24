@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://cp1pnfen3w5qw"]
+[gd_scene load_steps=35 format=3 uid="uid://cp1pnfen3w5qw"]
 
 [ext_resource type="Script" path="res://EnemyData/Trio/Musk1/musk_1.gd" id="1_gn5ba"]
 [ext_resource type="Texture2D" uid="uid://1vkodbryeyxm" path="res://EnemyData/Trio/Musk1/Musk1Outlined.png" id="1_p3f44"]
@@ -19,6 +19,7 @@
 [ext_resource type="Script" path="res://EnemyData/EnemyHurtBox.gd" id="14_ijy17"]
 [ext_resource type="Texture2D" uid="uid://d4ks88vmui4i2" path="res://EnemyData/Trio/Musk1/Animations/Musk1DodgeOutlined-Sheet.png" id="17_e2e2b"]
 [ext_resource type="Texture2D" uid="uid://cvwjmixitvbn1" path="res://EnemyData/Trio/Musk1/Animations/BladeExtended-Sheet.png" id="17_wt1y0"]
+[ext_resource type="Texture2D" uid="uid://dh7557idv8icx" path="res://EnemyData/Trio/Musk1/Animations/Musk1IdleOutlined-Sheet.png" id="18_0ay1k"]
 [ext_resource type="Script" path="res://EnemyData/EnemyHitBox.gd" id="19_v1tnt"]
 [ext_resource type="Script" path="res://character_general/hit_box_collision_base.gd" id="20_lcd1v"]
 [ext_resource type="PackedScene" uid="uid://d2lcx734h0ln8" path="res://EnemyData/health_bar.tscn" id="22_1f7xq"]
@@ -251,7 +252,7 @@ tracks/3/keys = {
 
 [sub_resource type="Animation" id="Animation_u3ja1"]
 resource_name = "Idle"
-loop_mode = 1
+length = 0.6
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -259,10 +260,10 @@ tracks/0/path = NodePath("Idle:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [0]
+"values": [0, 1, 2, 3, 4, 5]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -752,7 +753,8 @@ hframes = 5
 [node name="Idle" type="Sprite2D" parent="."]
 visible = false
 position = Vector2(1, -23)
-texture = ExtResource("1_p3f44")
+texture = ExtResource("18_0ay1k")
+hframes = 6
 
 [node name="Dodge" type="Sprite2D" parent="."]
 visible = false

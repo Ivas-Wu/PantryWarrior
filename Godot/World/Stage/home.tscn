@@ -1,9 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://3if8eaqnjp72"]
+[gd_scene load_steps=6 format=3 uid="uid://3if8eaqnjp72"]
 
 [ext_resource type="Script" path="res://World/Stage/home.gd" id="1_4cnrt"]
 [ext_resource type="PackedScene" uid="uid://b0vy5dsyol6bn" path="res://World/Tiles/tile_map.tscn" id="1_uioop"]
 [ext_resource type="PackedScene" uid="uid://cypcocvbiby87" path="res://Playerdata/Characters/playerPink.tscn" id="3_ruko7"]
-[ext_resource type="PackedScene" uid="uid://cp1pnfen3w5qw" path="res://EnemyData/Trio/Musk1/musk_1.tscn" id="4_dyxjf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0vir7"]
 size = Vector2(50, 66)
@@ -29,9 +28,6 @@ shape = SubResource("RectangleShape2D_0vir7")
 
 [node name="Player" parent="." instance=ExtResource("3_ruko7")]
 position = Vector2(-264, 0)
-
-[node name="Musk1" parent="." instance=ExtResource("4_dyxjf")]
-position = Vector2(-105, 0)
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 navigation_polygon = SubResource("NavigationPolygon_mjvj8")
