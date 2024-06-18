@@ -1,4 +1,4 @@
-[gd_scene load_steps=83 format=3 uid="uid://cypcocvbiby87"]
+[gd_scene load_steps=85 format=3 uid="uid://cypcocvbiby87"]
 
 [ext_resource type="Script" path="res://Playerdata/player.gd" id="1_pypjj"]
 [ext_resource type="Script" path="res://Playerdata/Scripts/PlayerMovementData.gd" id="2_5p0ot"]
@@ -24,7 +24,9 @@
 [ext_resource type="Script" path="res://Playerdata/States/IdleState.gd" id="15_wy141"]
 [ext_resource type="Script" path="res://Playerdata/States/AttackState.gd" id="16_quyg4"]
 [ext_resource type="Script" path="res://Playerdata/States/RollingState.gd" id="17_iuqsj"]
+[ext_resource type="Script" path="res://Playerdata/Scripts/load_game.gd" id="18_jtg7s"]
 [ext_resource type="Script" path="res://Playerdata/States/DashState.gd" id="18_od1wa"]
+[ext_resource type="Script" path="res://Playerdata/Scripts/save_game.gd" id="19_28qog"]
 [ext_resource type="Script" path="res://Playerdata/States/PlummetState.gd" id="19_lpxuq"]
 
 [sub_resource type="Resource" id="Resource_5chmb"]
@@ -739,7 +741,6 @@ hit_box_col = NodePath("CharacterAttributes/HitBox/CollisionShape2D")
 hurt_box = NodePath("CharacterAttributes/HurtBox")
 hurt_box_col = NodePath("CharacterAttributes/HurtBox/CollisionPolygon2D")
 animated_sprite_2d = NodePath("CharacterAttributes/AnimatedSprite2D")
-exp_on_kill = null
 
 [node name="CharacterAttributes" type="Node2D" parent="."]
 
@@ -791,7 +792,8 @@ shape = SubResource("CircleShape2D_f17js")
 position = Vector2(1, -9)
 scale = Vector2(0.599609, 0.59668)
 sprite_frames = SubResource("SpriteFrames_a3m6q")
-animation = &"Idle"
+animation = &"Running"
+frame_progress = 0.562278
 
 [node name="Attacking" type="Sprite2D" parent="CharacterAttributes"]
 visible = false
@@ -830,6 +832,7 @@ polygon = PackedVector2Array(0, 0, 0, 0, 0, 0)
 [node name="Camera2D" type="Camera2D" parent="."]
 offset = Vector2(0, -40)
 zoom = Vector2(0.85, 0.85)
+process_callback = 0
 position_smoothing_enabled = true
 
 [node name="TimeHandler" type="Node" parent="."]
@@ -858,6 +861,13 @@ script = ExtResource("6_yvkpx")
 
 [node name="level_handler" type="Node" parent="Scripts"]
 script = ExtResource("7_dmt8y")
+
+[node name="load_game" type="Node" parent="Scripts" node_paths=PackedStringArray("player")]
+script = ExtResource("18_jtg7s")
+player = NodePath("../..")
+
+[node name="save_game" type="Node" parent="Scripts"]
+script = ExtResource("19_28qog")
 
 [node name="States" type="Node" parent="." node_paths=PackedStringArray("state")]
 script = ExtResource("11_b02sp")

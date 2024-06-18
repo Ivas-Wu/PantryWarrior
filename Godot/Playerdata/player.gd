@@ -9,6 +9,8 @@ extends base_character_class
 @onready var starting_position = global_position
 
 #scripts
+@onready var load_game = $Scripts/load_game
+@onready var save_game = $Scripts/save_game
 @onready var skill_handler = $Scripts/skill_handler
 @onready var calculate_stats = $Scripts/calculate_stats
 @onready var level_handler = $Scripts/level_handler
@@ -93,7 +95,7 @@ func reset_values():
 	global_position = starting_position
 	
 	#Player Stats
-	current_hp = hp
+	load_game.load_game()
 	air_jump = stat_data.air_jump
 	invulnerability_frames = 20
 	disabled_hurt_boxes()

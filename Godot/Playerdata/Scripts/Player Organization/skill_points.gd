@@ -15,6 +15,9 @@ func _ready():
 func save(_data):
 	pass
 
+func load(_data):
+	pass
+	
 func add_skill_pts(pts: int):
 	for n in range(pts): skill_pts += 1
 	
