@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="KingStatsData" load_steps=2 format=3 uid="uid://bnpuu3ne6r4sl"]
+
+[ext_resource type="Script" path="res://EnemyData/King/KingMaxStats.gd" id="1_tn3fr"]
+
+[resource]
+script = ExtResource("1_tn3fr")
+hp = 300.0
+vision_range = 100.0
+attack_range_short = 0.0
+attack_range_long = 0.0
+max_walk_angle = 0.0
