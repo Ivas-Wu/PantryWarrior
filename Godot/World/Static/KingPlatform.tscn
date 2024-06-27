@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://dcreqcp8pkstt"]
+
+[ext_resource type="Texture2D" uid="uid://br01lxuqwkgxi" path="res://EnemyData/King/Stage/KingThrone.png" id="1_bcsfl"]
+
+[node name="KingPlatform" type="StaticBody2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_bcsfl")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(83, 51, 97, 51, 97, 52, 112, 52, 115, 49, 115, 39, 114, 39, 114, 14, 115, 14, 117, 12, 117, 0, 116, 0, 116, -1, 115, -1, 115, -2, 115, -2, 114, -2, 114, -3, 102, -3, 102, -2, 101, -2, 101, -1, 100, -1, 100, 0, 99, 0, 99, 1, -55, 1, -55, 0, -56, 0, -56, -1, -57, -1, -57, -2, -58, -2, -58, -3, -59, -3, -59, -4, -78, -4, -78, -3, -79, -3, -79, -2, -80, -2, -80, -1, -81, -1, -81, 0, -82, 0, -82, 1, -110, 1, -110, 2, -111, 2, -111, 3, -112, 3, -112, 32, -113, 32, -113, 38, -114, 38, -114, 39, -115, 39, -115, 40, -116, 40, -116, 52, -113, 55, -101, 55, -98, 52, -98, 51, -85, 51, -85, 52, -45, 52, -45, 51, -8, 51, -8, 52, 7, 52, 7, 51, 56, 51, 56, 52, 60, 56, 79, 56, 83, 52)

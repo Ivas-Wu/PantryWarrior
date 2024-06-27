@@ -15,24 +15,6 @@
 [ext_resource type="Texture2D" uid="uid://lor0s8sjk3m5" path="res://EnemyData/King/Scythe/ScytheNewOutlinedNew-Sheet.png" id="10_8qplm"]
 [ext_resource type="Texture2D" uid="uid://dyc0t80i61vu3" path="res://EnemyData/King/Transitions/HandEntranceOutlined-Sheet.png" id="11_4rxs5"]
 
-[sub_resource type="Animation" id="Animation_au3gj"]
-resource_name = "AttackIdle"
-length = 0.6
-loop_mode = 1
-step = 0.15
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("../IdleAttack:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.15, 0.3, 0.45),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3]
-}
-
 [sub_resource type="Animation" id="Animation_7opf7"]
 resource_name = "Idle"
 length = 0.6
@@ -78,6 +60,24 @@ tracks/1/keys = {
 "values": [0]
 }
 
+[sub_resource type="Animation" id="Animation_au3gj"]
+resource_name = "AttackIdle"
+length = 0.6
+loop_mode = 1
+step = 0.15
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../IdleAttack:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.3, 0.45),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_0gqau"]
 _data = {
 "AttackIdle": SubResource("Animation_au3gj"),
@@ -114,36 +114,6 @@ tracks/1/keys = {
 "args": [],
 "method": &"handle_state"
 }]
-}
-
-[sub_resource type="Animation" id="Animation_62qg5"]
-resource_name = "MakeHand"
-length = 1.2
-tracks/0/type = "method"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("../FiniteStateMachine/attack_state_king")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(1.2),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [],
-"method": &"hand_made"
-}]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("../MakeHand:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
 }
 
 [sub_resource type="Animation" id="Animation_hrwn4"]
@@ -185,24 +155,6 @@ tracks/2/keys = {
 "values": [0]
 }
 
-[sub_resource type="Animation" id="Animation_yrnqt"]
-resource_name = "RemoveHand"
-length = 0.3
-tracks/0/type = "method"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("../FiniteStateMachine/attack_state_king")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0.3),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [],
-"method": &"hand_removed"
-}]
-}
-
 [sub_resource type="Animation" id="Animation_jowkv"]
 resource_name = "ScytheSwing"
 length = 2.4
@@ -234,6 +186,54 @@ tracks/1/keys = {
 }]
 }
 
+[sub_resource type="Animation" id="Animation_yrnqt"]
+resource_name = "RemoveHand"
+length = 0.3
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../FiniteStateMachine/attack_state_king")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.3),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"hand_removed"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_62qg5"]
+resource_name = "MakeHand"
+length = 1.2
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../FiniteStateMachine/attack_state_king")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(1.2),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"hand_made"
+}]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../MakeHand:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_pceu7"]
 _data = {
 "HammerSwing": SubResource("Animation_twvb3"),
@@ -243,53 +243,8 @@ _data = {
 "ScytheSwing": SubResource("Animation_jowkv")
 }
 
-[sub_resource type="Animation" id="Animation_qf4g1"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("TempShield:self_modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 0.270588)]
-}
-
 [sub_resource type="Animation" id="Animation_qq5ff"]
 resource_name = "Shield"
-
-[sub_resource type="Animation" id="Animation_hyfol"]
-resource_name = "ShieldBreaking"
-length = 0.55
-tracks/0/type = "method"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("FiniteStateMachine/defend_state_king")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0.5),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [],
-"method": &"shield_broke"
-}]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("TempShield:self_modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 0.270588), Color(1, 1, 1, 0)]
-}
 
 [sub_resource type="Animation" id="Animation_sdghl"]
 resource_name = "ShieldForming"
@@ -319,6 +274,51 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0.270588)]
+}
+
+[sub_resource type="Animation" id="Animation_hyfol"]
+resource_name = "ShieldBreaking"
+length = 0.5
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FiniteStateMachine/defend_state_king")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"shield_broke"
+}]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("TempShield:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0.270588), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_qf4g1"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TempShield:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0.270588)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_wjhnw"]
@@ -450,6 +450,7 @@ color = Color(0.654902, 0.556863, 1, 1)
 polygon = PackedVector2Array(107.745, 0, -113.569, 0, -113.569, -27.3505, -109.201, -54.701, -99.0092, -80.684, -81.537, -101.197, -58.2407, -118.975, -32.0324, -128.547, -2.91203, -132.65, 26.2083, -128.547, 52.4166, -118.975, 74.2569, -102.564, 93.1851, -79.3165, 104.833, -53.3335, 107.745, -27.3505)
 
 [node name="SafeArea" type="Area2D" parent="."]
+visible = false
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SafeArea"]

@@ -5,18 +5,21 @@ signal defend
 
 var king : king
 var current_sprite
-var flipped : bool = false
-
+var flip_direction = 1
 func _ready():
 	king = get_tree().get_first_node_in_group("Boss")
 	set_physics_process(false)
 	
 func _enter_state() -> void:
-	pick_attack()
+	king.idle_attack.visible = true
+	king.character_animations.play("AttackIdle")
+	make_hand()
 	set_physics_process(true)
 
 func _exit_state() -> void:
 	cleanup()
+	king.idle_attack.visible = false
+	current_sprite.visible = false
 	set_physics_process(false)
 
 func _physics_process(delta):
@@ -27,13 +30,25 @@ func handle_state():
 		cleanup()
 		pick_attack()
 	else:
-		defend.emit()
+		remove_hand()
+
+func make_hand():
+	king.make_hand.visible = true
+	king.attack_animations.play("MakeHand")
+	set_flip()
+	flip(king.make_hand)
+	
+func hand_made():
+	king.make_hand.visible = false
+	pick_attack()
+	
+func remove_hand():
+	king.attack_animations.play("RemoveHand")
+
+func hand_removed():
+	defend.emit()
 		
 func pick_attack():
-	if king.enemy_finder_ray.target_position.x < 0:
-		flipped = true
-	king.idle_attack.visible = true
-	king.character_animations.play("AttackIdle")
 	if king.random_number > 0.5:
 		king.scythe_sprite.visible = true
 		current_sprite = king.scythe_sprite
@@ -42,15 +57,14 @@ func pick_attack():
 		king.hammer_sprite.visible = true
 		current_sprite = king.hammer_sprite
 		king.attack_animations.play("HammerSwing")
-	if flipped:
-		current_sprite.position.x *= -1
-		current_sprite.scale.x *= -1
+	flip(current_sprite)
 		
 func cleanup():
-	king.idle_attack.visible = false
-	current_sprite.visible = false
 	king.attack_animations.play("RESET")
-	if flipped:
-		current_sprite.position.x *= -1
-		current_sprite.scale.x *= -1
-		flipped = false
+
+func flip(sprite: Sprite2D):
+	sprite.position.x = flip_direction * abs(sprite.position.x)
+	sprite.scale.x = flip_direction * abs(sprite.scale.x)
+
+func set_flip():
+	flip_direction = -1 if king.enemy_finder_ray.target_position.x < 0 else 1
