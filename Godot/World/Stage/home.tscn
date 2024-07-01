@@ -30,6 +30,7 @@ shape = SubResource("RectangleShape2D_0vir7")
 position = Vector2(-264, 0)
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+visible = false
 navigation_polygon = SubResource("NavigationPolygon_mjvj8")
 
 [connection signal="body_entered" from="NextStage" to="." method="_on_next_stage_body_entered"]

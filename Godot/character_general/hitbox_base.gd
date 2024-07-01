@@ -5,10 +5,17 @@ extends Area2D
 @export var stun_time : float
 @export var knock_back : float
 @export var freeze_frames : float
-@export var parent : base_character_class
+
+# if it is a character the parent will be passed in, it is a base_character_class
+# and will have everything required for the source
+# if it is a projectile, the parent will be passed in soley to destroy the projectile after
+# you will need to pass in a source col shape/polygon as well
+@export var parent : CharacterBody2D
+@export var source_col_shape : CollisionShape2D
+@export var source_col_polygon : CollisionPolygon2D
 
 var already_hit : bool = false;
-var source : CollisionPolygon2D
+var source : Vector2
 
 func _ready():
 	pass
@@ -17,7 +24,12 @@ func _process(delta):
 	pass
 
 func init():
-	source = parent.character_collision_polygon
+	if source_col_shape:
+		source = source_col_shape.global_position
+	elif source_col_polygon:
+		source = source_col_polygon.global_position
+	else:
+		source = parent.character_collision_polygon.global_position
 	
 func set_export_values(damage: int, knock: float, stun: float, freeze: float, rand: float, multiplier: float = 1) :
 	generate_damage(damage * multiplier, rand)

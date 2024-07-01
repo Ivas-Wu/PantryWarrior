@@ -107,13 +107,18 @@ func _on_harzard_detector_area_entered(hazard: Hazard):
 	handle_knockback(hazard.source, hazard.knock_back)
 
 func _on_hurt_box_area_entered(hitbox : hitbox_base):
-	if invulnerability_frames > 0: return
-	#hitbox.already_hit = true
-	enter_damaged_state()
-	create_effect(hit_effect, character_collision_polygon.global_position)
-	await(handle_time_slow(hitbox.freeze_frames if hitbox else 0))
-	if take_damage(hitbox.damage if hitbox else 0):
-		hitbox.parent.gain_exp(exp_on_kill)
-	elif hitbox:
-		handle_knockback(hitbox.source.global_position, hitbox.knock_back)
-		handle_stun(hitbox.stun_time)
+	if invulnerability_frames == 0: 
+		#hitbox.already_hit = true
+		enter_damaged_state()
+		create_effect(hit_effect, character_collision_polygon.global_position)
+		await(handle_time_slow(hitbox.freeze_frames if hitbox else 0))
+		
+		if take_damage(hitbox.damage if hitbox else 0):
+			if hitbox.parent is base_character_class:
+				hitbox.parent.gain_exp(exp_on_kill)
+		elif hitbox:
+			handle_knockback(hitbox.source, hitbox.knock_back)
+			handle_stun(hitbox.stun_time)
+	
+	if hitbox.parent is projectile_base:
+		hitbox.parent.destroy()

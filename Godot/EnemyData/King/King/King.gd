@@ -28,8 +28,12 @@ extends base_character_class
 @onready var temp_shield = $TempShield
 @onready var shield_push = $ShieldPush/CollisionPolygon2D
 
+#Timers
+@onready var projectile_timer = $Timers/ProjectileTimer
+
 var player : Player
 var in_safety: bool = false
+var projectile_count: int = 5
 
 func _ready():
 	player = get_tree().get_first_node_in_group("Player")
@@ -45,6 +49,9 @@ func set_states():
 	
 func _process(delta):
 	random_number = rng.randf()
+	if projectile_timer.time_left == 0 and get_node("Projectiles").get_child_count() == 0:
+		generate_projectiles()
+		projectile_timer.start()
 	
 func handle_enemy_finder() -> bool:
 	var collision_object = enemy_finder_ray.get_collider()
@@ -52,7 +59,19 @@ func handle_enemy_finder() -> bool:
 	enemy_finder_ray.target_position = direction_to_player * stat_data.vision_range
 	return collision_object == player
 
+func create_projectile(initial_velocity: Vector2, bounce: int): #TODO
+	var projectile = preload("res://EnemyData/King/Projectile/projectile.tscn").instantiate().with_values(initial_velocity, bounce)
+	get_node("Projectiles").add_child(projectile)
+	projectile.global_position = global_position #+ Vector2(-110, -39)
 
+func generate_projectiles():
+	var rng = RandomNumberGenerator.new()
+	var vel = Vector2.ZERO
+	for n in projectile_count:
+		vel = Vector2(rng.randf_range(-400,400),rng.randf_range(-800,0))
+		create_projectile(vel, projectile_count - 1)
+	projectile_count += 1
+	
 func _on_safe_area_body_entered(body):
 	if body is Player:
 		in_safety = true

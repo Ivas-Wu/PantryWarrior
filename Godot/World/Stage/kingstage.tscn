@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://dw7yf2rkh0382"]
+[gd_scene load_steps=14 format=3 uid="uid://dw7yf2rkh0382"]
 
 [ext_resource type="Script" path="res://World/Stage/boss_stage.gd" id="1_yopbn"]
 [ext_resource type="Texture2D" uid="uid://c0p0xdhdrficf" path="res://Backgrounds/musk1stage.png" id="2_3ymex"]
@@ -12,11 +12,17 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0vir7"]
 size = Vector2(50, 66)
 
+[sub_resource type="Curve2D" id="Curve2D_ya0el"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 232, 0, 0, 0, 0, 0, 232, -64, 0, 0, 0, 0, 0, -64, 0, 0, 0, 0, 0, 0)
+}
+point_count = 5
+
 [sub_resource type="Curve2D" id="Curve2D_j558f"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 0, 1, 0, 0, 0, 0, -232, 0)
+"points": PackedVector2Array(0, 0, 0, 0, 0, 1, 0, 0, 0, 0, -232, 0, 0, 0, 0, 0, -232, 64, 0, 0, 0, 0, 0, 64, 0, 0, 0, 0, 0, 0)
 }
-point_count = 2
+point_count = 5
 
 [sub_resource type="Curve2D" id="Curve2D_4xc2j"]
 _data = {
@@ -67,10 +73,13 @@ layer_0/tile_data = PackedInt32Array(196638, 65537, 2, 131102, 65537, 1, 65566, 
 
 [node name="Platforms" type="Node" parent="."]
 
+[node name="Path2D3" parent="Platforms" instance=ExtResource("6_400n1")]
+position = Vector2(-408, -168)
+curve = SubResource("Curve2D_ya0el")
+
 [node name="Path2D" parent="Platforms" instance=ExtResource("6_400n1")]
 position = Vector2(-176, -232)
 curve = SubResource("Curve2D_j558f")
-loop = false
 
 [node name="Path2D2" parent="Platforms" instance=ExtResource("6_400n1")]
 position = Vector2(-543, -231)

@@ -1,0 +1,34 @@
+[gd_scene load_steps=6 format=3 uid="uid://dt80xrdlfpw10"]
+
+[ext_resource type="Script" path="res://EnemyData/King/Projectile/bounce_projectile.gd" id="1_ki54l"]
+[ext_resource type="Texture2D" uid="uid://ntnr4p0pi77u" path="res://icon.svg" id="2_7pv77"]
+[ext_resource type="Script" path="res://EnemyData/EnemyHitBox.gd" id="3_myh15"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_grn6c"]
+radius = 7.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7dqx7"]
+radius = 8.0
+
+[node name="Projectile" type="CharacterBody2D"]
+collision_layer = 1024
+collision_mask = 3
+script = ExtResource("1_ki54l")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("2_7pv77")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_grn6c")
+
+[node name="EnemyHitBox" type="Area2D" parent="." node_paths=PackedStringArray("parent", "source_col_shape")]
+script = ExtResource("3_myh15")
+damage = 100
+stun_time = 1.0
+knock_back = 1.0
+parent = NodePath("..")
+source_col_shape = NodePath("../CollisionShape2D")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyHitBox"]
+shape = SubResource("CircleShape2D_7dqx7")
