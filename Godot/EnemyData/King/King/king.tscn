@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://biwma6gllqrv2"]
+[gd_scene load_steps=34 format=3 uid="uid://biwma6gllqrv2"]
 
 [ext_resource type="Script" path="res://EnemyData/King/King/King.gd" id="1_qalyh"]
 [ext_resource type="Resource" uid="uid://bnpuu3ne6r4sl" path="res://EnemyData/King/kingstats.tres" id="2_3vet7"]
@@ -10,10 +10,12 @@
 [ext_resource type="Script" path="res://EnemyData/King/States/defend_state_king.gd" id="6_pmgky"]
 [ext_resource type="Script" path="res://EnemyData/EnemyHitBox.gd" id="6_tm7m5"]
 [ext_resource type="Script" path="res://character_general/hit_box_collision_base.gd" id="7_3v0up"]
+[ext_resource type="Script" path="res://EnemyData/King/States/damaged_state_king.gd" id="7_lpocg"]
 [ext_resource type="Texture2D" uid="uid://wfio6grsrit7" path="res://EnemyData/King/King/KingCharacterAttackOutlined-Sheet.png" id="8_5jtlx"]
 [ext_resource type="Texture2D" uid="uid://dq8i4fkjb8evx" path="res://EnemyData/King/Hammer/HammerNewOutlinedFixed-Sheet.png" id="9_lm8oe"]
 [ext_resource type="Texture2D" uid="uid://lor0s8sjk3m5" path="res://EnemyData/King/Scythe/ScytheNewOutlinedNew-Sheet.png" id="10_8qplm"]
 [ext_resource type="Texture2D" uid="uid://dyc0t80i61vu3" path="res://EnemyData/King/Transitions/HandEntranceOutlined-Sheet.png" id="11_4rxs5"]
+[ext_resource type="PackedScene" uid="uid://d2lcx734h0ln8" path="res://EnemyData/health_bar.tscn" id="15_wdnbn"]
 
 [sub_resource type="Animation" id="Animation_au3gj"]
 resource_name = "AttackIdle"
@@ -375,7 +377,11 @@ script = ExtResource("5_nl1o8")
 [node name="defend_state_king" type="Node" parent="FiniteStateMachine"]
 script = ExtResource("6_pmgky")
 
+[node name="damaged_state_king" type="Node" parent="FiniteStateMachine"]
+script = ExtResource("7_lpocg")
+
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+visible = false
 position = Vector2(0, 2)
 polygon = PackedVector2Array(15, -2, 18, -5, 18, -7, 16, -8, 19, -11, 19, -16, 17, -18, 19, -23, 22, -23, 26, -33, 19, -34, 24, -39, 24, -44, 23, -45, 19, -45, 19, -49, 11, -56, 10, -62, 4, -60, -12, -58, -9, -52, -11, -50, -11, -48, -9, -43, -13, -40, -19, -32, -28, -28, -31, -25, -30, -20, -29, -19, -26, -16, -24, -15, -17, -11, -15, -6, -9, -2)
 
@@ -413,7 +419,6 @@ texture = ExtResource("11_4rxs5")
 hframes = 16
 
 [node name="EnemyHurtBox" type="Area2D" parent="."]
-visible = false
 script = ExtResource("5_w6jhw")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="EnemyHurtBox"]
@@ -435,6 +440,7 @@ target_position = Vector2(1000, 0)
 collision_mask = 2
 
 [node name="ShieldPush" type="StaticBody2D" parent="."]
+visible = false
 position = Vector2(-2, -20)
 collision_layer = 16
 collision_mask = 2
@@ -451,6 +457,7 @@ color = Color(0.654902, 0.556863, 1, 1)
 polygon = PackedVector2Array(107.745, 0, -113.569, 0, -113.569, -27.3505, -109.201, -54.701, -99.0092, -80.684, -81.537, -101.197, -58.2407, -118.975, -32.0324, -128.547, -2.91203, -132.65, 26.2083, -128.547, 52.4166, -118.975, 74.2569, -102.564, 93.1851, -79.3165, 104.833, -53.3335, 107.745, -27.3505)
 
 [node name="SafeArea" type="Area2D" parent="."]
+visible = false
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SafeArea"]
@@ -464,5 +471,8 @@ shape = SubResource("CircleShape2D_4y302")
 [node name="ProjectileTimer" type="Timer" parent="Timers"]
 one_shot = true
 
+[node name="HealthBar" parent="." instance=ExtResource("15_wdnbn")]
+
+[connection signal="area_entered" from="EnemyHurtBox" to="." method="_on_enemy_hurt_box_area_entered"]
 [connection signal="body_entered" from="SafeArea" to="." method="_on_safe_area_body_entered"]
 [connection signal="body_exited" from="SafeArea" to="." method="_on_safe_area_body_exited"]

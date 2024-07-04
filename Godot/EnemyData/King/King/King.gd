@@ -31,13 +31,24 @@ extends base_character_class
 #Timers
 @onready var projectile_timer = $Timers/ProjectileTimer
 
+@onready var health_bar = $HealthBar
+
 var player : Player
 var in_safety: bool = false
 var projectile_count: int = 5
+var invul: bool = false
 
 func _ready():
 	player = get_tree().get_first_node_in_group("Player")
 	set_states()
+	hp = 400
+	reset_values()
+
+func reset_values():
+	current_hp = hp
+	health_bar.min_value = 0
+	health_bar.max_value = hp
+	set_healthbar()
 	
 func set_states():
 	fsm.change_state(fsm.state)
@@ -62,16 +73,36 @@ func handle_enemy_finder() -> bool:
 func create_projectile(initial_velocity: Vector2, bounce: int): #TODO
 	var projectile = preload("res://EnemyData/King/Projectile/projectile.tscn").instantiate().with_values(initial_velocity, bounce)
 	get_node("Projectiles").add_child(projectile)
-	projectile.global_position = global_position #+ Vector2(-110, -39)
+	projectile.global_position = global_position + Vector2(0, -50)
 
 func generate_projectiles():
 	var rng = RandomNumberGenerator.new()
 	var vel = Vector2.ZERO
 	for n in projectile_count:
 		vel = Vector2(rng.randf_range(-400,400),rng.randf_range(-800,0))
-		create_projectile(vel, projectile_count - 1)
+		create_projectile(vel, projectile_count - 2)
 	projectile_count += 1
+
+func take_damage(damage: float) -> bool: 
+	if invul: return false
+	var is_dead = false
+	if current_hp <= damage: 
+		handle_death()
+		is_dead = true
+	else: 
+		current_hp -= damage
+		set_healthbar()
+	if not is_dead:
+		invul = true
+	return is_dead
 	
+func handle_stun(duration: float): pass
+
+func set_healthbar():
+	health_bar.value = current_hp 
+
+func handle_death(): queue_free()
+
 func _on_safe_area_body_entered(body):
 	if body is Player:
 		in_safety = true
@@ -79,3 +110,6 @@ func _on_safe_area_body_entered(body):
 func _on_safe_area_body_exited(body):
 	if body is Player:
 		in_safety = false
+
+func _on_enemy_hurt_box_area_entered(hitbox : hitbox_base):
+	take_damage(hitbox.damage if hitbox else 0)

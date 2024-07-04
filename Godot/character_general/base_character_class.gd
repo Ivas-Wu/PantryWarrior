@@ -107,6 +107,7 @@ func _on_harzard_detector_area_entered(hazard: Hazard):
 	handle_knockback(hazard.source, hazard.knock_back)
 
 func _on_hurt_box_area_entered(hitbox : hitbox_base):
+	if not hitbox: return
 	if invulnerability_frames == 0: 
 		#hitbox.already_hit = true
 		enter_damaged_state()
