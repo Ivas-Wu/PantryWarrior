@@ -19,11 +19,10 @@ func _enter_state() -> void:
 func _exit_state() -> void:
 	cleanup()
 	king.idle_attack.visible = false
-	current_sprite.visible = false
+	if current_sprite: current_sprite.visible = false
 	set_physics_process(false)
 
-func _physics_process(delta):
-	king.handle_enemy_finder()
+func _physics_process(delta): pass
 	
 func handle_state():
 	if not king.handle_enemy_finder():
@@ -61,6 +60,7 @@ func pick_attack():
 		
 func cleanup():
 	king.attack_animations.play("RESET")
+	king.make_hand.visible = false
 
 func flip(sprite: Sprite2D):
 	sprite.position.x = flip_direction * abs(sprite.position.x)

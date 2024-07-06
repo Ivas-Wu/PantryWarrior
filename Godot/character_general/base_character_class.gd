@@ -33,6 +33,7 @@ var acceleration : int = 0
 var rng = RandomNumberGenerator.new()
 var random_number : float
 var max_invulnerablity_frames : int
+var pushed : bool = false
 
 func _ready():
 	pass
@@ -72,16 +73,20 @@ func flip_animation(input_axis):
 
 func handle_speed(input_axis, delta):
 	if input_axis:
+		var a = acceleration
+		var s = speed
 		if input_axis * velocity.x >= 0:
-			if is_on_floor():
-				velocity.x = move_toward(velocity.x, input_axis * speed, acceleration * delta)
-			else:
-				velocity.x = move_toward(velocity.x, input_axis * speed * 0.75, acceleration * delta)
+			if not is_on_floor():
+				s *= 0.75
+				if pushed: a *= 0.5
 		else:
-			if is_on_floor():
-				velocity.x = move_toward(velocity.x, input_axis * speed, acceleration * 10 * delta)
-			else:
-				velocity.x = move_toward(velocity.x, input_axis * speed * 0.75, acceleration * 10 * delta)
+			a *= 10
+			if not is_on_floor():
+				s *= 0.75
+				if pushed: 
+					a *= 0.05
+					s *= 0.5
+		velocity.x = move_toward(velocity.x, input_axis * s, a * delta)
 
 func create_effect(effect: PackedScene, location: Vector2 = global_position):
 	if effect:
@@ -107,14 +112,14 @@ func _on_harzard_detector_area_entered(hazard: Hazard):
 	handle_knockback(hazard.source, hazard.knock_back)
 
 func _on_hurt_box_area_entered(hitbox : hitbox_base):
-	if not hitbox: return
+	if hitbox == null: return
 	if invulnerability_frames == 0: 
 		#hitbox.already_hit = true
 		enter_damaged_state()
 		create_effect(hit_effect, character_collision_polygon.global_position)
 		await(handle_time_slow(hitbox.freeze_frames if hitbox else 0))
 		
-		if take_damage(hitbox.damage if hitbox else 0):
+		if take_damage(hitbox.damage if hitbox != null else 0):
 			if hitbox.parent is base_character_class:
 				hitbox.parent.gain_exp(exp_on_kill)
 		elif hitbox:

@@ -777,7 +777,6 @@ scale = Vector2(1, 0.770833)
 polygon = PackedVector2Array(-3, -19.4595, 6, -19.4595, 6, 3.89189, -3, 3.89189)
 
 [node name="HitBox" type="Area2D" parent="CharacterAttributes" node_paths=PackedStringArray("parent")]
-visible = false
 collision_layer = 32
 collision_mask = 256
 script = ExtResource("8_crlak")

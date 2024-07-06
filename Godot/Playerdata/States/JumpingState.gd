@@ -51,7 +51,7 @@ func _physics_process(delta):
 	handle_state_changes()
 	player.move_and_slide()
 	
-func handle_jump(delta):
+func handle_jump(delta): #TODO add a pushed delay timer
 	if player.is_on_floor() and player.skill_handler.agility > 0:
 		if Input.is_action_pressed("Down") and Input.is_action_pressed("Up"):
 			player.velocity.x = 0
@@ -66,7 +66,7 @@ func handle_jump(delta):
 				player.air_jump -= 1
 				player.velocity.y = player.jump * 0.8
 		if Input.is_action_just_released("Up"):
-			if player.velocity.y < 0:
+			if player.velocity.y < 0 :
 				player.velocity.y /= 3
 
 func handle_animation():

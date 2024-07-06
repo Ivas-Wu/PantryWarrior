@@ -118,6 +118,7 @@ func _physics_process(delta):
 	
 	if is_on_floor(): 
 		air_jump = stat_data.air_jump
+		pushed = false
 	handle_physics(input_axis, delta)
 	if not is_attacking():
 		handle_speed(input_axis, delta)
@@ -185,6 +186,7 @@ func handle_death() :
 func handle_push(direction: Vector2):
 	velocity.x += direction.x
 	velocity.y += direction.y
+	enter_damaged_state()
 	
 func handle_respawn():
 	reset_values()

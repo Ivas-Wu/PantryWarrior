@@ -10,12 +10,13 @@ func _ready():
 	set_physics_process(false)
 	
 func _enter_state() -> void:
+	set_physics_process(true)
 	king.idle_attack.visible = true
 	king.character_animations.play("AttackIdle")
 	form_shield()
-	set_physics_process(true)
 
 func _exit_state() -> void:
+	king.push_area.disabled = true
 	king.idle_attack.visible = false
 	break_shield()
 	set_physics_process(false)
@@ -28,13 +29,11 @@ func form_shield():
 	king.temp_shield.visible = true
 	king.defense_animation.play("ShieldForming")
 
-func shield_formed():
-	king.shield_push.disabled = false # add this to animation
+func shield_formed(): pass
 	
 func break_shield():
 	king.defense_animation.play("ShieldBreaking")
 	
 func shield_broke():
-	king.shield_push.disabled = true # add this to animation
 	king.temp_shield.visible = false
 	attack.emit()

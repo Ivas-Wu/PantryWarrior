@@ -20,7 +20,6 @@ func _exit_state() -> void:
 	set_physics_process(false)
 
 func _physics_process(delta):
-	king.handle_enemy_finder()
 	handle_state()
 	
 func handle_state():

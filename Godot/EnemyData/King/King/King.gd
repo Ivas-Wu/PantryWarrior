@@ -13,6 +13,7 @@ extends base_character_class
 @onready var idle_state_king = $FiniteStateMachine/idle_state_king
 @onready var attack_state_king = $FiniteStateMachine/attack_state_king
 @onready var defend_state_king = $FiniteStateMachine/defend_state_king
+@onready var damaged_state_king = $FiniteStateMachine/damaged_state_king
 
 #sprit sheets
 #Character
@@ -26,7 +27,10 @@ extends base_character_class
 
 #Shield
 @onready var temp_shield = $TempShield
-@onready var shield_push = $ShieldPush/CollisionPolygon2D
+@onready var shield_push = $ShieldPush/CollisionShape2D
+@onready var safe_area = $SafeArea
+@onready var trigger_push = $TriggerPush
+@onready var push_area = $PushArea/CollisionShape2D
 
 #Timers
 @onready var projectile_timer = $Timers/ProjectileTimer
@@ -43,11 +47,13 @@ func _ready():
 	set_states()
 	hp = 400
 	reset_values()
+	handle_enemy_finder()
 
 func reset_values():
 	current_hp = hp
 	health_bar.min_value = 0
 	health_bar.max_value = hp
+	temp_shield.visible = false
 	set_healthbar()
 	
 func set_states():
@@ -57,9 +63,11 @@ func set_states():
 	
 	attack_state_king.defend.connect(fsm.change_state.bind(defend_state_king))
 	defend_state_king.attack.connect(fsm.change_state.bind(attack_state_king))
+	damaged_state_king.finished.connect(fsm.change_state.bind(defend_state_king))
 	
 func _process(delta):
 	random_number = rng.randf()
+	handle_enemy_finder()
 	if projectile_timer.time_left == 0 and get_node("Projectiles").get_child_count() == 0:
 		generate_projectiles()
 		projectile_timer.start()
@@ -94,6 +102,7 @@ func take_damage(damage: float) -> bool:
 		set_healthbar()
 	if not is_dead:
 		invul = true
+		fsm.change_state(damaged_state_king)
 	return is_dead
 	
 func handle_stun(duration: float): pass
@@ -102,6 +111,11 @@ func set_healthbar():
 	health_bar.value = current_hp 
 
 func handle_death(): queue_free()
+
+func push(): 
+	if trigger_push.overlaps_body(player):
+		#player.handle_push(enemy_finder_ray.target_position.normalized() * 50000 * 1/((global_position.x-player.global_position.x) + (global_position.y-player.global_position.y)))
+		player.handle_push(enemy_finder_ray.target_position.normalized() * 777)
 
 func _on_safe_area_body_entered(body):
 	if body is Player:

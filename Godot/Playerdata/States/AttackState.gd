@@ -40,8 +40,8 @@ func _exit_state() -> void:
 	player.attack_queue.pop_front()
 	player.animated_sprite_2d.visible = true
 	player.attack_animation.visible = false
-	player.animation_player.stop()
-	player.hit_box_col.disabled = true
+	player.animation_player.play("RESET")
+	player.hit_box_col.set_deferred("disabled",true)
 	flip_scale()
 	set_physics_process(false)
 

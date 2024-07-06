@@ -11,7 +11,8 @@ func _ready():
 	
 func _enter_state() -> void:
 	king.idle_attack.visible = true #TODO
-	king.character_animations.play("AttackIdle")
+	king.character_animations.play("Damaged")
+	king.attack_animations.play("Push")
 	set_physics_process(true)
 
 func _exit_state() -> void:
