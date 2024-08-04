@@ -1,0 +1,43 @@
+[gd_scene load_steps=4 format=3 uid="uid://p021mbbr44gk"]
+
+[ext_resource type="Script" path="res://Menus/skills_menu_new.gd" id="1_d2bjf"]
+[ext_resource type="PackedScene" uid="uid://cp8pi02v5uf64" path="res://Menus/skills_card.tscn" id="2_tcnob"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0pokw"]
+bg_color = Color(1, 1, 1, 0)
+
+[node name="SkillsMenu" type="Control"]
+process_mode = 2
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_d2bjf")
+
+[node name="Skills" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_0pokw")
+
+[node name="Menu" type="HBoxContainer" parent="Skills"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SkillsCard" parent="Skills/Menu" instance=ExtResource("2_tcnob")]
+layout_mode = 2
+
+[node name="SkillsCard2" parent="Skills/Menu" instance=ExtResource("2_tcnob")]
+layout_mode = 2
+
+[node name="SkillsCard3" parent="Skills/Menu" instance=ExtResource("2_tcnob")]
+layout_mode = 2

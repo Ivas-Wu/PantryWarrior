@@ -14,6 +14,7 @@ signal landed
 var player : Player
 var charge : float = 0
 var gravity : float = 1
+
 func _ready():
 	set_physics_process(false)
 	player = get_tree().get_first_node_in_group("Player")
@@ -68,12 +69,16 @@ func handle_jump(delta): #TODO add a pushed delay timer
 		if Input.is_action_just_released("Up"):
 			if player.velocity.y < 0 :
 				player.velocity.y /= 3
+		player.handle_wall_jump()
 
 func handle_animation():
-	if player.is_on_floor():
-		player.animated_sprite_2d.play("JumpStart")
-	if not player.is_on_floor():
-		player.animated_sprite_2d.play("JumpAirUp")
+	if player.wall_jump_flag:
+		player.animated_sprite_2d.play("WallJump")
+	else:
+		if player.is_on_floor():
+			player.animated_sprite_2d.play("JumpStart")
+		if not player.is_on_floor():
+			player.animated_sprite_2d.play("JumpAirUp")
 
 func handle_state_changes():
 	if Input.is_action_just_pressed("Down") and player.skill_handler.special > 0:
@@ -84,6 +89,7 @@ func handle_state_changes():
 		landed.emit()
 
 func handle_slide():
+	if player.near_wall(): return
 	var left_col = left.is_colliding()
 	var middle_left_col = middleleft.is_colliding()
 	var middle_right_col = middleright.is_colliding()

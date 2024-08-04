@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ca8da81cuvg82"
-path="res://.godot/imported/PinkBugrunningoutlinedG-Sheet.png-40774b78a21cd2ef8e8b27ccff2bc555.ctex"
+uid="uid://bhs8svupwct55"
+path="res://.godot/imported/KingCharacterDamagedOutlined-Sheet.png-84017a075027b397d54ad72604bfacd5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Playerdata/Pink/PinkBugrunningoutlinedG-Sheet.png"
-dest_files=["res://.godot/imported/PinkBugrunningoutlinedG-Sheet.png-40774b78a21cd2ef8e8b27ccff2bc555.ctex"]
+source_file="res://EnemyData/King/King/KingCharacterDamagedOutlined-Sheet.png"
+dest_files=["res://.godot/imported/KingCharacterDamagedOutlined-Sheet.png-84017a075027b397d54ad72604bfacd5.ctex"]
 
 [params]
 

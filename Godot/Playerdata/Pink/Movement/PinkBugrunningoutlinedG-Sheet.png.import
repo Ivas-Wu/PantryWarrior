@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cfdx0csp5joyp"
-path="res://.godot/imported/PinkBugrunningoutlinedWhite-Sheet.png-1b40c6b9d894b5d42937ddfdecc664e8.ctex"
+uid="uid://ca8da81cuvg82"
+path="res://.godot/imported/PinkBugrunningoutlinedG-Sheet.png-4485b31e7ac0e3fd75d1a2aacf24ac9b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Playerdata/Pink/PinkBugrunningoutlinedWhite-Sheet.png"
-dest_files=["res://.godot/imported/PinkBugrunningoutlinedWhite-Sheet.png-1b40c6b9d894b5d42937ddfdecc664e8.ctex"]
+source_file="res://Playerdata/Pink/Movement/PinkBugrunningoutlinedG-Sheet.png"
+dest_files=["res://.godot/imported/PinkBugrunningoutlinedG-Sheet.png-4485b31e7ac0e3fd75d1a2aacf24ac9b.ctex"]
 
 [params]
 

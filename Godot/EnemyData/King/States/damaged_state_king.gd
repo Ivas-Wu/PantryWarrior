@@ -10,13 +10,14 @@ func _ready():
 	set_physics_process(false)
 	
 func _enter_state() -> void:
-	king.idle_attack.visible = true #TODO
+	king.damaged.visible = true
 	king.character_animations.play("Damaged")
 	king.attack_animations.play("Push")
+	await(king.handle_time_slow(0.1))
 	set_physics_process(true)
 
 func _exit_state() -> void:
-	king.idle_attack.visible = false #TODO
+	king.damaged.visible = false
 	king.invul = false
 	set_physics_process(false)
 

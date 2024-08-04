@@ -19,6 +19,7 @@ extends base_character_class
 #Character
 @onready var idle = $Idle
 @onready var idle_attack = $IdleAttack
+@onready var damaged = $Damaged
 
 #Weapon
 @onready var hammer_sprite = $HammerSprite

@@ -22,7 +22,7 @@ func _exit_state() -> void:
 	if current_sprite: current_sprite.visible = false
 	set_physics_process(false)
 
-func _physics_process(delta): pass
+func _physics_process(delta): flip_hitbox(king.hit_box_col)
 	
 func handle_state():
 	if not king.handle_enemy_finder():
@@ -35,7 +35,7 @@ func make_hand():
 	king.make_hand.visible = true
 	king.attack_animations.play("MakeHand")
 	set_flip()
-	flip(king.make_hand)
+	flip_sprite(king.make_hand)
 	
 func hand_made():
 	king.make_hand.visible = false
@@ -56,15 +56,20 @@ func pick_attack():
 		king.hammer_sprite.visible = true
 		current_sprite = king.hammer_sprite
 		king.attack_animations.play("HammerSwing")
-	flip(current_sprite)
+	flip_sprite(current_sprite)
 		
 func cleanup():
 	king.attack_animations.play("RESET")
 	king.make_hand.visible = false
 
-func flip(sprite: Sprite2D):
+func flip_sprite(sprite: Sprite2D):
 	sprite.position.x = flip_direction * abs(sprite.position.x)
 	sprite.scale.x = flip_direction * abs(sprite.scale.x)
+		
+
+func flip_hitbox(hitbox: hitbox_collision_shape_base): 
+	hitbox.position.x = flip_direction * abs(hitbox.position.x)
+	hitbox.scale.x = flip_direction * abs(hitbox.scale.x)
 
 func set_flip():
 	flip_direction = -1 if king.enemy_finder_ray.target_position.x < 0 else 1

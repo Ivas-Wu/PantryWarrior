@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://sbux3ue0ipeq"
-path="res://.godot/imported/PlummetOutlined-Sheet.png-2865ee049e9172f4e92145c36360ea58.ctex"
+uid="uid://rih703ddkuht"
+path="res://.godot/imported/PinkBugJumpOutlined-Sheet.png-fefafb7d390438cf323a87d454cfd226.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Playerdata/Pink/PlummetOutlined-Sheet.png"
-dest_files=["res://.godot/imported/PlummetOutlined-Sheet.png-2865ee049e9172f4e92145c36360ea58.ctex"]
+source_file="res://Playerdata/Pink/Movement/PinkBugJumpOutlined-Sheet.png"
+dest_files=["res://.godot/imported/PinkBugJumpOutlined-Sheet.png-fefafb7d390438cf323a87d454cfd226.ctex"]
 
 [params]
 

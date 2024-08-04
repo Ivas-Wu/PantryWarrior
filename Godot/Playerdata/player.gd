@@ -212,3 +212,15 @@ func _input(event : InputEvent):
 			attack_queue.append("BigAttack")
 		elif event.is_action_pressed("SpecialAttack"):
 			attack_queue.append("SpecialAttack")
+			
+func handle_wall_jump():
+	var dtw = direction_to_wall()
+	if near_wall() and ((dtw < 0 and Input.is_action_just_pressed("Right")) or (dtw > 0 and Input.is_action_just_pressed("Left"))):
+		wall_jump_flag = true
+		animated_sprite_2d.play("WallJump")
+		velocity.x = -dtw * 250
+		velocity.y = -250
+
+func _on_animated_sprite_2d_animation_finished():
+	if animated_sprite_2d.animation == "WallJump":
+		wall_jump_flag = false  

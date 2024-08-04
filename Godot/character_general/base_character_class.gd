@@ -7,6 +7,8 @@ extends CharacterBody2D
 @export var harzard_detector: Area2D
 @export var harzard_detector_col: CollisionShape2D
 @export var character_collision_polygon: CollisionPolygon2D
+@export var wall_left: RayCast2D
+@export var wall_right: RayCast2D
 
 @export var hit_box: hitbox_base
 @export var hit_box_col: hitbox_collision_shape_base
@@ -34,6 +36,7 @@ var rng = RandomNumberGenerator.new()
 var random_number : float
 var max_invulnerablity_frames : int
 var pushed : bool = false
+var wall_jump_flag : bool = false
 
 func _ready():
 	pass
@@ -88,6 +91,20 @@ func handle_speed(input_axis, delta):
 					s *= 0.5
 		velocity.x = move_toward(velocity.x, input_axis * s, a * delta)
 
+# Custom is on wall with more flexiblity
+func near_wall():
+	if not wall_left or not wall_right: return
+	return wall_right.is_colliding() or wall_left.is_colliding()
+
+func direction_to_wall():
+	if not wall_left or not wall_right: return
+	if wall_right.is_colliding():
+		return 1
+	elif wall_left.is_colliding():
+		return -1
+	else: 
+		return 0
+	
 func create_effect(effect: PackedScene, location: Vector2 = global_position):
 	if effect:
 		var ef = effect.instantiate()

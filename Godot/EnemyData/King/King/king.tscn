@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://biwma6gllqrv2"]
+[gd_scene load_steps=38 format=3 uid="uid://biwma6gllqrv2"]
 
 [ext_resource type="Script" path="res://EnemyData/King/King/King.gd" id="1_qalyh"]
 [ext_resource type="Resource" uid="uid://bnpuu3ne6r4sl" path="res://EnemyData/King/kingstats.tres" id="2_3vet7"]
@@ -15,6 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://dq8i4fkjb8evx" path="res://EnemyData/King/Hammer/HammerNewOutlinedFixed-Sheet.png" id="9_lm8oe"]
 [ext_resource type="Texture2D" uid="uid://lor0s8sjk3m5" path="res://EnemyData/King/Scythe/ScytheNewOutlinedNew-Sheet.png" id="10_8qplm"]
 [ext_resource type="Texture2D" uid="uid://dyc0t80i61vu3" path="res://EnemyData/King/Transitions/HandEntranceOutlined-Sheet.png" id="11_4rxs5"]
+[ext_resource type="Texture2D" uid="uid://bhs8svupwct55" path="res://EnemyData/King/King/KingCharacterDamagedOutlined-Sheet.png" id="13_meqq6"]
 [ext_resource type="PackedScene" uid="uid://d2lcx734h0ln8" path="res://EnemyData/health_bar.tscn" id="15_wdnbn"]
 
 [sub_resource type="Animation" id="Animation_au3gj"]
@@ -61,6 +62,7 @@ tracks/2/keys = {
 
 [sub_resource type="Animation" id="Animation_5j74u"]
 resource_name = "Damaged"
+length = 0.3
 tracks/0/type = "method"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -68,12 +70,24 @@ tracks/0/path = NodePath("../FiniteStateMachine/damaged_state_king")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(1),
+"times": PackedFloat32Array(0.3),
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": [],
 "method": &"handle_state"
 }]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../Damaged:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
 }
 
 [sub_resource type="Animation" id="Animation_7opf7"]
@@ -143,6 +157,18 @@ tracks/3/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [PackedVector2Array(15, -2, 18, -5, 18, -7, 16, -8, 19, -13, 19, -16, 17, -18, 19, -21, 19, -23, 22, -23, 24, -25, 24, -28, 22, -30, 17, -30, 17, -33, 22, -38, 23, -38, 24, -39, 24, -44, 23, -45, 19, -45, 19, -49, 11, -56, 11, -61, 10, -62, 9, -62, 9, -61, 7, -61, 6, -59, 3, -59, 2, -61, 1, -61, 0, -59, -2, -61, -3, -61, -3, -60, -6, -60, -6, -59, -11, -59, -12, -58, -12, -56, -9, -52, -11, -50, -11, -48, -10, -46, -16, -37, -22, -31, -28, -27, -30, -24, -30, -20, -27, -17, -24, -16, -24, -14, -21, -12, -17, -12, -17, -8, -13, -4, -9, -2)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("../Damaged:frame")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_0gqau"]
@@ -252,7 +278,7 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="Animation_ob20m"]
 resource_name = "Push"
-length = 0.55
+length = 0.3
 step = 0.01
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -261,10 +287,10 @@ tracks/0/path = NodePath("../PushArea/CollisionShape2D:shape:radius")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.5, 0.55),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.29, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [0.01, 44.11, 77.0, 0.01]
+"values": [0.01, 77.0, 0.01]
 }
 tracks/1/type = "method"
 tracks/1/imported = false
@@ -273,7 +299,7 @@ tracks/1/path = NodePath("..")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0.5),
+"times": PackedFloat32Array(0.29),
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": [],
@@ -287,7 +313,7 @@ tracks/2/path = NodePath("../PushArea/CollisionShape2D:disabled")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.55),
+"times": PackedFloat32Array(0, 0.3),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [false, true]
@@ -487,60 +513,6 @@ _data = {
 "ScytheSwing": SubResource("Animation_jowkv")
 }
 
-[sub_resource type="Animation" id="Animation_iabe6"]
-resource_name = "ShieldForming"
-length = 0.5
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("TempShield:self_modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0.270588)]
-}
-tracks/1/type = "method"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("FiniteStateMachine/defend_state_king")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0.5),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [],
-"method": &"shield_formed"
-}]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("PushArea/CollisionShape2D:shape:radius")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [0.01, 77.0]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("PushArea/CollisionShape2D:disabled")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-
 [sub_resource type="Animation" id="Animation_meb6g"]
 length = 0.001
 tracks/0/type = "value"
@@ -620,6 +592,60 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_iabe6"]
+resource_name = "ShieldForming"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TempShield:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0.270588)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("FiniteStateMachine/defend_state_king")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"shield_formed"
+}]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("PushArea/CollisionShape2D:shape:radius")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.01, 77.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("PushArea/CollisionShape2D:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_afpts"]
@@ -723,6 +749,12 @@ position = Vector2(85, -114)
 texture = ExtResource("11_4rxs5")
 hframes = 16
 
+[node name="Damaged" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(-1, -30)
+texture = ExtResource("13_meqq6")
+hframes = 2
+
 [node name="EnemyHurtBox" type="Area2D" parent="."]
 script = ExtResource("5_w6jhw")
 
@@ -732,6 +764,9 @@ polygon = PackedVector2Array(15, -2, 18, -5, 18, -7, 16, -8, 19, -13, 19, -16, 1
 
 [node name="EnemyHitBox" type="Area2D" parent="." node_paths=PackedStringArray("parent")]
 script = ExtResource("6_tm7m5")
+damage = 100
+knock_back = 5.0
+freeze_frames = 0.3
 parent = NodePath("..")
 
 [node name="hitbox_collision_shape_base" type="CollisionShape2D" parent="EnemyHitBox"]

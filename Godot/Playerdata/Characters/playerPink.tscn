@@ -1,4 +1,4 @@
-[gd_scene load_steps=85 format=3 uid="uid://cypcocvbiby87"]
+[gd_scene load_steps=90 format=3 uid="uid://cypcocvbiby87"]
 
 [ext_resource type="Script" path="res://Playerdata/player.gd" id="1_pypjj"]
 [ext_resource type="Script" path="res://Playerdata/Scripts/PlayerMovementData.gd" id="2_5p0ot"]
@@ -6,16 +6,17 @@
 [ext_resource type="Script" path="res://character_general/hit_box_collision_base.gd" id="4_7pw5j"]
 [ext_resource type="Script" path="res://Playerdata/Scripts/HealthBar.gd" id="4_cj8jf"]
 [ext_resource type="Script" path="res://Playerdata/Scripts/Player Organization/calculate_stats.gd" id="5_ckmjd"]
-[ext_resource type="Texture2D" uid="uid://cf24xlv35lmq4" path="res://Playerdata/Pink/PinkBugDashOutlined-Sheet.png" id="5_o7f74"]
+[ext_resource type="Texture2D" uid="uid://cf24xlv35lmq4" path="res://Playerdata/Pink/Movement/PinkBugDashOutlined-Sheet.png" id="5_o7f74"]
 [ext_resource type="Script" path="res://Playerdata/Scripts/Player Organization/skill_points.gd" id="6_yvkpx"]
 [ext_resource type="Script" path="res://Playerdata/Scripts/HurtBox.gd" id="7_2nxao"]
 [ext_resource type="Script" path="res://Playerdata/Scripts/Player Organization/player_level.gd" id="7_dmt8y"]
-[ext_resource type="Texture2D" uid="uid://sbux3ue0ipeq" path="res://Playerdata/Pink/PlummetOutlined-Sheet.png" id="7_eh5ai"]
+[ext_resource type="Texture2D" uid="uid://sbux3ue0ipeq" path="res://Playerdata/Pink/Movement/PlummetOutlined-Sheet.png" id="7_eh5ai"]
 [ext_resource type="Texture2D" uid="uid://dwwvvid8bwqbm" path="res://Playerdata/Pink/PinkBugIdleOutlined-Sheet.png" id="7_fthkm"]
-[ext_resource type="Texture2D" uid="uid://04mf2pwpu05i" path="res://Playerdata/Pink/PinkBugRollOutlined-Sheet.png" id="7_hq282"]
+[ext_resource type="Texture2D" uid="uid://04mf2pwpu05i" path="res://Playerdata/Pink/Movement/PinkBugRollOutlined-Sheet.png" id="7_hq282"]
 [ext_resource type="Script" path="res://Playerdata/Scripts/Hitbox.gd" id="8_crlak"]
-[ext_resource type="Texture2D" uid="uid://rih703ddkuht" path="res://Playerdata/Pink/PinkBugJumpOutlined-Sheet.png" id="8_rkqrp"]
-[ext_resource type="Texture2D" uid="uid://ca8da81cuvg82" path="res://Playerdata/Pink/PinkBugrunningoutlinedG-Sheet.png" id="8_sexm6"]
+[ext_resource type="Texture2D" uid="uid://rih703ddkuht" path="res://Playerdata/Pink/Movement/PinkBugJumpOutlined-Sheet.png" id="8_rkqrp"]
+[ext_resource type="Texture2D" uid="uid://ca8da81cuvg82" path="res://Playerdata/Pink/Movement/PinkBugrunningoutlinedG-Sheet.png" id="8_sexm6"]
+[ext_resource type="Texture2D" uid="uid://c015mno1ou6et" path="res://Playerdata/Pink/Movement/PinkBugWallJumpOutline-Sheet.png" id="10_op445"]
 [ext_resource type="Texture2D" uid="uid://b3yx5a2sef6lr" path="res://Playerdata/Pink/output.png" id="10_pwch6"]
 [ext_resource type="Script" path="res://finite_state_machine.gd" id="11_b02sp"]
 [ext_resource type="Script" path="res://Playerdata/States/JumpingState.gd" id="12_4657u"]
@@ -195,37 +196,53 @@ region = Rect2(224, 0, 32, 32)
 atlas = ExtResource("7_hq282")
 region = Rect2(256, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_s1cck"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_484qn"]
 atlas = ExtResource("8_sexm6")
-region = Rect2(32, 0, 32, 32)
+region = Rect2(33, 0, 33, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_rfnat"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_l6jlx"]
 atlas = ExtResource("8_sexm6")
-region = Rect2(64, 0, 32, 32)
+region = Rect2(66, 0, 33, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_kh8s1"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_giavv"]
 atlas = ExtResource("8_sexm6")
-region = Rect2(96, 0, 32, 32)
+region = Rect2(99, 0, 33, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_8v6f1"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_yw32j"]
 atlas = ExtResource("8_sexm6")
-region = Rect2(128, 0, 32, 32)
+region = Rect2(132, 0, 33, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_yt4bl"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_pvs8n"]
 atlas = ExtResource("8_sexm6")
-region = Rect2(160, 0, 32, 32)
+region = Rect2(165, 0, 33, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_og81i"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_5pkie"]
 atlas = ExtResource("8_sexm6")
-region = Rect2(192, 0, 32, 32)
+region = Rect2(198, 0, 33, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_m7paf"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_w5yp6"]
 atlas = ExtResource("8_sexm6")
-region = Rect2(224, 0, 32, 32)
+region = Rect2(231, 0, 33, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_i5ou2"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_esntv"]
 atlas = ExtResource("8_sexm6")
-region = Rect2(0, 0, 32, 32)
+region = Rect2(132, 0, 33, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xcpan"]
+atlas = ExtResource("10_op445")
+region = Rect2(36, 0, 36, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_apva8"]
+atlas = ExtResource("10_op445")
+region = Rect2(72, 0, 36, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_64gne"]
+atlas = ExtResource("10_op445")
+region = Rect2(108, 0, 36, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j1hf8"]
+atlas = ExtResource("10_op445")
+region = Rect2(0, 0, 36, 64)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_a3m6q"]
 animations = [{
@@ -384,32 +401,49 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_s1cck")
+"texture": SubResource("AtlasTexture_484qn")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_rfnat")
+"texture": SubResource("AtlasTexture_l6jlx")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_kh8s1")
+"texture": SubResource("AtlasTexture_giavv")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_8v6f1")
+"texture": SubResource("AtlasTexture_yw32j")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_yt4bl")
+"texture": SubResource("AtlasTexture_pvs8n")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_og81i")
+"texture": SubResource("AtlasTexture_5pkie")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_m7paf")
+"texture": SubResource("AtlasTexture_w5yp6")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_i5ou2")
+"texture": SubResource("AtlasTexture_esntv")
 }],
 "loop": true,
 "name": &"Running",
 "speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xcpan")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_apva8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_64gne")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j1hf8")
+}],
+"loop": false,
+"name": &"WallJump",
+"speed": 10.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_setf6"]
@@ -725,7 +759,7 @@ _data = {
 "Special_Attack": SubResource("Animation_jhw26")
 }
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("harzard_detector", "harzard_detector_col", "character_collision_polygon", "hit_box", "hit_box_col", "hurt_box", "hurt_box_col", "animated_sprite_2d") groups=["Player"]]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("harzard_detector", "harzard_detector_col", "character_collision_polygon", "wall_left", "wall_right", "hit_box", "hit_box_col", "hurt_box", "hurt_box_col", "animated_sprite_2d") groups=["Player"]]
 collision_layer = 18
 collision_mask = 23
 floor_constant_speed = true
@@ -736,6 +770,8 @@ stat_data = SubResource("Resource_sppp2")
 harzard_detector = NodePath("CharacterAttributes/HarzardDetector")
 harzard_detector_col = NodePath("CharacterAttributes/HarzardDetector/CollisionShape2D")
 character_collision_polygon = NodePath("CharacterAttributes/CharacterCollisionShape/CollisionPolygon2D")
+wall_left = NodePath("CharacterAttributes/wall_left")
+wall_right = NodePath("CharacterAttributes/wall_right")
 hit_box = NodePath("CharacterAttributes/HitBox")
 hit_box_col = NodePath("CharacterAttributes/HitBox/CollisionShape2D")
 hurt_box = NodePath("CharacterAttributes/HurtBox")
@@ -760,13 +796,16 @@ position = Vector2(0, -1)
 polygon = PackedVector2Array(-2, 1, 3, 1, 5, -2, 5, -11, 3, -14, -1, -14, -2, -12, -4, -10, -3, -3)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterAttributes"]
+visible = false
 position = Vector2(1, -9)
 scale = Vector2(0.599609, 0.59668)
 sprite_frames = SubResource("SpriteFrames_a3m6q")
-animation = &"Running"
-frame_progress = 0.562278
+animation = &"WallJump"
+frame = 3
+frame_progress = 1.0
 
 [node name="HurtBox" type="Area2D" parent="CharacterAttributes"]
+visible = false
 collision_layer = 64
 collision_mask = 0
 script = ExtResource("7_2nxao")
@@ -777,6 +816,7 @@ scale = Vector2(1, 0.770833)
 polygon = PackedVector2Array(-3, -19.4595, 6, -19.4595, 6, 3.89189, -3, 3.89189)
 
 [node name="HitBox" type="Area2D" parent="CharacterAttributes" node_paths=PackedStringArray("parent")]
+visible = false
 collision_layer = 32
 collision_mask = 256
 script = ExtResource("8_crlak")
@@ -785,6 +825,7 @@ stun_time = 0.5
 parent = NodePath("../..")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterAttributes/HitBox"]
+visible = false
 position = Vector2(10.475, -9)
 scale = Vector2(2.8, 6.5)
 shape = SubResource("RectangleShape2D_setf6")
@@ -813,25 +854,35 @@ libraries = {
 }
 
 [node name="left" type="RayCast2D" parent="CharacterAttributes"]
-position = Vector2(-6, -14)
+position = Vector2(-5, -14)
 target_position = Vector2(0, -11)
 
 [node name="middleleft" type="RayCast2D" parent="CharacterAttributes"]
-position = Vector2(-3, -14)
+position = Vector2(-2, -14)
 target_position = Vector2(0, -11)
 
 [node name="middleright" type="RayCast2D" parent="CharacterAttributes"]
-position = Vector2(3, -14)
+position = Vector2(4, -14)
 target_position = Vector2(0, -11)
 
 [node name="right" type="RayCast2D" parent="CharacterAttributes"]
-position = Vector2(6, -14)
+position = Vector2(7, -14)
 target_position = Vector2(0, -11)
 
+[node name="wall_left" type="RayCast2D" parent="CharacterAttributes"]
+position = Vector2(-2, -2)
+target_position = Vector2(-5, 0)
+
+[node name="wall_right" type="RayCast2D" parent="CharacterAttributes"]
+position = Vector2(4, -2)
+target_position = Vector2(5, 0)
+
 [node name="CollisionPolygon" type="CollisionPolygon2D" parent="."]
+visible = false
 polygon = PackedVector2Array(0, 0, 0, 0, 0, 0)
 
 [node name="Camera2D" type="Camera2D" parent="."]
+visible = false
 offset = Vector2(0, -40)
 zoom = Vector2(0.85, 0.85)
 process_callback = 0
@@ -854,6 +905,7 @@ offset_bottom = 40.0
 script = ExtResource("4_cj8jf")
 
 [node name="Scripts" type="Node2D" parent="."]
+visible = false
 
 [node name="calculate_stats" type="Node" parent="Scripts"]
 script = ExtResource("5_ckmjd")
@@ -901,6 +953,7 @@ script = ExtResource("19_lpxuq")
 
 [connection signal="area_entered" from="CharacterAttributes/HarzardDetector" to="." method="_on_harzard_detector_area_entered"]
 [connection signal="area_exited" from="CharacterAttributes/HarzardDetector" to="." method="_on_harzard_detector_area_exited"]
+[connection signal="animation_finished" from="CharacterAttributes/AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="animation_finished" from="CharacterAttributes/AnimatedSprite2D" to="States/falling_state" method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="animation_finished" from="CharacterAttributes/AnimatedSprite2D" to="States/rolling_state" method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="animation_finished" from="CharacterAttributes/AnimatedSprite2D" to="States/dash_state" method="_on_animated_sprite_2d_animation_finished"]
