@@ -126,7 +126,7 @@ func set_hurtbox_col():
 
 func _on_harzard_detector_area_entered(hazard: Hazard):
 	if invulnerability_frames > 0 or take_damage(hazard.damage): return
-	handle_knockback(hazard.parent.global_position, hazard.knock_back)
+	handle_knockback(hazard.source.global_position, hazard.knock_back)
 
 func _on_hurt_box_area_entered(hitbox : hitbox_base):
 	if hitbox == null: return
