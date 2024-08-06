@@ -17,7 +17,7 @@ func _enter_state() -> void:
 		player.hit_box.already_hit = false
 		player.hit_box_col.disabled = false
 		#edit hitbox exports
-		player.hit_box.set_export_values(100, 5, 1, 0.1, player.random_number, player.damage)
+		player.hit_box.set_export_values(100, 5, 1, 0.1, player.random_number, player.damage, player.knockback, player.stun)
 		player.hurt_box_col.disabled = true
 		player.collision_mask = 7
 		set_physics_process(true)
@@ -45,7 +45,7 @@ func handle_landing():
 	if skills[skills_enum.PLUMMET_PLUS]:
 		#set the size of the hitbox
 		player.hit_box_col.set_x_y_size(Vector2(30,30), Vector2(0,-12), Vector2(1,0.8))
-		player.hit_box.set_export_values(500, 15, 1, 0.3, player.random_number, player.damage)
+		player.hit_box.set_export_values(500, 15, 1, 0.3, player.random_number, player.damage, player.knockback, player.stun)
 
 func _on_animated_sprite_2d_animation_finished():
 	if player.animated_sprite_2d.animation == "PlummetLand":

@@ -54,15 +54,15 @@ func prev():
 	
 func handle_basic_attack(): 
 	player.animation_player.play("Basic_Attack")
-	player.hit_box.set_export_values(100, 5, 0, 0, player.random_number, player.damage)
+	player.hit_box.set_export_values(100, 5, 0, 0, player.random_number, player.damage, player.knockback, player.stun)
 	
 func handle_big_attack(): 
 	player.animation_player.play("Big_Attack")
-	player.hit_box.set_export_values(300, 8, 1, 0.3, player.random_number, player.damage)
+	player.hit_box.set_export_values(300, 8, 1, 0.3, player.random_number, player.damage, player.knockback, player.stun)
 	
 func handle_special_attack(): 
 	player.animation_player.play("Special_Attack")
-	player.hit_box.set_export_values(100, 5, 1, 0, player.random_number, player.damage)
+	player.hit_box.set_export_values(100, 5, 1, 0, player.random_number, player.damage, player.knockback, player.stun)
 	
 func handle_ground_attack(): pass
 

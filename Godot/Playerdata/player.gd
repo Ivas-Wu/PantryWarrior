@@ -31,10 +31,12 @@ extends base_character_class
 @onready var plummet_state = $States/plummet_state as plummet_state
 
 #Player Stats
-var air_jump : int = 0
-var damage : float = 0 # damage + speed + knock back
-var defense : float = 0 # damage reduction
-var stablity : float = 0 # knock back on you
+var air_jump : int = 1
+var damage : float = 1 # damage + animation speed
+var knockback : float = 1 # multiplier
+var stun : float = 1 # multiplier
+var defense : float = 1 # damage reduction
+var stablity : float = 1 # knock back on you
 
 #changes as you play
 var attack_queue : Array = []

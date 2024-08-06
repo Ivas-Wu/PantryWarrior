@@ -31,23 +31,23 @@ func setup():
 	
 func _process(delta):
 	if Input.is_action_just_pressed("Left"):
-		cards[selected_index].selected = false
-		if selected_index == 0:
-			selected_index = 0
-		else: selected_index -= 1
-		cards[selected_index].selected = true
+		switch_selected(card_count - 1 if selected_index == 0 else selected_index - 1)
 	if Input.is_action_just_pressed("Right"):
-		cards[selected_index].selected = false
-		selected_index = (selected_index + 1)%card_count
-		cards[selected_index].selected = true
+		switch_selected((selected_index + 1)%card_count)
 	if Input.is_action_just_pressed("Confirm"):
 		cards[selected_index].pressed.emit()
 	
 func select_ability(idx: int):
 	player.skill_handler.add_ability(idx)
+	switch_selected(0)
 	hide()
 	get_tree().paused = false
 
+func switch_selected(new_index):
+	cards[selected_index].selected = false
+	selected_index = new_index
+	cards[selected_index].selected = true
+	
 func open():
 	get_tree().paused = true
 	#TODO

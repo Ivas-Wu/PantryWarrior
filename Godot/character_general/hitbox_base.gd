@@ -15,7 +15,7 @@ extends Area2D
 @export var source_col_polygon : CollisionPolygon2D
 
 var already_hit : bool = false;
-var source : Vector2
+var source
 
 func _ready():
 	pass
@@ -25,16 +25,16 @@ func _process(delta):
 
 func init():
 	if source_col_shape:
-		source = source_col_shape.global_position
+		source = source_col_shape
 	elif source_col_polygon:
-		source = source_col_polygon.global_position
+		source = source_col_polygon
 	else:
-		source = parent.character_collision_polygon.global_position
+		source = parent.character_collision_polygon
 	
-func set_export_values(damage: int, knock: float, stun: float, freeze: float, rand: float, multiplier: float = 1) :
+func set_export_values(damage: int, knock: float, stun: float, freeze: float, rand: float, multiplier: float = 1, km: float = 1, sm: float = 1) :
 	generate_damage(damage * multiplier, rand)
-	knock_back = knock * multiplier
-	stun_time = stun * multiplier
+	knock_back = knock * km
+	stun_time = stun * sm
 	freeze_frames = freeze
 
 func generate_damage(base_damage : float, rand: float):
