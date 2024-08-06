@@ -74,40 +74,6 @@ var skill_variables = {
 	SkillVariables.BONUS_HEALING: 0.0
 }
 
-var agility : float
-var attack : float
-var knockback_done : float
-var stun : float
-var hp: float
-var defense : float
-var knockback_taken : float
-
-# combat
-var big_attack : bool
-var special_attack : bool
-var ground_attack : bool
-var dash_attack : bool
-var plummet : bool
-var plummet_plus : bool
-var shield : bool
-
-#movement
-var roll : bool
-var dash : bool
-var wall_jump : bool
-var triple_jump : bool
-var charged_jump : bool
-
-# utility
-var goggles : bool
-var health_regen : float
-var lifesteal : float
-var bonus_exp : float
-var bonus_healing : float
-
-# fury
-#todo
-
 func _ready():
 	set_physics_process(false)
 	skill_tree_instance = skill_tree.new()

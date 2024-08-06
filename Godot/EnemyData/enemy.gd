@@ -119,6 +119,7 @@ func enter_damaged_state():
 	
 func handle_knockback(source_location: Vector2, knock_back: int):
 	var launch_direction = source_location.direction_to(hurt_box.global_position).normalized()
+	print(hurt_box.global_position)
 	velocity.x = move_toward(velocity.x, launch_direction.x * knock_back * 200 * movement_data.knock_back, knock_back * 30)
 	velocity.y = move_toward(velocity.y, launch_direction.y * knock_back * 200 * movement_data.knock_back, knock_back * 30)
 	
