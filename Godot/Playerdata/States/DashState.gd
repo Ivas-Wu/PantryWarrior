@@ -3,21 +3,15 @@ extends State
 
 signal idle
 
-var player : Player
 var dir : int
 var original_speed : int
-
-func _ready():
-	set_physics_process(false)
-	player = get_tree().get_first_node_in_group("Player")
 	
 func _enter_state() -> void:
 	dir = 1 if not player.animated_sprite_2d.flip_h else -1
 	original_speed = player.velocity.x
-	if player.skill_handler.defense == 5:
+	if skills[skills_enum.DASH_ATTACK]:
 		player.hurt_box_col.disabled = true
-	else:
-		player.defense *= 1 + player.skill_handler.defense
+
 	#reset properties to allow hit
 	player.hit_box.already_hit = false
 	player.hit_box_col.disabled = false

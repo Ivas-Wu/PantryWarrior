@@ -4,13 +4,8 @@ extends State
 signal idle
 signal previous
 
-var player : Player
 var dir : int
 var original_speed : int
-
-func _ready():
-	set_physics_process(false)
-	player = get_tree().get_first_node_in_group("Player")
 	
 func _enter_state() -> void:
 	if not player.is_on_floor(): previous.emit()

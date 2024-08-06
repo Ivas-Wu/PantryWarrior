@@ -16,15 +16,15 @@ func calculate_agility():
 	#player.acceleration = player.movement_data.acceleration + player.skill_handler.agility * (35 + player.skill_handler.agility)
 	
 func calculate_offense():
-	player.damage = 1 + player.skill_handler.offense/10
+	#player.damage = 1 + player.skill_handler.offense/10
 	player.animation_player.speed_scale = player.damage 
 	
 func calculate_defense():
 	var old_max = player.hp
-	player.hp = player.stat_data.hp + player.skill_handler.defense * 100
+	#player.hp = player.stat_data.hp + player.skill_handler.defense * 100
 	if player.hp > old_max:
 		player.current_hp += player.hp - old_max
-	player.defense = 1 + (player.skill_handler.defense * player.skill_handler.defense)/10
-	player.stablity = (1 + player.skill_handler.defense)
-	player.max_invulnerablity_frames = player.stat_data.invulnerability_frames * (1 + player.skill_handler.defense)
+	#player.defense = 1 + (player.skill_handler.defense * player.skill_handler.defense)/10
+	#player.stablity = (1 + player.skill_handler.defense)
+	#player.max_invulnerablity_frames = player.stat_data.invulnerability_frames * (1 + player.skill_handler.defense)
 

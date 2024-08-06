@@ -79,7 +79,7 @@ func handle_enemy_finder() -> bool:
 	enemy_finder_ray.target_position = direction_to_player * stat_data.vision_range
 	return collision_object == player
 
-func create_projectile(initial_velocity: Vector2, bounce: int): #TODO
+func create_projectile(initial_velocity: Vector2, bounce: int):
 	var projectile = preload("res://EnemyData/King/Projectile/projectile.tscn").instantiate().with_values(initial_velocity, bounce)
 	get_node("Projectiles").add_child(projectile)
 	projectile.global_position = global_position + Vector2(0, -50)

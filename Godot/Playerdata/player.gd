@@ -104,6 +104,7 @@ func reset_values():
 	#Prevent bugs
 	animated_sprite_2d.visible = true
 	attack_animation.visible = false
+	animation_player.set_speed_scale(1)
 	animation_player.stop()
 	fsm.change_state(idle_state)
 
@@ -199,7 +200,7 @@ func set_health_bar():
 	health_bar.set_health_bar(current_hp)
 
 func gain_exp(experience: int):
-	skill_handler.add_skill_pts(level_handler.gain_exp(experience))
+	level_handler.gain_exp(experience)
 
 func _input(event : InputEvent):
 	if is_on_floor():
@@ -220,7 +221,7 @@ func handle_wall_jump():
 		animated_sprite_2d.play("WallJump")
 		velocity.x = -dtw * 250
 		velocity.y = -250
-
+	
 func _on_animated_sprite_2d_animation_finished():
 	if animated_sprite_2d.animation == "WallJump":
 		wall_jump_flag = false  

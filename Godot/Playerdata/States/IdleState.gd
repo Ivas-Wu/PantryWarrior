@@ -7,12 +7,6 @@ signal fall
 signal roll
 signal attack
 signal up
-
-var player : Player
-
-func _ready():
-	set_physics_process(false)
-	player = get_tree().get_first_node_in_group("Player")
 	
 func _enter_state() -> void:
 	# Add and check queued actions
@@ -34,17 +28,13 @@ func _physics_process(delta):
 				up.emit()
 
 func handle_state():
-	var sig = false
 	if not player.attack_queue.is_empty():
 		attack.emit()
-		sig = true
 	elif Input.is_action_just_pressed("Up"):
 		jump.emit()
-		sig = true
-	elif Input.is_action_just_pressed("Roll"):
+	elif Input.is_action_just_pressed("Roll") and skills[skills_enum.ROLL]:
 		roll.emit()
-		sig = true
 	elif player.input_axis:
 		run.emit()
-		sig = true
-	return sig
+	else: return false
+	return true

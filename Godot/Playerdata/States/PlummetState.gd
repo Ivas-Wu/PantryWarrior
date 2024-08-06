@@ -5,12 +5,6 @@ signal landed
 signal previous
 signal jump
 signal fall
-
-var player : Player
-
-func _ready():
-	set_physics_process(false)
-	player = get_tree().get_first_node_in_group("Player")
 	
 func _enter_state() -> void:
 	if player.is_on_floor(): landed.emit()
@@ -23,7 +17,7 @@ func _enter_state() -> void:
 		player.hit_box.already_hit = false
 		player.hit_box_col.disabled = false
 		#edit hitbox exports
-		player.hit_box.set_export_values(50 + 50 * player.skill_handler.special, 5, 1, 0.1, player.random_number, player.damage)
+		player.hit_box.set_export_values(100, 5, 1, 0.1, player.random_number, player.damage)
 		player.hurt_box_col.disabled = true
 		player.collision_mask = 7
 		set_physics_process(true)
@@ -48,7 +42,7 @@ func _physics_process(delta):
 
 func handle_landing():
 	player.animated_sprite_2d.play("PlummetLand")
-	if player.skill_handler.special == 5:
+	if skills[skills_enum.PLUMMET_PLUS]:
 		#set the size of the hitbox
 		player.hit_box_col.set_x_y_size(Vector2(30,30), Vector2(0,-12), Vector2(1,0.8))
 		player.hit_box.set_export_values(500, 15, 1, 0.3, player.random_number, player.damage)

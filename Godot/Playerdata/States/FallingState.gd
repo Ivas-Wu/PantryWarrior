@@ -6,12 +6,6 @@ signal previous
 signal jump
 signal plummet
 
-var player : Player
-
-func _ready():
-	set_physics_process(false)
-	player = get_tree().get_first_node_in_group("Player")
-	
 func _enter_state() -> void:
 	if player.is_on_floor(): landed.emit()
 	else:
@@ -25,7 +19,7 @@ func _exit_state() -> void:
 func _physics_process(delta):
 	if Input.is_action_just_pressed("Up"):
 		jump.emit()
-	elif Input.is_action_just_pressed("Down") and player.skill_handler.special > 0:
+	elif Input.is_action_just_pressed("Down") and skills[skills_enum.PLUMMET]:
 		plummet.emit()
 	else:
 		var in_air = not player.is_on_floor()

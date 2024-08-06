@@ -11,14 +11,9 @@ signal landed
 @onready var middleleft = $"../../CharacterAttributes/middleleft"
 @onready var middleright = $"../../CharacterAttributes/middleright"
 
-var player : Player
 var charge : float = 0
 var gravity : float = 1
 
-func _ready():
-	set_physics_process(false)
-	player = get_tree().get_first_node_in_group("Player")
-	
 func _enter_state() -> void:
 	gravity = player.movement_data.gravity_scale
 	set_physics_process(true)
@@ -27,7 +22,7 @@ func _enter_state() -> void:
 		if can_jump:
 			player.animated_sprite_2d.play("JumpStart")
 			if player.is_on_floor():
-				if Input.is_action_pressed("Down") and player.skill_handler.agility > 0:
+				if Input.is_action_pressed("Down") and skills[skills_enum.CHARGED_JUMP]:
 					player.velocity = Vector2.ZERO
 				else:
 					player.velocity.y += player.jump
@@ -53,12 +48,12 @@ func _physics_process(delta):
 	player.move_and_slide()
 	
 func handle_jump(delta): #TODO add a pushed delay timer
-	if player.is_on_floor() and player.skill_handler.agility > 0:
+	if player.is_on_floor() and skills[skills_enum.CHARGED_JUMP]:
 		if Input.is_action_pressed("Down") and Input.is_action_pressed("Up"):
 			player.velocity.x = 0
 			charge += delta
 		if Input.is_action_just_released("Down"):
-			player.velocity.y = player.jump * min(1 + charge, 1 + player.skill_handler.agility)
+			player.velocity.y = player.jump * min(1 + charge, 5)
 			player.movement_data.gravity_scale = 1 + charge
 			charge = 0
 	else:
@@ -81,7 +76,7 @@ func handle_animation():
 			player.animated_sprite_2d.play("JumpAirUp")
 
 func handle_state_changes():
-	if Input.is_action_just_pressed("Down") and player.skill_handler.special > 0:
+	if Input.is_action_just_pressed("Down") and skills[skills_enum.PLUMMET]:
 		plummet.emit()
 	elif player.velocity.y > 0:
 		falling.emit()

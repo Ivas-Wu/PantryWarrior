@@ -4,12 +4,7 @@ extends State
 signal previous
 signal idle
 
-var player : Player
 var flip : bool = false
-
-func _ready():
-	set_physics_process(false)
-	player = get_tree().get_first_node_in_group("Player")
 	
 func _enter_state() -> void:
 	set_physics_process(true)
@@ -26,12 +21,12 @@ func _enter_state() -> void:
 		"Attack":
 			handle_basic_attack()
 		"BigAttack":
-			if player.skill_handler.offense > 0:
+			if skills[skills_enum.BIG_ATTACK]:
 				handle_big_attack()
 			else:
 				prev()
 		"SpecialAttack":
-			if player.skill_handler.offense > 1:
+			if skills[skills_enum.SPECIAL_ATTACK]:
 				handle_special_attack()
 			else:
 				prev()
