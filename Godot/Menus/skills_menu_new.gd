@@ -17,8 +17,12 @@ func _ready():
 	setup()
 	open()
 	
-func setup():
-	var skills = player.skill_handler.get_skills(card_count)
+func open():
+	cards = []
+	var skills: Array = player.skill_handler.get_skills(card_count, 1)
+	if skills.is_empty(): return
+	
+	get_tree().paused = true
 	for s in skills:
 		var skills_card = preload(skill_card_path).instantiate().with_values(s[2], s[1], s[0])
 		get_node("Skills/Menu").add_child(skills_card)
@@ -26,7 +30,9 @@ func setup():
 		if cards.is_empty():
 			skills_card.selected = true
 		cards.append((skills_card))
-
+	show()
+	
+func setup():
 	player.level_handler.leveled.connect(open.bind()) #Opens upon leveling only, TODO
 	
 func _process(delta):
@@ -36,20 +42,21 @@ func _process(delta):
 		switch_selected((selected_index + 1)%card_count)
 	if Input.is_action_just_pressed("Confirm"):
 		cards[selected_index].pressed.emit()
-	
-func select_ability(idx: int):
-	player.skill_handler.add_ability(idx)
-	switch_selected(0)
-	hide()
-	get_tree().paused = false
 
 func switch_selected(new_index):
 	cards[selected_index].selected = false
 	selected_index = new_index
 	cards[selected_index].selected = true
 	
-func open():
-	get_tree().paused = true
-	#TODO
-	show()
+func select_ability(idx: int):
+	player.skill_handler.add_ability(idx, true)
+	cleanup()
+	
+func cleanup():
+	switch_selected(0)
+	hide()
+	for c in get_node("Skills/Menu").get_child_count():
+		var child = get_node("Skills/Menu").get_child(c)
+		child.queue_free()
+	get_tree().paused = false
 	
