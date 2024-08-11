@@ -1,24 +1,27 @@
 class_name player_level
 extends Node
 
-var max_exp : int = 100
-var level : int
+var max_exp : int = 10
+var current_level : int
+var level_queue : Array = []
 var experience : int 
 
-signal leveled
+signal leveled(level_queue)
 
 func _ready():
 	set_physics_process(false)
-
-func gain_exp(gain : int) -> int:
-	var levels = 0
+	
+func gain_exp(gain : int):
 	experience += gain
 	while experience >= max_exp:
 		level_up()
-		levels += 1
-	return levels
-		
+	call_deferred("exp_timer_complete")
+	
 func level_up():
-	level += 1
+	current_level += 1
+	level_queue.append(current_level)
 	experience -= max_exp
-	leveled.emit()
+
+func exp_timer_complete():
+	leveled.emit(level_queue)
+	level_queue = []

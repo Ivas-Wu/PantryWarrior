@@ -1,30 +1,39 @@
 extends Control
 
+const skill_card_path = "res://Menus/skills_card.tscn"
+
 @export var game: world
 
 @onready var menu = $Skills/Menu
 
 var player : Player
 var card_count : int = 3
-const skill_card_path = "res://Menus/skills_card.tscn"
 var selected_index = 0
 var cards : Array
+var currently_open : bool = false
+var banked : Array = []
 
 func _ready():
 	player = get_tree().get_first_node_in_group("Player")
 	set_physics_process(false)
 	#hide()
 	setup()
-	open()
+	open([2])
 	
-func open():
-	cards = []
-	var skills: Array = player.skill_handler.get_skills(card_count, 1)
-	if skills.is_empty(): return
-	
+func open(level_queue: Array):
+	if level_queue.is_empty() : return
 	get_tree().paused = true
+	if currently_open: banked.append_array(level_queue) #This does nothing, bug with multiple levels still exists
+	currently_open = true
+	cards = []
+	
+	var level = level_queue.pop_front()
+	banked.append_array(level_queue)
+	
+	var skills: Array = player.skill_handler.get_skills(card_count, level if level <= player.skill_handler.max_level else player.skill_handler.max_level)
+	if skills.is_empty(): close()
 	for s in skills:
-		var skills_card = preload(skill_card_path).instantiate().with_values(s[2], s[1], s[0])
+		var skills_card = preload(skill_card_path).instantiate().with_values(s[3][0], s[3][1], s[2], s[0])
 		get_node("Skills/Menu").add_child(skills_card)
 		skills_card.pressed.connect(select_ability.bind(s[0]))
 		if cards.is_empty():
@@ -33,7 +42,7 @@ func open():
 	show()
 	
 func setup():
-	player.level_handler.leveled.connect(open.bind()) #Opens upon leveling only, TODO
+	player.level_handler.leveled.connect(open) #Opens upon leveling only, TODO
 	
 func _process(delta):
 	if Input.is_action_just_pressed("Left"):
@@ -54,9 +63,16 @@ func select_ability(idx: int):
 	
 func cleanup():
 	switch_selected(0)
-	hide()
 	for c in get_node("Skills/Menu").get_child_count():
 		var child = get_node("Skills/Menu").get_child(c)
 		child.queue_free()
-	get_tree().paused = false
+	close()
+	
+func close():
+	hide()
+	currently_open = false
+	if banked.is_empty():
+		get_tree().paused = false
+	else:
+		open([banked.pop_front()])
 	

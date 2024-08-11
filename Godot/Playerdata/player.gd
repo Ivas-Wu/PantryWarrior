@@ -100,7 +100,7 @@ func reset_values():
 	load_game.load_game()
 	air_jump = stat_data.air_jump
 	invulnerability_frames = 20
-	disabled_hurt_boxes()
+	disable_hurtbox()
 	set_collision_shape()
 	
 	#Prevent bugs
@@ -130,11 +130,10 @@ func _physics_process(delta):
 	set_hurtbox_col()
 
 func handle_damage():
-	if invulnerability_frames == 0:
-		enabled_hurt_boxes()
-	else:
+	if invulnerability_frames > 0:
 		invulnerability_frames -= 1
 		if invulnerability_frames == 0:
+			enable_hurtbox()
 			if not is_attacking():
 				animated_sprite_2d.visible = true
 			else:
@@ -155,8 +154,8 @@ func take_damage(damage) -> bool:
 		handle_death()
 		is_dead = true
 	else: 
-		invulnerability_frames = max_invulnerablity_frames
-		disabled_hurt_boxes()
+		invulnerability_frames = max_invulnerablity_frames if max_invulnerablity_frames > 0 else 1
+		disable_hurtbox()
 		current_hp -= damage
 	set_health_bar()
 	return is_dead
@@ -164,12 +163,14 @@ func take_damage(damage) -> bool:
 func enter_damaged_state():
 	fsm.change_state(idle_state)
 	
-func disabled_hurt_boxes():
+func disable_hurtbox():
 	hurt_box_col.set_deferred("disabled", true)
+	hurt_box.set_deferred("monitoring", false)
 	harzard_detector_col.set_deferred("disabled", true)
 
-func enabled_hurt_boxes():
+func enable_hurtbox():
 	hurt_box_col.set_deferred("disabled", false)
+	hurt_box.set_deferred("monitoring", true)
 	harzard_detector_col.set_deferred("disabled", false)
 	
 func handle_knockback(source_location: Vector2, knock_back: int):
@@ -223,7 +224,7 @@ func handle_wall_jump():
 		animated_sprite_2d.play("WallJump")
 		velocity.x = -dtw * 250
 		velocity.y = -250
-	
+
 func _on_animated_sprite_2d_animation_finished():
 	if animated_sprite_2d.animation == "WallJump":
 		wall_jump_flag = false  

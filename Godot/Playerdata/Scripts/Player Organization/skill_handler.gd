@@ -7,14 +7,10 @@ signal initialized
 var unlocked_abilities : Dictionary
 var skill_tree_instance : skill_tree
 # for seraching
-var basic_ability_pool_t1 : Array[int]
-var basic_ability_pool_t2 : Array[int]
-var basic_ability_pool_t3 : Array[int]
-var basic_ability_pool_t4 : Array[int]
-var postrec_ability_pool_t1 : Array[int]
-var postrec_ability_pool_t2 : Array[int]
-var postrec_ability_pool_t3 : Array[int]
-var postrec_ability_pool_t4 : Array[int]
+var basic_ability_pools : Array[Array]
+var postrec_ability_pools : Array[Array]
+var max_tier: int = 4
+var max_level: int = 6 #TODO 10 later
 
 enum SkillVariables {
 	AGILITY,
@@ -36,7 +32,7 @@ enum SkillVariables {
 	WALL_JUMP,
 	TRIPLE_JUMP,
 	CHARGED_JUMP,
-	GOGGLES,
+	TRUE_SIGHT,
 	HEALTH_REGEN,
 	LIFESTEAL,
 	BONUS_EXP,
@@ -59,15 +55,15 @@ var skill_variables = {
 	SkillVariables.DASH_ATTACK: false,
 	SkillVariables.PLUMMET: false,
 	SkillVariables.PLUMMET_PLUS: false,
-	SkillVariables.SHIELD: false,
 	
+	SkillVariables.SHIELD: false,
 	SkillVariables.ROLL: false,
 	SkillVariables.DASH: false,
 	SkillVariables.WALL_JUMP: false,
 	SkillVariables.TRIPLE_JUMP: false,
 	SkillVariables.CHARGED_JUMP: false,
 	
-	SkillVariables.GOGGLES: false,
+	SkillVariables.TRUE_SIGHT: false,
 	SkillVariables.HEALTH_REGEN: 0.0,
 	SkillVariables.LIFESTEAL: 0.0,
 	SkillVariables.BONUS_EXP: 0.0,
@@ -81,14 +77,11 @@ func _ready():
 	initialized.emit()
 
 func reset_card_pool():
-	basic_ability_pool_t1 = []
-	basic_ability_pool_t2 = []
-	basic_ability_pool_t3 = []
-	basic_ability_pool_t4 = []
-	postrec_ability_pool_t1 = []
-	postrec_ability_pool_t2 = []
-	postrec_ability_pool_t3 = []
-	postrec_ability_pool_t4 = []
+	basic_ability_pools = []
+	postrec_ability_pools = []
+	for i in max_tier:
+		basic_ability_pools.append([])
+		postrec_ability_pools.append([])
 	
 func load_abilities(_data : Array):
 	# update ability pools TODO
@@ -98,46 +91,30 @@ func load_abilities(_data : Array):
 
 func add_ability(index: int, reprocess: bool = false):
 	var skill = skill_tree_instance.skills_list[index]
-	var skill_key = SkillVariables[skill[3]]
+	var skill_key = SkillVariables[skill[4]]
 
 	if skill_key != null:
 		unlocked_abilities[index] = 1 #add to dictionary for fast lookup times, value is unused atm
 		if typeof(skill_variables[skill_key]) == TYPE_BOOL:
 			skill_variables[skill_key] = true
 		else:
-			skill_variables[skill_key] = skill[4]
+			skill_variables[skill_key] = skill[5]
 		if reprocess:
 			populate_card_pool()
 
 func populate_card_pool():
 	reset_card_pool()
 	for s in skill_tree_instance.skills_list:
-		var tier: int = s[5]
+		var tier: int = s[1]
 		var prereq: Array = s[6]
 		if unlocked_abilities.has(s[0]):
 			continue
 		elif prereq.is_empty():
-			match(tier):
-				1:
-					basic_ability_pool_t1.append(s[0])
-				2:
-					basic_ability_pool_t2.append(s[0])
-				3:
-					basic_ability_pool_t3.append(s[0])
-				4:
-					basic_ability_pool_t4.append(s[0])
+			basic_ability_pools[tier-1].append(s[0])
 		elif validate_prereq(prereq):
-			match(tier):
-				1: 
-					postrec_ability_pool_t1.append(s[0])
-				2: 
-					postrec_ability_pool_t2.append(s[0])
-				3: 
-					postrec_ability_pool_t3.append(s[0])
-				4: 
-					postrec_ability_pool_t4.append(s[0])
+			postrec_ability_pools[tier-1].append(s[0])
 
-func validate_prereq(prereq: Array[int]):
+func validate_prereq(prereq: Array):
 	for pr in prereq:
 		if !unlocked_abilities.has(pr): 
 			return false
@@ -147,14 +124,25 @@ func get_skills(count: int, level: int = 0):
 	if level == 0: return []
 	var res = []
 	var level_percent = skill_tree_instance.level_percentage[level]
-	var pool: Array
+	var pool: Array = []
+	var tmp_basic_pool = basic_ability_pools.duplicate(true)
+	var tmp_postrec_pool = postrec_ability_pools.duplicate(true)
 	
 	for c in count:
-		#TODO randomize the tier and add percentage for upgraded skills
-		#TODO prevent duplicates
-		pool = basic_ability_pool_t1.duplicate()
+		var rand_tier = randf()
+		var temp_value = 0
+		for i in range(1, max_tier + 1):
+			temp_value += level_percent[i]
+			if (rand_tier < temp_value):
+				if randf() < level_percent[max_tier + 1] and !tmp_postrec_pool[i - 1].is_empty():
+					pool = tmp_postrec_pool[i - 1]
+				else:
+					pool = tmp_basic_pool[i - 1]
+					pool.append_array(tmp_postrec_pool[i - 1])
+				break
+			
 		if !pool.is_empty():
 			var rand = randi() % pool.size()
 			res.append(skill_tree_instance.skills_list[pool[rand]])
+			pool.remove_at(rand)
 	return res
-		

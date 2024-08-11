@@ -10,7 +10,7 @@ func _enter_state() -> void:
 	dir = 1 if not player.animated_sprite_2d.flip_h else -1
 	original_speed = player.velocity.x
 	if skills[skills_enum.DASH_ATTACK]:
-		player.hurt_box_col.disabled = true
+		player.disable_hurtbox()
 
 	#reset properties to allow hit
 	player.hit_box.already_hit = false
@@ -21,9 +21,9 @@ func _enter_state() -> void:
 	set_physics_process(true)
 
 func _exit_state() -> void:
+	player.enable_hurtbox()
 	player.calculate_stats.calculate_defense()
 	player.velocity.x = original_speed
-	player.hurt_box_col.disabled = false
 	player.hit_box_col.disabled = true
 	set_physics_process(false)
 

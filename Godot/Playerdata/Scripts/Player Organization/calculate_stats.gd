@@ -35,5 +35,5 @@ func calculate_defense():
 	player.stablity = 1 + skills[skills_enum.KNOCKBACK_TAKEN]
 	player.knockback = 1 + skills[skills_enum.KNOCKBACK_DONE]
 	player.stun = 1 + skills[skills_enum.STUN]
-	#player.max_invulnerablity_frames = player.stat_data.invulnerability_frames * (1 + player.skill_handler.defense)
+	player.max_invulnerablity_frames = player.stat_data.invulnerability_frames
 

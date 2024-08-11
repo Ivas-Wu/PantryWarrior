@@ -32,6 +32,7 @@ func _enter_state() -> void:
 				prev()
 
 func _exit_state() -> void:
+	player.enable_hurtbox()
 	player.attack_queue.pop_front()
 	player.animated_sprite_2d.visible = true
 	player.attack_animation.visible = false
@@ -63,6 +64,7 @@ func handle_big_attack():
 func handle_special_attack(): 
 	player.animation_player.play("Special_Attack")
 	player.hit_box.set_export_values(100, 5, 1, 0, player.random_number, player.damage, player.knockback, player.stun)
+	player.disable_hurtbox()
 	
 func handle_ground_attack(): pass
 
