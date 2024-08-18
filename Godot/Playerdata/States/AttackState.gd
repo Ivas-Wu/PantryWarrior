@@ -30,6 +30,11 @@ func _enter_state() -> void:
 				handle_special_attack()
 			else:
 				prev()
+		"GroundAttack":
+			if skills[skills_enum.GROUND_ATTACK]:
+				handle_ground_attack()
+			else:
+				prev()
 
 func _exit_state() -> void:
 	player.enable_hurtbox()

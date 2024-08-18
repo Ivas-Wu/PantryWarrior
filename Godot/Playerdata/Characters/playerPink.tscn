@@ -1,4 +1,4 @@
-[gd_scene load_steps=91 format=3 uid="uid://cypcocvbiby87"]
+[gd_scene load_steps=92 format=3 uid="uid://cypcocvbiby87"]
 
 [ext_resource type="Script" path="res://Playerdata/player.gd" id="1_pypjj"]
 [ext_resource type="Script" path="res://Playerdata/Scripts/PlayerMovementData.gd" id="2_5p0ot"]
@@ -30,6 +30,7 @@
 [ext_resource type="Script" path="res://Playerdata/Scripts/save_game.gd" id="19_28qog"]
 [ext_resource type="Script" path="res://Playerdata/States/PlummetState.gd" id="19_lpxuq"]
 [ext_resource type="Script" path="res://Playerdata/Scripts/Player Organization/skill_handler.gd" id="21_vog3e"]
+[ext_resource type="Script" path="res://Playerdata/States/WallJumpingState.gd" id="31_hi03v"]
 
 [sub_resource type="Resource" id="Resource_5chmb"]
 script = ExtResource("2_5p0ot")
@@ -953,13 +954,16 @@ script = ExtResource("18_od1wa")
 [node name="plummet_state" type="Node" parent="States"]
 script = ExtResource("19_lpxuq")
 
+[node name="walljump_state" type="Node" parent="States"]
+script = ExtResource("31_hi03v")
+
 [connection signal="area_entered" from="CharacterAttributes/HarzardDetector" to="." method="_on_harzard_detector_area_entered"]
 [connection signal="area_exited" from="CharacterAttributes/HarzardDetector" to="." method="_on_harzard_detector_area_exited"]
-[connection signal="animation_finished" from="CharacterAttributes/AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="animation_finished" from="CharacterAttributes/AnimatedSprite2D" to="States/falling_state" method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="animation_finished" from="CharacterAttributes/AnimatedSprite2D" to="States/rolling_state" method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="animation_finished" from="CharacterAttributes/AnimatedSprite2D" to="States/dash_state" method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="animation_finished" from="CharacterAttributes/AnimatedSprite2D" to="States/plummet_state" method="_on_animated_sprite_2d_animation_finished"]
+[connection signal="animation_finished" from="CharacterAttributes/AnimatedSprite2D" to="States/walljump_state" method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="frame_changed" from="CharacterAttributes/AnimatedSprite2D" to="States/falling_state" method="_on_animated_sprite_2d_frame_changed"]
 [connection signal="frame_changed" from="CharacterAttributes/AnimatedSprite2D" to="States/plummet_state" method="_on_animated_sprite_2d_frame_changed"]
 [connection signal="area_entered" from="CharacterAttributes/HurtBox" to="." method="_on_hurt_box_area_entered"]

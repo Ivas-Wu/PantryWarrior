@@ -36,7 +36,6 @@ var rng = RandomNumberGenerator.new()
 var random_number : float
 var max_invulnerablity_frames : int
 var pushed : bool = false
-var wall_jump_flag : bool = false
 
 func _ready():
 	pass

@@ -36,7 +36,23 @@ enum SkillVariables {
 	HEALTH_REGEN,
 	LIFESTEAL,
 	BONUS_EXP,
-	BONUS_HEALING
+	BONUS_HEALING,
+	BERSERKER, 
+	SUSANOO, 
+	DIVINE_TAKEOVER, 
+	PHASING, 
+	STAT_OVERLOAD, 
+	FEATHERWEIGHT, 
+	LUCKY_DROPS, 
+	LAST_STAND, 
+	CROCKPOT, 
+	BLESSED_ARMOR, 
+	FOF, 
+	SCHOLAR,
+	CONSECUTIVE_STRIKES,
+	CONSECUTIVE_STRIKES_PLUS,
+	INVULNERABILITY,
+	SECOND_WIND,
 }
 
 # Define your variables in a dictionary with initial values
@@ -56,18 +72,35 @@ var skill_variables = {
 	SkillVariables.PLUMMET: false,
 	SkillVariables.PLUMMET_PLUS: false,
 	
-	SkillVariables.SHIELD: false,
+	SkillVariables.SHIELD: false, #TODO
 	SkillVariables.ROLL: false,
-	SkillVariables.DASH: false,
-	SkillVariables.WALL_JUMP: false,
-	SkillVariables.TRIPLE_JUMP: false,
+	SkillVariables.DASH: false, #TODO
+	SkillVariables.WALL_JUMP: false, 
+	SkillVariables.TRIPLE_JUMP: false, #TODO from here down
 	SkillVariables.CHARGED_JUMP: false,
 	
 	SkillVariables.TRUE_SIGHT: false,
 	SkillVariables.HEALTH_REGEN: 0.0,
 	SkillVariables.LIFESTEAL: 0.0,
 	SkillVariables.BONUS_EXP: 0.0,
-	SkillVariables.BONUS_HEALING: 0.0
+	SkillVariables.BONUS_HEALING: 0.0,
+	
+	SkillVariables.BERSERKER: false,
+	SkillVariables.SUSANOO: false,
+	SkillVariables.DIVINE_TAKEOVER: false,
+	SkillVariables.PHASING: false,
+	SkillVariables.STAT_OVERLOAD: false,
+	SkillVariables.FEATHERWEIGHT: false,
+	SkillVariables.LUCKY_DROPS: false,
+	SkillVariables.LAST_STAND: false,
+	SkillVariables.CROCKPOT: false,
+	SkillVariables.BLESSED_ARMOR: false,
+	SkillVariables.FOF: false,
+	SkillVariables.SCHOLAR: false,
+	SkillVariables.CONSECUTIVE_STRIKES: 0,
+	SkillVariables.CONSECUTIVE_STRIKES_PLUS: 0,
+	SkillVariables.INVULNERABILITY: 0,
+	SkillVariables.SECOND_WIND: 0
 }
 
 func _ready():
@@ -133,8 +166,8 @@ func get_skills(count: int, level: int = 0):
 		var temp_value = 0
 		for i in range(1, max_tier + 1):
 			temp_value += level_percent[i]
-			if (rand_tier < temp_value):
-				if randf() < level_percent[max_tier + 1] and !tmp_postrec_pool[i - 1].is_empty():
+			if (rand_tier <= temp_value):
+				if randf() <= level_percent[max_tier + 1] and !tmp_postrec_pool[i - 1].is_empty():
 					pool = tmp_postrec_pool[i - 1]
 				else:
 					pool = tmp_basic_pool[i - 1]

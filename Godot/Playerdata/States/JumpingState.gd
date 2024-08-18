@@ -5,6 +5,7 @@ signal falling
 signal previous
 signal plummet
 signal landed
+signal wall
 
 @onready var left = $"../../CharacterAttributes/left"
 @onready var right = $"../../CharacterAttributes/right"
@@ -17,7 +18,7 @@ var gravity : float = 1
 func _enter_state() -> void:
 	gravity = player.movement_data.gravity_scale
 	set_physics_process(true)
-	if Input.is_action_pressed("Up"):
+	if Input.is_action_just_pressed("Up"):
 		var can_jump = player.is_on_floor() or player.coyote_jump_timer.time_left > 0.0
 		if can_jump:
 			player.animated_sprite_2d.play("JumpStart")
@@ -64,16 +65,15 @@ func handle_jump(delta): #TODO add a pushed delay timer
 		if Input.is_action_just_released("Up"):
 			if player.velocity.y < 0 :
 				player.velocity.y /= 3
-		player.handle_wall_jump()
+		var dtw = player.direction_to_wall()
+		if player.near_wall() and ((dtw < 0 and Input.is_action_just_pressed("Right")) or (dtw > 0 and Input.is_action_just_pressed("Left"))):
+			wall.emit()
 
 func handle_animation():
-	if player.wall_jump_flag:
-		player.animated_sprite_2d.play("WallJump")
-	else:
-		if player.is_on_floor():
-			player.animated_sprite_2d.play("JumpStart")
-		if not player.is_on_floor():
-			player.animated_sprite_2d.play("JumpAirUp")
+	if player.is_on_floor():
+		player.animated_sprite_2d.play("JumpStart")
+	if not player.is_on_floor():
+		player.animated_sprite_2d.play("JumpAirUp")
 
 func handle_state_changes():
 	if Input.is_action_just_pressed("Down") and skills[skills_enum.PLUMMET]:

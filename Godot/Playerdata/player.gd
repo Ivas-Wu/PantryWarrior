@@ -29,6 +29,7 @@ extends base_character_class
 @onready var rolling_state = $States/rolling_state as rolling_state
 @onready var dash_state = $States/dash_state as dash_state
 @onready var plummet_state = $States/plummet_state as plummet_state
+@onready var walljump_state = $States/walljump_state as walljump_state
 
 #Player Stats
 var air_jump : int = 1
@@ -56,13 +57,18 @@ func set_states():
 	jump_state.falling.connect(fsm.change_state.bind(falling_state))
 	jump_state.plummet.connect(fsm.change_state.bind(plummet_state))
 	jump_state.landed.connect(fsm.change_state.bind(idle_state))
+	jump_state.wall.connect(fsm.change_state.bind(walljump_state))
 	jump_state.previous.connect(fsm.change_to_previous_state.bind())
 	
 	falling_state.jump.connect(fsm.change_state.bind(jump_state))
 	falling_state.landed.connect(fsm.change_state.bind(idle_state))
 	falling_state.plummet.connect(fsm.change_state.bind(plummet_state))
+	falling_state.wall.connect(fsm.change_state.bind(walljump_state))
 	falling_state.previous.connect(fsm.change_to_previous_state.bind())
-
+	
+	walljump_state.falling.connect(fsm.change_state.bind(falling_state))
+	walljump_state.previous.connect(fsm.change_to_previous_state.bind())
+	
 	running_state.jump.connect(fsm.change_state.bind(jump_state))
 	running_state.idle.connect(fsm.change_state.bind(idle_state))
 	running_state.fall.connect(fsm.change_state.bind(falling_state))
@@ -149,7 +155,7 @@ func is_attacking():
 
 func take_damage(damage) -> bool:
 	var is_dead = false
-	damage = damage / defense
+	damage = damage / defense #TODO
 	if current_hp <= damage: 
 		handle_death()
 		is_dead = true
@@ -216,15 +222,3 @@ func _input(event : InputEvent):
 			attack_queue.append("BigAttack")
 		elif event.is_action_pressed("SpecialAttack"):
 			attack_queue.append("SpecialAttack")
-			
-func handle_wall_jump():
-	var dtw = direction_to_wall()
-	if near_wall() and ((dtw < 0 and Input.is_action_just_pressed("Right")) or (dtw > 0 and Input.is_action_just_pressed("Left"))):
-		wall_jump_flag = true
-		animated_sprite_2d.play("WallJump")
-		velocity.x = -dtw * 250
-		velocity.y = -250
-
-func _on_animated_sprite_2d_animation_finished():
-	if animated_sprite_2d.animation == "WallJump":
-		wall_jump_flag = false  

@@ -5,6 +5,7 @@ signal landed
 signal previous
 signal jump
 signal plummet
+signal wall
 
 func _enter_state() -> void:
 	if player.is_on_floor(): landed.emit()
@@ -13,7 +14,6 @@ func _enter_state() -> void:
 		set_physics_process(true)
 
 func _exit_state() -> void:
-	player.wall_jump_flag = false
 	set_physics_process(false)
 
 func _physics_process(delta):
@@ -23,7 +23,10 @@ func _physics_process(delta):
 		plummet.emit()
 	else:
 		var in_air = not player.is_on_floor()
-		if in_air: player.handle_wall_jump()
+		if in_air: 
+			var dtw = player.direction_to_wall()
+			if player.near_wall() and ((dtw < 0 and Input.is_action_just_pressed("Right")) or (dtw > 0 and Input.is_action_just_pressed("Left"))):
+				wall.emit()
 		player.velocity.y += player.gravity * delta * 1.07
 		player.move_and_slide()
 		if in_air and player.is_on_floor():

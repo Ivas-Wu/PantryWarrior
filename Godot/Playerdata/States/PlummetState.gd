@@ -7,7 +7,8 @@ signal jump
 signal fall
 	
 func _enter_state() -> void:
-	if player.is_on_floor(): landed.emit()
+	if not skills[skills_enum.PLUMMET]: previous.emit()
+	elif player.is_on_floor(): landed.emit()
 	else:
 		player.animated_sprite_2d.play("PlummetFall")
 		player.velocity.y += 300
