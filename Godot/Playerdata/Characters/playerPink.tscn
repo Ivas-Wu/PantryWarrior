@@ -1,7 +1,7 @@
-[gd_scene load_steps=92 format=3 uid="uid://cypcocvbiby87"]
+[gd_scene load_steps=91 format=3 uid="uid://cypcocvbiby87"]
 
 [ext_resource type="Script" path="res://Playerdata/player.gd" id="1_pypjj"]
-[ext_resource type="Script" path="res://Playerdata/Scripts/PlayerMovementData.gd" id="2_5p0ot"]
+[ext_resource type="Resource" uid="uid://1oj14qi0n73h" path="res://Playerdata/Resource/DefaultMovementData.tres" id="2_os55f"]
 [ext_resource type="Script" path="res://Playerdata/Scripts/PlayerMaxStats.gd" id="3_cc8eu"]
 [ext_resource type="Script" path="res://character_general/hit_box_collision_base.gd" id="4_7pw5j"]
 [ext_resource type="Script" path="res://Playerdata/Scripts/HealthBar.gd" id="4_cj8jf"]
@@ -31,16 +31,6 @@
 [ext_resource type="Script" path="res://Playerdata/States/PlummetState.gd" id="19_lpxuq"]
 [ext_resource type="Script" path="res://Playerdata/Scripts/Player Organization/skill_handler.gd" id="21_vog3e"]
 [ext_resource type="Script" path="res://Playerdata/States/WallJumpingState.gd" id="31_hi03v"]
-
-[sub_resource type="Resource" id="Resource_5chmb"]
-script = ExtResource("2_5p0ot")
-speed = 200.0
-jump_velocity = -300.0
-acceleration = 300.0
-air_resistence = 500.0
-friction = 1000.0
-gravity_scale = 1.0
-knock_back = 1.0
 
 [sub_resource type="Resource" id="Resource_sppp2"]
 script = ExtResource("3_cc8eu")
@@ -767,7 +757,7 @@ collision_mask = 23
 floor_constant_speed = true
 floor_snap_length = 3.0
 script = ExtResource("1_pypjj")
-movement_data = SubResource("Resource_5chmb")
+movement_data = ExtResource("2_os55f")
 stat_data = SubResource("Resource_sppp2")
 harzard_detector = NodePath("CharacterAttributes/HarzardDetector")
 harzard_detector_col = NodePath("CharacterAttributes/HarzardDetector/CollisionShape2D")
@@ -807,7 +797,6 @@ frame = 3
 frame_progress = 1.0
 
 [node name="HurtBox" type="Area2D" parent="CharacterAttributes"]
-visible = false
 collision_layer = 64
 collision_mask = 0
 script = ExtResource("7_2nxao")
@@ -897,6 +886,12 @@ one_shot = true
 [node name="StunTimer" type="Timer" parent="TimeHandler"]
 one_shot = true
 
+[node name="RollTimer" type="Timer" parent="TimeHandler"]
+one_shot = true
+
+[node name="AttackTimer" type="Timer" parent="TimeHandler"]
+one_shot = true
+
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="HealthBar" type="Container" parent="CanvasLayer"]
@@ -926,9 +921,8 @@ script = ExtResource("19_28qog")
 [node name="skill_handler" type="Node" parent="Scripts"]
 script = ExtResource("21_vog3e")
 
-[node name="States" type="Node" parent="." node_paths=PackedStringArray("state")]
+[node name="States" type="Node" parent="."]
 script = ExtResource("11_b02sp")
-state = NodePath("idle_state")
 
 [node name="jump_state" type="Node" parent="States"]
 script = ExtResource("12_4657u")

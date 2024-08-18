@@ -31,8 +31,8 @@ func init():
 	else:
 		source = parent.character_collision_polygon
 	
-func set_export_values(damage: int, knock: float, stun: float, freeze: float, rand: float, multiplier: float = 1, km: float = 1, sm: float = 1) :
-	generate_damage(damage * multiplier, rand)
+func set_export_values(dmg: int, knock: float, stun: float, freeze: float, rand: float, multiplier: float = 1, km: float = 1, sm: float = 1) :
+	generate_damage(dmg * multiplier, rand)
 	knock_back = knock * km
 	stun_time = stun * sm
 	freeze_frames = freeze

@@ -52,16 +52,15 @@ func handle_death(): pass
 func handle_push(direction: Vector2): pass
 func handle_physics(input_axis, delta):
 	add_gravity(delta)
-	handle_friction(input_axis, delta)
-	handle_air_resistence(input_axis, delta)
+	if input_axis:
+		handle_friction(delta)
+		handle_air_resistence(delta)
 	
-func handle_friction(input_axis, delta):
-	if input_axis: return
+func handle_friction(delta):
 	if is_on_floor():
 		velocity.x = move_toward(velocity.x, 0, movement_data.friction * delta)
 
-func handle_air_resistence(input_axis, delta):
-	if input_axis: return
+func handle_air_resistence(delta):
 	if not is_on_floor():
 		velocity.x = move_toward(velocity.x, 0, movement_data.air_resistence * delta)
 

@@ -5,9 +5,9 @@
 [resource]
 script = ExtResource("1_88ynl")
 speed = 200.0
-jump_velocity = -275.0
-acceleration = 250.0
-air_resistence = 300.0
-friction = 1000.0
+jump_velocity = -300.0
+acceleration = 300.0
+air_resistence = 50.0
+friction = 70.0
 gravity_scale = 1.0
 knock_back = 1.0

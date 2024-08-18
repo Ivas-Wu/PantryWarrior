@@ -4,7 +4,9 @@ extends base_character_class
 #default to character class
 @onready var collision_polygon = $CollisionPolygon 
 @onready var coyote_jump_timer = $TimeHandler/CoyoteJumpTimer as Timer
-@onready var stun_timer = $TimeHandler/StunTimer
+@onready var stun_timer = $TimeHandler/StunTimer as Timer
+@onready var roll_timer = $TimeHandler/RollTimer as Timer
+@onready var attack_timer = $TimeHandler/AttackTimer as Timer
 @onready var health_bar = $CanvasLayer/HealthBar
 @onready var starting_position = global_position
 

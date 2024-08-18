@@ -36,13 +36,13 @@ func handle_animation():
 func handle_state():
 	if player.input_axis == 0:
 		idle.emit()
-	elif not player.attack_queue.is_empty():
+	elif check_attack():
 		attack.emit()
-	elif Input.is_action_just_pressed("Up"):
+	elif check_jump():
 		jump.emit()
-	elif Input.is_action_just_pressed("Roll") and skills[skills_enum.ROLL]:
+	elif check_roll():
 		roll.emit()
-	elif Input.is_action_just_pressed("Dash") and skills[skills_enum.DASH_ATTACK] and abs(player.velocity.x) > player.speed/2:
+	elif check_tackle():
 		dash.emit()
 	else: return false
 	return true

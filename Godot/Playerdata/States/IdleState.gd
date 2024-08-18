@@ -9,7 +9,6 @@ signal attack
 signal up
 	
 func _enter_state() -> void:
-	# Add and check queued actions
 	player.animated_sprite_2d.play("Idle")
 	set_physics_process(true)
 
@@ -28,11 +27,11 @@ func _physics_process(delta):
 				up.emit()
 
 func handle_state():
-	if not player.attack_queue.is_empty():
+	if check_attack():
 		attack.emit()
-	elif Input.is_action_just_pressed("Up"):
+	elif check_jump():
 		jump.emit()
-	elif Input.is_action_just_pressed("Roll") and skills[skills_enum.ROLL]:
+	elif check_roll():
 		roll.emit()
 	elif player.input_axis:
 		run.emit()

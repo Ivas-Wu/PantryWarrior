@@ -31,7 +31,7 @@ func _exit_state() -> void:
 	set_physics_process(false)
 
 func _physics_process(delta):
-	if Input.is_action_just_pressed("Up"):
+	if check_jump():
 		jump.emit()
 	elif Input.is_action_just_released("Down"):
 		fall.emit()

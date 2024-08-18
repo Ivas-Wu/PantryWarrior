@@ -17,15 +17,14 @@ func _exit_state() -> void:
 	set_physics_process(false)
 
 func _physics_process(delta):
-	if Input.is_action_just_pressed("Up"):
+	if check_jump():
 		jump.emit()
-	elif Input.is_action_just_pressed("Down") and skills[skills_enum.PLUMMET]:
+	elif check_plummet():
 		plummet.emit()
 	else:
 		var in_air = not player.is_on_floor()
 		if in_air: 
-			var dtw = player.direction_to_wall()
-			if player.near_wall() and ((dtw < 0 and Input.is_action_just_pressed("Right")) or (dtw > 0 and Input.is_action_just_pressed("Left"))):
+			if handle_wall_jump():
 				wall.emit()
 		player.velocity.y += player.gravity * delta * 1.07
 		player.move_and_slide()

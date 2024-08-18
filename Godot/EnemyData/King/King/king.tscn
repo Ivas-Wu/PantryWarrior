@@ -695,9 +695,8 @@ libraries = {
 "": SubResource("AnimationLibrary_afpts")
 }
 
-[node name="FiniteStateMachine" type="Node" parent="." node_paths=PackedStringArray("state")]
+[node name="FiniteStateMachine" type="Node" parent="."]
 script = ExtResource("2_ed0so")
-state = NodePath("idle_state_king")
 
 [node name="idle_state_king" type="Node" parent="FiniteStateMachine"]
 script = ExtResource("3_iatlr")

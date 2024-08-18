@@ -21,3 +21,23 @@ func init():
 		
 	skills = skill_handler_raw.skill_variables
 	skills_enum = skill_handler_raw.SkillVariables
+
+func check_jump() -> bool:
+	return Input.is_action_just_pressed("Up")
+	
+func check_roll() -> bool:
+	return Input.is_action_just_pressed("Roll") and skills[skills_enum.ROLL] and player.roll_timer.time_left == 0
+
+func check_tackle() -> bool:
+	return Input.is_action_just_pressed("Dash") and skills[skills_enum.DASH_ATTACK] and abs(player.velocity.x) > player.speed/2
+
+func check_plummet() -> bool:
+	return Input.is_action_just_pressed("Down") and skills[skills_enum.PLUMMET]
+
+func check_attack() -> bool:
+	return not player.attack_queue.is_empty() and player.attack_timer.time_left == 0
+
+func handle_wall_jump() -> bool:
+	var dtw = player.direction_to_wall()
+	var input = (dtw < 0 and Input.is_action_just_pressed("Right")) or (dtw > 0 and Input.is_action_just_pressed("Left"))
+	return player.near_wall() and input
