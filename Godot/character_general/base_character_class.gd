@@ -52,13 +52,12 @@ func handle_death(): pass
 func handle_push(direction: Vector2): pass
 func handle_physics(input_axis, delta):
 	add_gravity(delta)
-	if input_axis:
-		handle_friction(delta)
-		handle_air_resistence(delta)
+	handle_friction(input_axis, delta)
+	handle_air_resistence(delta)
 	
-func handle_friction(delta):
+func handle_friction(ia, delta):
 	if is_on_floor():
-		velocity.x = move_toward(velocity.x, 0, movement_data.friction * delta)
+		velocity.x = move_toward(velocity.x, 0, movement_data.friction * delta * (1 if input_axis else 10))
 
 func handle_air_resistence(delta):
 	if not is_on_floor():
@@ -116,7 +115,6 @@ func handle_time_slow(duration : float):
 	await(get_tree().create_timer(duration, true, false, true).timeout)
 	Engine.time_scale = 1
 	set_physics_process(true)
-	
 	
 func set_hurtbox_col():
 	hurt_box_col.polygon = character_collision_polygon.polygon

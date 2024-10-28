@@ -17,6 +17,8 @@ func _exit_state() -> void:
 	set_physics_process(false)
 
 func _physics_process(delta):
+	if player.is_on_floor(): #sanity check
+		landed.emit()
 	if check_jump():
 		jump.emit()
 	elif check_plummet():

@@ -13,7 +13,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Arr
 outlines = Array[PackedVector2Array]([PackedVector2Array(448, -384, -448, -384, -448, -80, -384, -80, -384, 0, 448, 0)])
 source_geometry_group_name = &"navigation_polygon_source_group"
 
-[node name="Node2D" type="Node2D"]
+[node name="home" type="Node"]
 script = ExtResource("1_4cnrt")
 
 [node name="TileMap" parent="." instance=ExtResource("1_uioop")]

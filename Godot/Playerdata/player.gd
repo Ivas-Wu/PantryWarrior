@@ -7,6 +7,8 @@ extends base_character_class
 @onready var stun_timer = $TimeHandler/StunTimer as Timer
 @onready var roll_timer = $TimeHandler/RollTimer as Timer
 @onready var attack_timer = $TimeHandler/AttackTimer as Timer
+@onready var health_regen_timer = $TimeHandler/HealthRegenTimer as Timer
+
 @onready var health_bar = $CanvasLayer/HealthBar
 @onready var starting_position = global_position
 
@@ -35,6 +37,7 @@ extends base_character_class
 
 #Player Stats
 var air_jump : int = 1
+var max_air_jump : int = 1
 var damage : float = 1 # damage + animation speed
 var knockback : float = 1 # multiplier
 var stun : float = 1 # multiplier
@@ -99,6 +102,8 @@ func set_states():
 	plummet_state.fall.connect(fsm.change_state.bind(falling_state))
 	plummet_state.previous.connect(fsm.change_to_previous_state.bind())
 	
+	skill_handler.reprocess_data.connect(calculate_character_stats.bind())
+	
 func reset_values():
 	#Innate
 	velocity = Vector2.ZERO
@@ -106,7 +111,7 @@ func reset_values():
 	
 	#Player Stats
 	load_game.load_game()
-	air_jump = stat_data.air_jump
+	air_jump = max_air_jump
 	invulnerability_frames = 20
 	disable_hurtbox()
 	set_collision_shape()
@@ -122,13 +127,16 @@ func calculate_character_stats():
 	calculate_stats.calculate_agility()
 	calculate_stats.calculate_offense()
 	calculate_stats.calculate_defense()
+	if skill_handler.skill_variables[skill_handler.SkillVariables.HEALTH_REGEN] > 0: 
+		health_regen_timer.start()
+		health_regen_timer.timeout.connect(heal.bind(skill_handler.skill_variables[skill_handler.SkillVariables.HEALTH_REGEN]))
 
 func _physics_process(delta):
 	random_number = rng.randf()
 	input_axis = Input.get_axis("Left", "Right")
 	
 	if is_on_floor(): 
-		air_jump = stat_data.air_jump
+		air_jump = max_air_jump
 		pushed = false
 	handle_physics(input_axis, delta)
 	if not is_attacking():
@@ -220,7 +228,9 @@ func _input(event : InputEvent):
 	if attack_queue.is_empty(): #currently only takes one action at a time due to long animations
 		if event.is_action_pressed("Attack"):
 			attack_queue.append("Attack")
-		elif event.is_action_pressed("BigAttack"):
+		elif event.is_action_pressed("BigAttack") and skill_handler.skill_variables[skill_handler.SkillVariables.BIG_ATTACK]:
 			attack_queue.append("BigAttack")
-		elif event.is_action_pressed("SpecialAttack"):
+		elif event.is_action_pressed("SpecialAttack") and skill_handler.skill_variables[skill_handler.SkillVariables.SPECIAL_ATTACK]:
 			attack_queue.append("SpecialAttack")
+		elif event.is_action_pressed("GroundAttack") and skill_handler.skill_variables[skill_handler.GROUND_ATTACK]:
+			attack_queue.append("GroundAttack")

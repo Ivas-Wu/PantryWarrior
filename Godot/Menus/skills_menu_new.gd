@@ -15,13 +15,14 @@ var banked : Array = []
 
 func _ready():
 	player = get_tree().get_first_node_in_group("Player")
-	set_physics_process(false)
+	set_process(false)
 	#hide()
 	setup()
-	open([2])
+	#open([2]) #For testing only, upon loading in
 	
 func open(level_queue: Array):
 	if level_queue.is_empty() : return
+	set_process(true)
 	get_tree().paused = true
 	if currently_open: banked.append_array(level_queue) #This does nothing, bug with multiple levels still exists
 	currently_open = true
@@ -70,6 +71,7 @@ func cleanup():
 	
 func close():
 	hide()
+	set_process(false)
 	currently_open = false
 	if banked.is_empty():
 		get_tree().paused = false

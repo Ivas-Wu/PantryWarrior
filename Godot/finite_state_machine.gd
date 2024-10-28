@@ -8,6 +8,7 @@ func _ready():
 	pass
 	
 func change_state(new_state: State):
+	if new_state == null: return
 	if state is State:
 		previous_state = state
 		state._exit_state()

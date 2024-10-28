@@ -13,7 +13,7 @@ func with_values(initial_velocity: Vector2 = Vector2(0,0), bounce: int = 0):
 	max_bounce = bounce
 	return self
 
-func _process(delta):
+func _physics_process(delta):
 	generate_tween_shadow()
 	if not is_on_floor():
 		velocity.y += gravity * delta

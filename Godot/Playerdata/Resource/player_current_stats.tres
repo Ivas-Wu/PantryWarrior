@@ -1,10 +1,10 @@
-[gd_resource type="Resource" script_class="player_current_stats" load_steps=2 format=3 uid="uid://cliwko62wtnmb"]
+[gd_resource type="Resource" script_class="player_current_stats" load_steps=2 format=3]
 
 [ext_resource type="Script" path="res://Playerdata/Scripts/player_current_stats.gd" id="1_pbsk7"]
 
 [resource]
 script = ExtResource("1_pbsk7")
-current_hp = 500
+current_hp = 500.0
 free_skill_pts = 5
 agility = 0
 offense = 0

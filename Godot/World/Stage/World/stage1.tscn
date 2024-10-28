@@ -16,11 +16,11 @@ process_mode = 1
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
+[node name="SkillsMenu" parent="CanvasLayer" node_paths=PackedStringArray("game") instance=ExtResource("6_dyjgr")]
+game = NodePath("../..")
+
 [node name="PauseMenu" parent="CanvasLayer" node_paths=PackedStringArray("game") instance=ExtResource("2_6vfhy")]
 game = NodePath("../..")
 
 [node name="StageCompleteMenu" parent="CanvasLayer" node_paths=PackedStringArray("game") instance=ExtResource("5_3jw7r")]
-game = NodePath("../..")
-
-[node name="SkillsMenu" parent="CanvasLayer" node_paths=PackedStringArray("game") instance=ExtResource("6_dyjgr")]
 game = NodePath("../..")

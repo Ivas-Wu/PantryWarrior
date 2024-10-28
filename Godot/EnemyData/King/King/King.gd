@@ -66,7 +66,7 @@ func set_states():
 	defend_state_king.attack.connect(fsm.change_state.bind(attack_state_king))
 	damaged_state_king.finished.connect(fsm.change_state.bind(defend_state_king))
 	
-func _process(delta):
+func _physics_process(delta):
 	random_number = rng.randf()
 	handle_enemy_finder()
 	if projectile_timer.time_left == 0 and get_node("Projectiles").get_child_count() == 0:

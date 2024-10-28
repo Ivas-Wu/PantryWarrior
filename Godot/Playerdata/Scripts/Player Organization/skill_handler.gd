@@ -2,6 +2,7 @@ class_name skill_handler
 extends Node
 
 signal initialized
+signal reprocess_data
 
 #
 var unlocked_abilities : Dictionary
@@ -76,11 +77,11 @@ var skill_variables = {
 	SkillVariables.ROLL: false,
 	SkillVariables.DASH: false, #TODO
 	SkillVariables.WALL_JUMP: false, 
-	SkillVariables.TRIPLE_JUMP: false, #TODO from here down
+	SkillVariables.TRIPLE_JUMP: false,
 	SkillVariables.CHARGED_JUMP: false,
 	
-	SkillVariables.TRUE_SIGHT: false,
-	SkillVariables.HEALTH_REGEN: 0.0,
+	SkillVariables.TRUE_SIGHT: false,#TODO
+	SkillVariables.HEALTH_REGEN: 0.0,#TODO from here down
 	SkillVariables.LIFESTEAL: 0.0,
 	SkillVariables.BONUS_EXP: 0.0,
 	SkillVariables.BONUS_HEALING: 0.0,
@@ -134,6 +135,7 @@ func add_ability(index: int, reprocess: bool = false):
 			skill_variables[skill_key] = skill[5]
 		if reprocess:
 			populate_card_pool()
+			reprocess_data.emit()
 
 func populate_card_pool():
 	reset_card_pool()

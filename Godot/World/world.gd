@@ -30,4 +30,4 @@ func complete_stage():
 	stage_complete.emit()
 	
 func navigate():
-	get_tree().change_scene_to_file("res://World/world.tscn")
+	get_tree().change_scene_to_file("res://World/Stage/World/home.tscn")

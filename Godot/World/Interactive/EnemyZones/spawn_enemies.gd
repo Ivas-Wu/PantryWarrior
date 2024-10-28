@@ -34,7 +34,7 @@ func spawn():
 		for i in range(total_count):
 			var region = choose_region()
 			if region:
-				create_enemy(list_of_enemies[0], region.navigation_polygon.get_vertices()[0])
+				create_enemy(list_of_enemies[0], region.global_position)
 
 func choose_region() -> navigation_properties:
 	var val = rng.randf()

@@ -14,5 +14,5 @@ func _process(delta):
 	pass
 	
 func complete_stage(): 
-	player.gain_exp(200) #need to make calculation here to balance this stat
+	player.gain_exp(0) #need to make calculation here to balance this stat
 	stage_complete.emit()
