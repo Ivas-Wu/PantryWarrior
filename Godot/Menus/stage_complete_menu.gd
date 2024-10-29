@@ -20,6 +20,7 @@ func save() :
 	player.save_game.save()
 	
 func _on_continue_pressed():
+	save()
 	game.game_paused = false
 	game.navigate()
 

@@ -13,10 +13,10 @@ var stages = [
 	"res://World/Stage/1Stage.tscn", #8
 	"res://World/Stage/1Stage.tscn", #9
 ]
-var stage_number: int = -1
 
 func _on_next_stage_body_entered(body):
-	stage_number += 1
+	var stage_number: int = scene_tracker.scene_number
+	scene_tracker.scene_number = stage_number + 1
 	if stage_number <= len(stages):
 		get_tree().change_scene_to_file(stages[stage_number])
 	else:

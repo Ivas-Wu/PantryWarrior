@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" path="res://Playerdata/Scripts/Player Organization/skill_points.gd" id="1_1mxad"]
 [ext_resource type="Script" path="res://Playerdata/player.gd" id="1_b20uo"]
-[ext_resource type="Script" path="res://Playerdata/Scripts/PlayerMovementData.gd" id="2_4c75t"]
-[ext_resource type="Script" path="res://Playerdata/Scripts/PlayerMaxStats.gd" id="3_fm1bq"]
+[ext_resource type="Script" path="res://Playerdata/Resource/Scripts/PlayerMovementData.gd" id="2_4c75t"]
+[ext_resource type="Script" path="res://Playerdata/Resource/Scripts/PlayerMaxStats.gd" id="3_fm1bq"]
 [ext_resource type="Script" path="res://Playerdata/Scripts/Player Organization/calculate_stats.gd" id="9_7kphf"]
 [ext_resource type="Script" path="res://Playerdata/Scripts/HealthBar.gd" id="9_73uob"]
 [ext_resource type="Script" path="res://Playerdata/Scripts/Player Organization/player_level.gd" id="14_rbvmo"]

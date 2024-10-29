@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Playerdata/player.gd" id="1_pypjj"]
 [ext_resource type="Resource" uid="uid://1oj14qi0n73h" path="res://Playerdata/Resource/DefaultMovementData.tres" id="2_os55f"]
-[ext_resource type="Script" path="res://Playerdata/Scripts/PlayerMaxStats.gd" id="3_cc8eu"]
+[ext_resource type="Script" path="res://Playerdata/Resource/Scripts/PlayerMaxStats.gd" id="3_y2c32"]
 [ext_resource type="Script" path="res://character_general/hit_box_collision_base.gd" id="4_7pw5j"]
 [ext_resource type="Script" path="res://Playerdata/Scripts/HealthBar.gd" id="4_cj8jf"]
 [ext_resource type="Script" path="res://Playerdata/Scripts/Player Organization/calculate_stats.gd" id="5_ckmjd"]
@@ -33,7 +33,7 @@
 [ext_resource type="Script" path="res://Playerdata/States/WallJumpingState.gd" id="31_hi03v"]
 
 [sub_resource type="Resource" id="Resource_sppp2"]
-script = ExtResource("3_cc8eu")
+script = ExtResource("3_y2c32")
 hp = 500.0
 invulnerability_frames = 20
 air_jump = 1

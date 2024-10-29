@@ -57,6 +57,7 @@ enum SkillVariables {
 }
 
 # Define your variables in a dictionary with initial values
+# Default is always false or 0.0
 var skill_variables = {
 	SkillVariables.AGILITY: 0.0,
 	SkillVariables.ATTACK: 0.0,
