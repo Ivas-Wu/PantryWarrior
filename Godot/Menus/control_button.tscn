@@ -1,0 +1,50 @@
+[gd_scene load_steps=4 format=3 uid="uid://cam53ao8a2vwf"]
+
+[ext_resource type="Script" path="res://Menus/control_button.gd" id="1_efrn6"]
+
+[sub_resource type="Theme" id="Theme_e1icq"]
+default_font_size = 10
+
+[sub_resource type="Theme" id="Theme_xw2fx"]
+default_font_size = 10
+
+[node name="ControlButton" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_efrn6")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Control" type="Control" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+theme = SubResource("Theme_e1icq")
+text = "Label
+"
+
+[node name="Button" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = SubResource("Theme_xw2fx")
+text = "B
+"
+flat = true
+
+[node name="Control2" type="Control" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
