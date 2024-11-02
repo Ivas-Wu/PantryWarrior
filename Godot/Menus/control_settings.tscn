@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://pb7exefhpocd"]
+[gd_scene load_steps=4 format=3 uid="uid://pb7exefhpocd"]
 
 [ext_resource type="Script" path="res://ControlSettings.gd" id="1_v3wrt"]
+[ext_resource type="Texture2D" uid="uid://bsg8cgvdykbqc" path="res://Playerdata/Controls/test.png" id="2_d0dsc"]
 [ext_resource type="PackedScene" uid="uid://cam53ao8a2vwf" path="res://Menus/control_button.tscn" id="2_e7xuf"]
 
 [node name="ControlSettings" type="Control"]
@@ -13,21 +14,24 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_v3wrt")
 
-[node name="Panel" type="Panel" parent="."]
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -156.0
-offset_top = -87.0
-offset_right = 156.0
-offset_bottom = 87.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = -4.0
 grow_horizontal = 2
 grow_vertical = 2
+texture = ExtResource("2_d0dsc")
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 2
+patch_margin_bottom = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+[node name="ParentContainer" type="VBoxContainer" parent="NinePatchRect"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -35,80 +39,106 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ControlsLabel" type="Label" parent="Panel/VBoxContainer"]
+[node name="ControlTitle" type="Label" parent="NinePatchRect/ParentContainer"]
 layout_mode = 2
 text = "Controls
 "
 horizontal_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Panel/VBoxContainer"]
+[node name="Subtitle" type="Label" parent="NinePatchRect/ParentContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "Movement
+"
+horizontal_alignment = 1
+
+[node name="MiddleContainer" type="HBoxContainer" parent="NinePatchRect/ParentContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 9.0
 
-[node name="Control" type="Control" parent="Panel/VBoxContainer/HBoxContainer"]
+[node name="LeftSapcer" type="Control" parent="NinePatchRect/ParentContainer/MiddleContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="GridContainer" type="GridContainer" parent="Panel/VBoxContainer/HBoxContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="NinePatchRect/ParentContainer/MiddleContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_stretch_ratio = 8.0
-columns = 4
+size_flags_stretch_ratio = 18.0
 
-[node name="ControlButton" parent="Panel/VBoxContainer/HBoxContainer/GridContainer" instance=ExtResource("2_e7xuf")]
+[node name="Control" type="HBoxContainer" parent="NinePatchRect/ParentContainer/MiddleContainer/ScrollContainer"]
 layout_mode = 2
-label_text = "Jump"
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
-[node name="ControlButton2" parent="Panel/VBoxContainer/HBoxContainer/GridContainer" instance=ExtResource("2_e7xuf")]
-layout_mode = 2
-
-[node name="ControlButton3" parent="Panel/VBoxContainer/HBoxContainer/GridContainer" instance=ExtResource("2_e7xuf")]
-layout_mode = 2
-
-[node name="ControlButton4" parent="Panel/VBoxContainer/HBoxContainer/GridContainer" instance=ExtResource("2_e7xuf")]
-layout_mode = 2
-
-[node name="ControlButton5" parent="Panel/VBoxContainer/HBoxContainer/GridContainer" instance=ExtResource("2_e7xuf")]
-layout_mode = 2
-
-[node name="ControlButton6" parent="Panel/VBoxContainer/HBoxContainer/GridContainer" instance=ExtResource("2_e7xuf")]
-layout_mode = 2
-
-[node name="ControlButton7" parent="Panel/VBoxContainer/HBoxContainer/GridContainer" instance=ExtResource("2_e7xuf")]
-layout_mode = 2
-
-[node name="ControlButton8" parent="Panel/VBoxContainer/HBoxContainer/GridContainer" instance=ExtResource("2_e7xuf")]
-layout_mode = 2
-
-[node name="ControlButton9" parent="Panel/VBoxContainer/HBoxContainer/GridContainer" instance=ExtResource("2_e7xuf")]
-layout_mode = 2
-
-[node name="ControlButton10" parent="Panel/VBoxContainer/HBoxContainer/GridContainer" instance=ExtResource("2_e7xuf")]
-layout_mode = 2
-
-[node name="ControlButton11" parent="Panel/VBoxContainer/HBoxContainer/GridContainer" instance=ExtResource("2_e7xuf")]
-layout_mode = 2
-
-[node name="ControlButton12" parent="Panel/VBoxContainer/HBoxContainer/GridContainer" instance=ExtResource("2_e7xuf")]
-layout_mode = 2
-
-[node name="ControlButton13" parent="Panel/VBoxContainer/HBoxContainer/GridContainer" instance=ExtResource("2_e7xuf")]
-layout_mode = 2
-
-[node name="ControlButton14" parent="Panel/VBoxContainer/HBoxContainer/GridContainer" instance=ExtResource("2_e7xuf")]
-layout_mode = 2
-
-[node name="ControlButton15" parent="Panel/VBoxContainer/HBoxContainer/GridContainer" instance=ExtResource("2_e7xuf")]
-layout_mode = 2
-
-[node name="ControlButton16" parent="Panel/VBoxContainer/HBoxContainer/GridContainer" instance=ExtResource("2_e7xuf")]
-layout_mode = 2
-
-[node name="Control2" type="Control" parent="Panel/VBoxContainer/HBoxContainer"]
+[node name="Labels" type="Control" parent="NinePatchRect/ParentContainer/MiddleContainer/ScrollContainer/Control"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Control" type="Control" parent="Panel/VBoxContainer"]
+[node name="Labels" type="VBoxContainer" parent="NinePatchRect/ParentContainer/MiddleContainer/ScrollContainer/Control/Labels"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ControlButton" parent="NinePatchRect/ParentContainer/MiddleContainer/ScrollContainer/Control/Labels/Labels" instance=ExtResource("2_e7xuf")]
+layout_mode = 2
+label_type = "Up"
+
+[node name="ControlButton2" parent="NinePatchRect/ParentContainer/MiddleContainer/ScrollContainer/Control/Labels/Labels" instance=ExtResource("2_e7xuf")]
+layout_mode = 2
+label_type = "Down"
+
+[node name="ControlButton3" parent="NinePatchRect/ParentContainer/MiddleContainer/ScrollContainer/Control/Labels/Labels" instance=ExtResource("2_e7xuf")]
+layout_mode = 2
+label_type = "Left"
+
+[node name="ControlButton4" parent="NinePatchRect/ParentContainer/MiddleContainer/ScrollContainer/Control/Labels/Labels" instance=ExtResource("2_e7xuf")]
+layout_mode = 2
+label_type = "Right"
+
+[node name="ControlButton5" parent="NinePatchRect/ParentContainer/MiddleContainer/ScrollContainer/Control/Labels/Labels" instance=ExtResource("2_e7xuf")]
+layout_mode = 2
+
+[node name="Spacer" type="Control" parent="NinePatchRect/ParentContainer/MiddleContainer/ScrollContainer/Control"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="NinePatchRect/ParentContainer/MiddleContainer/ScrollContainer/Control"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 3.0
+
+[node name="Video" type="Control" parent="NinePatchRect/ParentContainer/MiddleContainer/ScrollContainer/Control/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 5.0
+
+[node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="NinePatchRect/ParentContainer/MiddleContainer/ScrollContainer/Control/VBoxContainer/Video"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+autoplay = true
+expand = true
+loop = true
+
+[node name="ControlDisplay" type="Control" parent="NinePatchRect/ParentContainer/MiddleContainer/ScrollContainer/Control/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="RightSpacer" type="Control" parent="NinePatchRect/ParentContainer/MiddleContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="BottomSpacer" type="Control" parent="NinePatchRect/ParentContainer"]
 layout_mode = 2
 size_flags_vertical = 3

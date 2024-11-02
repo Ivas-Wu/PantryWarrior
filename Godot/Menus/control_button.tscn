@@ -1,12 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://cam53ao8a2vwf"]
+[gd_scene load_steps=3 format=3 uid="uid://cam53ao8a2vwf"]
 
 [ext_resource type="Script" path="res://Menus/control_button.gd" id="1_efrn6"]
-
-[sub_resource type="Theme" id="Theme_e1icq"]
-default_font_size = 10
-
-[sub_resource type="Theme" id="Theme_xw2fx"]
-default_font_size = 10
+[ext_resource type="Texture2D" uid="uid://bsg8cgvdykbqc" path="res://Playerdata/Controls/test.png" id="2_snwgb"]
 
 [node name="ControlButton" type="Control"]
 layout_mode = 3
@@ -19,7 +14,20 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("1_efrn6")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_snwgb")
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 2
+patch_margin_bottom = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="NinePatchRect"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -27,24 +35,28 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Control" type="Control" parent="HBoxContainer"]
+[node name="LeftSpacer" type="Control" parent="NinePatchRect/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="HBoxContainer"]
+[node name="LabelSpacer" type="Control" parent="NinePatchRect/HBoxContainer"]
+clip_contents = true
 layout_mode = 2
-theme = SubResource("Theme_e1icq")
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 8.0
+
+[node name="Label" type="Label" parent="NinePatchRect/HBoxContainer/LabelSpacer"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -7.0
+offset_right = 26.0
+offset_bottom = 7.0
+grow_vertical = 2
 text = "Label
 "
 
-[node name="Button" type="Button" parent="HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme = SubResource("Theme_xw2fx")
-text = "B
-"
-flat = true
-
-[node name="Control2" type="Control" parent="HBoxContainer"]
+[node name="RightSapcer" type="Control" parent="NinePatchRect/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
