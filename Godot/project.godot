@@ -18,6 +18,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 scene_tracker="*res://Assets/scene_tracker.gd"
+input_stringname="*res://Assets/input_stringname.gd"
 
 [display]
 

@@ -2,7 +2,7 @@ class_name control_button
 extends Control
 
 #Predefined label text and video strings mapped for label types in component
-@export var label_type: String
+@export var label_type: StringName
 @onready var label = $NinePatchRect/HBoxContainer/LabelSpacer/Label
 @onready var nine_patch_rect = $NinePatchRect
 
@@ -12,18 +12,18 @@ var selected_texture : CompressedTexture2D = load('res://Playerdata/Controls/tes
 
 # label text
 var label_texts_enum = {
-	'Up' : "Up/Jump",
-	'Down' : "Down/Drop",
-	'Left' : "Left",
-	'Right' : "Right",
+	input_stringname.Up : "Up/Jump",
+	input_stringname.Down : "Down/Drop",
+	input_stringname.Left : "Left",
+	input_stringname.Right : "Right",
 }
 
 # video location
 var video_enum = {
-	'Up' : "res://Playerdata/Controls/replicate-prediction-3mub6kbbgiftidugvney3e53ay.ogv",
-	'Down' : "res://Playerdata/Controls/replicate-prediction-3mub6kbbgiftidugvney3e53ay.ogv",
-	'Left' : "res://Playerdata/Controls/replicate-prediction-3mub6kbbgiftidugvney3e53ay.ogv",
-	'Right' : "res://Playerdata/Controls/replicate-prediction-3mub6kbbgiftidugvney3e53ay.ogv",
+	input_stringname.Up : "res://Playerdata/Controls/replicate-prediction-3mub6kbbgiftidugvney3e53ay.ogv",
+	input_stringname.Down : "res://Playerdata/Controls/replicate-prediction-3mub6kbbgiftidugvney3e53ay.ogv",
+	input_stringname.Left : "res://Playerdata/Controls/replicate-prediction-3mub6kbbgiftidugvney3e53ay.ogv",
+	input_stringname.Right : "res://Playerdata/Controls/replicate-prediction-3mub6kbbgiftidugvney3e53ay.ogv",
 }
 
 func _ready():
@@ -47,6 +47,9 @@ func get_label_string() -> String:
 func get_video_string() -> String:
 	return video_enum[label_type] if label_type in video_enum else ''
 
+func get_keybinds(action: StringName) -> Array[InputEvent]:
+	return InputMap.action_get_events(action)
+	
 func select():
 	selected = true
 	nine_patch_rect.texture = selected_texture
@@ -56,3 +59,6 @@ func unselect():
 	selected = false
 	nine_patch_rect.texture = regular_texture
 	label.label_settings.font_color = Color(1, 1, 1, 1)
+
+func enter_select_keys_mode():
+	pass

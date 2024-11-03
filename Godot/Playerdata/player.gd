@@ -133,7 +133,7 @@ func calculate_character_stats():
 
 func _physics_process(delta):
 	random_number = rng.randf()
-	input_axis = Input.get_axis("Left", "Right")
+	input_axis = Input.get_axis(input_stringname.Left, input_stringname.Right)
 	
 	if is_on_floor(): 
 		air_jump = max_air_jump
@@ -223,7 +223,7 @@ func gain_exp(experience: int):
 
 func _input(event : InputEvent):
 	if is_on_floor():
-		if event.is_action_pressed("Down") :
+		if event.is_action_pressed(input_stringname.Down) :
 			position.y += 1
 	if attack_queue.is_empty(): #currently only takes one action at a time due to long animations
 		if event.is_action_pressed("Attack"):

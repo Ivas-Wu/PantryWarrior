@@ -33,7 +33,7 @@ func _exit_state() -> void:
 func _physics_process(delta):
 	if check_jump():
 		jump.emit()
-	elif Input.is_action_just_released("Down"):
+	elif Input.is_action_just_released(input_stringname.Down):
 		fall.emit()
 	else:
 		var in_air = not player.is_on_floor()

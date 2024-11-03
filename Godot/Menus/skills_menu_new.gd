@@ -46,11 +46,11 @@ func setup():
 	player.level_handler.leveled.connect(open) #Opens upon leveling only, TODO
 	
 func _process(delta):
-	if Input.is_action_just_pressed("Left"):
+	if Input.is_action_just_pressed(input_stringname.Left):
 		switch_selected(card_count - 1 if selected_index == 0 else selected_index - 1)
-	if Input.is_action_just_pressed("Right"):
+	if Input.is_action_just_pressed(input_stringname.Right):
 		switch_selected((selected_index + 1)%card_count)
-	if Input.is_action_just_pressed("Confirm"):
+	if Input.is_action_just_pressed(input_stringname.Confirm):
 		cards[selected_index].pressed.emit()
 
 func switch_selected(new_index):

@@ -23,7 +23,7 @@ func _enter_state() -> void:
 		if can_jump:
 			player.animated_sprite_2d.play("JumpStart")
 			if player.is_on_floor():
-				if Input.is_action_pressed("Down") and skills[skills_enum.CHARGED_JUMP]:
+				if Input.is_action_pressed(input_stringname.Down) and skills[skills_enum.CHARGED_JUMP]:
 					player.velocity = Vector2.ZERO
 				else:
 					player.velocity.y += player.jump
@@ -40,7 +40,7 @@ func _exit_state() -> void:
 	set_physics_process(false)
 
 func _physics_process(delta):
-	if player.is_on_floor()and Input.is_action_pressed("Down"):
+	if player.is_on_floor()and Input.is_action_pressed(input_stringname.Down):
 		player.velocity.x = 0
 	handle_jump(delta)
 	handle_animation()
@@ -50,10 +50,10 @@ func _physics_process(delta):
 	
 func handle_jump(delta): #TODO add a pushed delay timer
 	if player.is_on_floor() and skills[skills_enum.CHARGED_JUMP]:
-		if Input.is_action_pressed("Down") and Input.is_action_pressed("Up"):
+		if Input.is_action_pressed(input_stringname.Down) and Input.is_action_pressed(input_stringname.Up):
 			player.velocity.x = 0
 			charge += delta
-		if Input.is_action_just_released("Down"):
+		if Input.is_action_just_released(input_stringname.Down):
 			player.velocity.y = player.jump * min(1 + charge, 5)
 			player.movement_data.gravity_scale = 1 + charge
 			charge = 0
@@ -62,7 +62,7 @@ func handle_jump(delta): #TODO add a pushed delay timer
 			if player.air_jump > 0:
 				player.air_jump -= 1
 				player.velocity.y = player.jump * 0.8
-		if Input.is_action_just_released("Up"):
+		if Input.is_action_just_released(input_stringname.Up):
 			if player.velocity.y < 0 :
 				player.velocity.y /= 3
 		if handle_wall_jump():
