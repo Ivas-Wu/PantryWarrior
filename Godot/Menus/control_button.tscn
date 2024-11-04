@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://cam53ao8a2vwf"]
 
 [ext_resource type="Script" path="res://Menus/control_button.gd" id="1_efrn6"]
-[ext_resource type="Texture2D" uid="uid://bsg8cgvdykbqc" path="res://Playerdata/Controls/test.png" id="2_snwgb"]
+[ext_resource type="Texture2D" uid="uid://dna8npihmvq7e" path="res://Playerdata/Controls/SettingsLabel.png" id="2_uiqq3"]
 
 [node name="ControlButton" type="Control"]
 layout_mode = 3
@@ -21,11 +21,11 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_snwgb")
-patch_margin_left = 2
-patch_margin_top = 2
-patch_margin_right = 2
-patch_margin_bottom = 2
+texture = ExtResource("2_uiqq3")
+patch_margin_left = 8
+patch_margin_top = 8
+patch_margin_right = 8
+patch_margin_bottom = 8
 
 [node name="HBoxContainer" type="HBoxContainer" parent="NinePatchRect"]
 layout_mode = 1
@@ -56,6 +56,7 @@ offset_bottom = 7.0
 grow_vertical = 2
 text = "Label
 "
+vertical_alignment = 1
 
 [node name="RightSapcer" type="Control" parent="NinePatchRect/HBoxContainer"]
 layout_mode = 2

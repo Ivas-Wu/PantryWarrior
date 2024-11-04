@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://beay471ymatrq"]
+[gd_scene load_steps=33 format=3 uid="uid://beay471ymatrq"]
 
 [ext_resource type="Script" path="res://World/Stage/stage_base.gd" id="1_314vs"]
 [ext_resource type="PackedScene" uid="uid://b0vy5dsyol6bn" path="res://World/Tiles/tile_map.tscn" id="2_wasku"]
@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://cf5xfl8a2kggl" path="res://Collectibles/Heart/heart.tscn" id="6_57rfn"]
 [ext_resource type="PackedScene" uid="uid://bdk3x35sn2pld" path="res://World/Tiles/tile_map2.tscn" id="6_qqtue"]
 [ext_resource type="Script" path="res://World/Interactive/EnemyZones/navigation_properties.gd" id="6_wxv4d"]
+[ext_resource type="PackedScene" uid="uid://bxt8sd05ehsyd" path="res://Menus/tutorial_signs.tscn" id="15_rxf1m"]
 
 [sub_resource type="Curve2D" id="Curve2D_gu7eg"]
 _data = {
@@ -131,12 +132,49 @@ texture = ExtResource("2_xq48n")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 z_index = -2
-offset_left = -128.0
-offset_top = -1424.0
-offset_right = 882.0
-offset_bottom = 272.0
+offset_left = -120.0
+offset_top = -1096.0
+offset_right = 890.0
+offset_bottom = 600.0
 scale = Vector2(2.36731, 0.981322)
 color = Color(0.360784, 0.360784, 0.360784, 0.6)
+
+[node name="Tutorial" type="Node" parent="."]
+
+[node name="jump" parent="Tutorial" instance=ExtResource("15_rxf1m")]
+offset_left = 320.0
+offset_top = 80.0
+offset_right = 96.0
+offset_bottom = -44.0
+input = &"Up"
+
+[node name="drop" parent="Tutorial" instance=ExtResource("15_rxf1m")]
+offset_left = 1816.0
+offset_top = 88.0
+offset_right = 1592.0
+offset_bottom = -36.0
+input = &"Down"
+
+[node name="Left" parent="Tutorial" instance=ExtResource("15_rxf1m")]
+offset_left = 16.0
+offset_top = 88.0
+offset_right = -208.0
+offset_bottom = -36.0
+input = &"Left"
+
+[node name="Right" parent="Tutorial" instance=ExtResource("15_rxf1m")]
+offset_left = 16.0
+offset_top = 144.0
+offset_right = -208.0
+offset_bottom = 20.0
+input = &"Right"
+
+[node name="jump2" parent="Tutorial" instance=ExtResource("15_rxf1m")]
+offset_left = 416.0
+offset_top = -1096.0
+offset_right = 192.0
+offset_bottom = -1220.0
+input = &"Attack"
 
 [node name="Static" type="Node" parent="."]
 

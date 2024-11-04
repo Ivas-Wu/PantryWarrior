@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://pb7exefhpocd"]
+[gd_scene load_steps=7 format=3 uid="uid://pb7exefhpocd"]
 
 [ext_resource type="Script" path="res://ControlSettings.gd" id="1_v3wrt"]
-[ext_resource type="Texture2D" uid="uid://bsg8cgvdykbqc" path="res://Playerdata/Controls/test.png" id="2_d0dsc"]
 [ext_resource type="PackedScene" uid="uid://cam53ao8a2vwf" path="res://Menus/control_button.tscn" id="2_e7xuf"]
+[ext_resource type="Texture2D" uid="uid://cmj1m7bjp5guu" path="res://Playerdata/Controls/SettingsOutter.png" id="2_ss6bp"]
+[ext_resource type="Texture2D" uid="uid://dna8npihmvq7e" path="res://Playerdata/Controls/SettingsLabel.png" id="4_pbept"]
 [ext_resource type="PackedScene" uid="uid://dmtsx3ns8eow7" path="res://Menus/key_display.tscn" id="4_w4b4u"]
 [ext_resource type="PackedScene" uid="uid://cqmigy7jwh64a" path="res://Menus/key_grabber.tscn" id="5_eot5j"]
 
@@ -27,11 +28,11 @@ offset_right = -8.0
 offset_bottom = -4.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_d0dsc")
-patch_margin_left = 2
-patch_margin_top = 2
-patch_margin_right = 2
-patch_margin_bottom = 2
+texture = ExtResource("2_ss6bp")
+patch_margin_left = 17
+patch_margin_top = 17
+patch_margin_right = 17
+patch_margin_bottom = 17
 
 [node name="ParentContainer" type="VBoxContainer" parent="NinePatchRect"]
 layout_mode = 1
@@ -40,6 +41,10 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="TopSpacer" type="Control" parent="NinePatchRect/ParentContainer"]
+layout_mode = 2
+size_flags_vertical = 3
 
 [node name="ControlTitle" type="Label" parent="NinePatchRect/ParentContainer"]
 layout_mode = 2
@@ -53,6 +58,11 @@ theme_override_font_sizes/font_size = 10
 text = "Movement
 "
 horizontal_alignment = 1
+
+[node name="Spacer2" type="Control" parent="NinePatchRect/ParentContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.1
 
 [node name="MiddleContainer" type="HBoxContainer" parent="NinePatchRect/ParentContainer"]
 layout_mode = 2
@@ -113,17 +123,26 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 2.0
 
-[node name="Video" type="Control" parent="NinePatchRect/ParentContainer/MiddleContainer/ScrollContainer/Control/VBoxContainer"]
+[node name="Video" type="NinePatchRect" parent="NinePatchRect/ParentContainer/MiddleContainer/ScrollContainer/Control/VBoxContainer"]
+clip_contents = true
 layout_mode = 2
-size_flags_horizontal = 3
 size_flags_vertical = 3
-size_flags_stretch_ratio = 4.0
+size_flags_stretch_ratio = 3.1
+texture = ExtResource("4_pbept")
+patch_margin_left = 8
+patch_margin_top = 8
+patch_margin_right = 8
+patch_margin_bottom = 8
 
 [node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="NinePatchRect/ParentContainer/MiddleContainer/ScrollContainer/Control/VBoxContainer/Video"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 8.0
+offset_right = -10.0
+offset_bottom = -8.0
 grow_horizontal = 2
 grow_vertical = 2
 autoplay = true

@@ -785,7 +785,7 @@ shape = SubResource("RectangleShape2D_prvjc")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="CharacterAttributes/CharacterCollisionShape"]
 position = Vector2(0, -1)
-polygon = PackedVector2Array(-2, 1, 3, 1, 5, -2, 5, -11, 3, -14, -1, -14, -2, -12, -4, -10, -3, -3)
+polygon = PackedVector2Array(-2, 1, 3, 1, 5, -2, 5, -11, 3, -14, -1, -14, -2, -12)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterAttributes"]
 visible = false
@@ -797,6 +797,7 @@ frame = 3
 frame_progress = 1.0
 
 [node name="HurtBox" type="Area2D" parent="CharacterAttributes"]
+visible = false
 collision_layer = 64
 collision_mask = 0
 script = ExtResource("7_2nxao")
@@ -807,6 +808,7 @@ scale = Vector2(1, 0.770833)
 polygon = PackedVector2Array(-3, -19.4595, 6, -19.4595, 6, 3.89189, -3, 3.89189)
 
 [node name="HitBox" type="Area2D" parent="CharacterAttributes" node_paths=PackedStringArray("parent", "source_col_shape")]
+visible = false
 collision_layer = 32
 collision_mask = 256
 script = ExtResource("8_crlak")
@@ -816,6 +818,7 @@ parent = NodePath("../..")
 source_col_shape = NodePath("CollisionShape2D")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterAttributes/HitBox"]
+visible = false
 position = Vector2(10.475, -9)
 scale = Vector2(2.8, 6.5)
 shape = SubResource("RectangleShape2D_setf6")
@@ -843,18 +846,22 @@ libraries = {
 }
 
 [node name="left" type="RayCast2D" parent="CharacterAttributes"]
+visible = false
 position = Vector2(-5, -14)
 target_position = Vector2(0, -11)
 
 [node name="middleleft" type="RayCast2D" parent="CharacterAttributes"]
+visible = false
 position = Vector2(-2, -14)
 target_position = Vector2(0, -11)
 
 [node name="middleright" type="RayCast2D" parent="CharacterAttributes"]
+visible = false
 position = Vector2(4, -14)
 target_position = Vector2(0, -11)
 
 [node name="right" type="RayCast2D" parent="CharacterAttributes"]
+visible = false
 position = Vector2(7, -14)
 target_position = Vector2(0, -11)
 

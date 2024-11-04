@@ -1,4 +1,4 @@
 class_name world_data
 extends Resource
 
-var _scene = 1
+var _scene = 0

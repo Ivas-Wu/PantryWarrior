@@ -1,7 +1,7 @@
-[gd_resource type="Resource" script_class="player_current_stats" load_steps=2 format=3]
+[gd_resource type="Resource" script_class="player_current_stats" load_steps=2 format=3 uid="uid://clhy0ahopfnxs"]
 
 [ext_resource type="Script" path="res://Playerdata/Resource/Scripts/player_current_stats.gd" id="1_io5i1"]
 
 [resource]
 script = ExtResource("1_io5i1")
-current_hp = 800.0
+current_hp = 0

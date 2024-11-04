@@ -7,8 +7,8 @@ extends Control
 @onready var nine_patch_rect = $NinePatchRect
 
 var selected : bool = false #visual thing
-var regular_texture : CompressedTexture2D = load('res://Playerdata/Controls/test.png')
-var selected_texture : CompressedTexture2D = load('res://Playerdata/Controls/test2.png')
+var regular_texture : CompressedTexture2D = load('res://Playerdata/Controls/SettingsLabel.png')
+var selected_texture : CompressedTexture2D = load('res://Playerdata/Controls/SettingsLabel.png')
 
 # label text
 var label_texts_enum = {
@@ -20,10 +20,10 @@ var label_texts_enum = {
 
 # video location
 var video_enum = {
-	input_stringname.Up : "res://Playerdata/Controls/replicate-prediction-3mub6kbbgiftidugvney3e53ay.ogv",
-	input_stringname.Down : "res://Playerdata/Controls/replicate-prediction-3mub6kbbgiftidugvney3e53ay.ogv",
-	input_stringname.Left : "res://Playerdata/Controls/replicate-prediction-3mub6kbbgiftidugvney3e53ay.ogv",
-	input_stringname.Right : "res://Playerdata/Controls/replicate-prediction-3mub6kbbgiftidugvney3e53ay.ogv",
+	input_stringname.Up : "res://Playerdata/Controls/UpVideo.ogv",
+	input_stringname.Down : "res://Playerdata/Controls/DownVideo.ogv",
+	input_stringname.Left : "res://Playerdata/Controls/LeftRightVideo.ogv",
+	input_stringname.Right : "res://Playerdata/Controls/LeftRightVideo.ogv",
 }
 
 func _ready():
@@ -32,7 +32,7 @@ func _ready():
 	
 	#Create label settings
 	label.label_settings = LabelSettings.new()
-	label.label_settings.font_size = 7
+	label.label_settings.font_size = 5
 	label.label_settings.font_color = Color(1, 1, 1, 1)
 	
 	if label_type:

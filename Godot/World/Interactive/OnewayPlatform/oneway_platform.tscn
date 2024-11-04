@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://World/Interactive/OnewayPlatform/oneway_platform.gd" id="1_pnlk0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4rsni"]
-size = Vector2(55, 10)
+size = Vector2(49, 6)
 
 [node name="OnewayPlatform" type="StaticBody2D"]
 script = ExtResource("1_pnlk0")
