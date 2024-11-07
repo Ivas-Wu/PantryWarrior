@@ -4,7 +4,7 @@
 
 [resource]
 script = ExtResource("1_afu5x")
-hp = 5.0
+hp = 3000.0
 vision_range = 100.0
 attack_range_short = 57.0
 attack_range_long = 83.0

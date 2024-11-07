@@ -1,0 +1,25 @@
+[gd_scene load_steps=6 format=3 uid="uid://biqq8w5w7wbm1"]
+
+[ext_resource type="Script" path="res://World/world.gd" id="1_6iqlj"]
+[ext_resource type="PackedScene" uid="uid://dx65r7d0rthul" path="res://World/Stage/2Stage.tscn" id="2_yxsa7"]
+[ext_resource type="PackedScene" uid="uid://p021mbbr44gk" path="res://Menus/skills_menu_new.tscn" id="3_ytn6m"]
+[ext_resource type="PackedScene" uid="uid://mtiuug5u0dfd" path="res://Menus/pause_menu.tscn" id="4_3b7p6"]
+[ext_resource type="PackedScene" uid="uid://dx53tl2jyh3e0" path="res://Menus/stage_complete_menu.tscn" id="5_b20ft"]
+
+[node name="World" type="Node" node_paths=PackedStringArray("stage")]
+process_mode = 3
+script = ExtResource("1_6iqlj")
+stage = NodePath("")
+
+[node name="StageBase" parent="." instance=ExtResource("2_yxsa7")]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="SkillsMenu" parent="CanvasLayer" node_paths=PackedStringArray("game") instance=ExtResource("3_ytn6m")]
+game = NodePath("../..")
+
+[node name="PauseMenu" parent="CanvasLayer" node_paths=PackedStringArray("game") instance=ExtResource("4_3b7p6")]
+game = NodePath("../..")
+
+[node name="StageCompleteMenu" parent="CanvasLayer" node_paths=PackedStringArray("game") instance=ExtResource("5_b20ft")]
+game = NodePath("../..")
