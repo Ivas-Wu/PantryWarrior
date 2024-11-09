@@ -62,9 +62,13 @@ libraries = {
 [node name="AnimatableBody2D" type="AnimatableBody2D" parent="."]
 
 [node name="Sprite2D" type="Sprite2D" parent="AnimatableBody2D"]
+z_index = -1
 texture = ExtResource("2_idqkd")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatableBody2D"]
 position = Vector2(-0.5, -0.5)
 shape = SubResource("RectangleShape2D_fgtnm")
 one_way_collision = true
+
+[node name="Delay" type="Timer" parent="."]
+one_shot = true
