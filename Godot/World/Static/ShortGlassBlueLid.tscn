@@ -3,6 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://dvuijxljt6m0y" path="res://World/Static/ShortContainerDesign16x3.png" id="1_y16l2"]
 
 [node name="YellowJar" type="StaticBody2D"]
+position = Vector2(-2, -11)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -13)

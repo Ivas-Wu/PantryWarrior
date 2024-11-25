@@ -1,7 +1,7 @@
 class_name timed_block
 extends StaticBody2D
 
-@export var time: float = 0.1
+@export var time: float = 1
 @export var reset_time: float = 99
 
 @onready var timer = $Timer

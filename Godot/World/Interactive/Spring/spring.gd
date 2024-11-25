@@ -1,5 +1,5 @@
 class_name spring
-extends Node2D
+extends RigidBody2D
 
 @export var flip: bool = false
 @onready var animatable_body_2d = $AnimatableBody2D
@@ -8,9 +8,11 @@ extends Node2D
 var body : base_character_class
 
 func _ready():
-	set_physics_process(false)
 	set_direction()
 
+func _physics_process(delta):
+	pass
+	
 func set_direction():
 	if flip:
 		animatable_body_2d.scale.x *= -1

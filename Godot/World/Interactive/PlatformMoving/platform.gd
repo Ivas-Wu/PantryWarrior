@@ -4,13 +4,16 @@ extends Path2D
 @export var speed : int = 1
 @export var speed_scale : float = 1.0
 @export var delay : int = 0
+@export var platform_scale : float = 1
 
 @onready var path = $PathFollow2D
 @onready var animation_player = $AnimationPlayer
 @onready var delay_timer = $Delay
+@onready var animatable_body_2d = $AnimatableBody2D
 
 func _ready():
 	set_process(false)
+	animatable_body_2d.scale.x = platform_scale #todo THis is broekn
 	if delay > 0:
 		delay_timer.wait_time = delay
 		delay_timer.start()

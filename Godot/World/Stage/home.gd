@@ -2,11 +2,11 @@ class_name home
 extends stage_base
 
 var stages = [
-	"res://World/Stage/World/stage2.tscn", #0
+	"res://World/Stage/World/tutorialStage1.tscn", #0
 	"res://World/Stage/World/musk1stage.tscn", #1
 	"res://World/Stage/World/kingstage.tscn", #2
-	"res://World/Stage/1Stage.tscn", #3
-	"res://World/Stage/1Stage.tscn", #4
+	"res://World/Stage/World/stage2.tscn", #3
+	"res://World/Stage/World/tutorialStage2.tscn", #4
 	"res://World/Stage/1Stage.tscn", #5
 	"res://World/Stage/1Stage.tscn", #6
 	"res://World/Stage/1Stage.tscn", #7
