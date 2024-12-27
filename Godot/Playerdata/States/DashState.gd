@@ -7,7 +7,7 @@ var dir : int
 var original_speed : int
 	
 func _enter_state() -> void:
-	dir = 1 if not player.animated_sprite_2d.flip_h else -1
+	dir = 1 if not player.get_flip_direction() else -1
 	original_speed = player.velocity.x
 	if skills[skills_enum.DASH_ATTACK]:
 		player.disable_hurtbox()

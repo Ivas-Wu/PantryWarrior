@@ -26,7 +26,7 @@ func check_jump() -> bool:
 	return Input.is_action_just_pressed(input_stringname.Up)
 	
 func check_roll() -> bool:
-	return Input.is_action_just_pressed("Roll") and skills[skills_enum.ROLL] and player.roll_timer.time_left == 0
+	return Input.is_action_just_pressed("Roll") #and skills[skills_enum.ROLL] and player.roll_timer.time_left == 0
 
 func check_tackle() -> bool:
 	return Input.is_action_just_pressed("Dash") and skills[skills_enum.DASH_ATTACK] and abs(player.velocity.x) > player.speed/2

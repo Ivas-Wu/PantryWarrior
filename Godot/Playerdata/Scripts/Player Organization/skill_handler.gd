@@ -108,7 +108,7 @@ var skill_variables = {
 func _ready():
 	set_physics_process(false)
 	skill_tree_instance = skill_tree.new()
-	load_abilities(load("res://Playerdata/Resource/PlayerSkills.tres").ability_index_list)
+	load_abilities(load("res://Playerdata/Resource/player_unlocked_abilities.tres").ability_index_list)
 	initialized.emit()
 
 func reset_card_pool():

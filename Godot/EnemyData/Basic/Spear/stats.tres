@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="EnemyStatsData" load_steps=2 format=3 uid="uid://cgafs2bsjp5my"]
+
+[ext_resource type="Script" path="res://EnemyData/Basic/Default/EnemyMaxStats.gd" id="1_l3lf8"]
+
+[resource]
+script = ExtResource("1_l3lf8")
+hp = 300.0
+vision_range = 100.0
+attack_range = 25.0
+max_walk_angle = 45.0

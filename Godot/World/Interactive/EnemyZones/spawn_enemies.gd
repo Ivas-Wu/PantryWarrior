@@ -5,7 +5,10 @@ extends Node
 @export var total_count : int = -1
 
 #Enemy Types
-var rat = preload("res://EnemyData/enemy.tscn") # 1
+var enemy_types = [
+				preload("res://EnemyData/Basic/Default/enemy.tscn"), # 1
+				preload("res://EnemyData/Basic/Spear/spear.tscn"), # 2
+			]
 
 var list_of_enemies : Array = []
 var list_of_regions : Array = []
@@ -24,10 +27,12 @@ func populate_regions_list():
 			list_of_regions.append(_i)
 			region_weight += _i.spawn_weighting
 
-func populate_enemy_list(): #only supports 1 type at a time right now
+func populate_enemy_list(): #only supports 2 type(s) at a time right now
 	match enemy_type:
 		1:
-			list_of_enemies.append(rat)
+			list_of_enemies.append(enemy_types[0])
+		2:
+			list_of_enemies.append(enemy_types[1])
 
 func spawn():
 	if not list_of_enemies.is_empty():

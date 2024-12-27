@@ -11,7 +11,7 @@ func _enter_state() -> void:
 	if not player.is_on_floor(): previous.emit()
 	else:
 		player.disable_hurtbox()
-		dir = 1 if not player.animated_sprite_2d.flip_h else -1
+		dir = 1 if not player.get_flip_direction() else -1
 		original_speed = player.velocity.x
 		player.collision_mask = 7
 		player.animated_sprite_2d.play("Rolling")

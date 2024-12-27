@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://3if8eaqnjp72"]
+[gd_scene load_steps=7 format=3 uid="uid://3if8eaqnjp72"]
 
 [ext_resource type="Script" path="res://World/Stage/home.gd" id="1_4cnrt"]
 [ext_resource type="PackedScene" uid="uid://b0vy5dsyol6bn" path="res://World/Tiles/tile_map.tscn" id="1_uioop"]
 [ext_resource type="PackedScene" uid="uid://cypcocvbiby87" path="res://Playerdata/Characters/playerPink.tscn" id="3_ruko7"]
+[ext_resource type="PackedScene" uid="uid://bxt8sd05ehsyd" path="res://Menus/tutorial_signs.tscn" id="4_flvt4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0vir7"]
 size = Vector2(50, 66)
@@ -32,5 +33,12 @@ position = Vector2(-264, 0)
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 visible = false
 navigation_polygon = SubResource("NavigationPolygon_mjvj8")
+
+[node name="tutorial_signs" parent="." instance=ExtResource("4_flvt4")]
+offset_left = -380.0
+offset_top = -91.0
+offset_right = -649.0
+offset_bottom = -229.0
+override = "<=="
 
 [connection signal="body_entered" from="NextStage" to="." method="_on_next_stage_body_entered"]

@@ -6,10 +6,9 @@
 [ext_resource type="PackedScene" uid="uid://mtiuug5u0dfd" path="res://Menus/pause_menu.tscn" id="4_3b7p6"]
 [ext_resource type="PackedScene" uid="uid://dx53tl2jyh3e0" path="res://Menus/stage_complete_menu.tscn" id="5_b20ft"]
 
-[node name="World" type="Node" node_paths=PackedStringArray("stage")]
+[node name="World" type="Node"]
 process_mode = 3
 script = ExtResource("1_6iqlj")
-stage = NodePath("")
 
 [node name="StageBase" parent="." instance=ExtResource("2_yxsa7")]
 

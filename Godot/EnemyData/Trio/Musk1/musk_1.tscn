@@ -16,11 +16,11 @@
 [ext_resource type="Script" path="res://EnemyData/Trio/Musk1/States/StabAttackState.gd" id="10_g58os"]
 [ext_resource type="Script" path="res://EnemyData/Trio/Musk1/States/DodgeState.gd" id="11_k5fob"]
 [ext_resource type="Script" path="res://EnemyData/Trio/Musk1/States/IdleState.gd" id="11_lun1n"]
-[ext_resource type="Script" path="res://EnemyData/EnemyHurtBox.gd" id="14_ijy17"]
+[ext_resource type="Script" path="res://EnemyData/Basic/Default/EnemyHurtBox.gd" id="14_ijy17"]
 [ext_resource type="Texture2D" uid="uid://d4ks88vmui4i2" path="res://EnemyData/Trio/Musk1/Animations/Musk1DodgeOutlined-Sheet.png" id="17_e2e2b"]
 [ext_resource type="Texture2D" uid="uid://cvwjmixitvbn1" path="res://EnemyData/Trio/Musk1/Animations/BladeExtended-Sheet.png" id="17_wt1y0"]
 [ext_resource type="Texture2D" uid="uid://dh7557idv8icx" path="res://EnemyData/Trio/Musk1/Animations/Musk1IdleOutlined-Sheet.png" id="18_0ay1k"]
-[ext_resource type="Script" path="res://EnemyData/EnemyHitBox.gd" id="19_v1tnt"]
+[ext_resource type="Script" path="res://EnemyData/Basic/Default/EnemyHitBox.gd" id="19_v1tnt"]
 [ext_resource type="Script" path="res://character_general/hit_box_collision_base.gd" id="20_lcd1v"]
 [ext_resource type="PackedScene" uid="uid://d2lcx734h0ln8" path="res://EnemyData/health_bar.tscn" id="22_1f7xq"]
 
@@ -681,7 +681,6 @@ exp_on_kill = 500
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 target_desired_distance = 30.0
 path_max_distance = 10000.0
-debug_enabled = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 visible = false

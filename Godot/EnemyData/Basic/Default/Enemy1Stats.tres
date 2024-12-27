@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="EnemyStatsData" load_steps=2 format=3 uid="uid://c67ivnxwt8mp8"]
+
+[ext_resource type="Script" path="res://EnemyData/Basic/Default/EnemyMaxStats.gd" id="1_afsq6"]
+
+[resource]
+script = ExtResource("1_afsq6")
+hp = 300.0

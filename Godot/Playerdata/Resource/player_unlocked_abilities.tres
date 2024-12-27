@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="player_unlocked_abilites" load_steps=2 format=3 uid="uid://c2wni4thynssj"]
+
+[ext_resource type="Script" path="res://Playerdata/Resource/Scripts/player_unlocked_abilities.gd" id="1_o8vq7"]
+
+[resource]
+script = ExtResource("1_o8vq7")
+ability_index_list = [1, 25]

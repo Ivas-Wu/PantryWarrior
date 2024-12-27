@@ -4,7 +4,7 @@
 
 [resource]
 script = ExtResource("1_tn3fr")
-hp = 300.0
+hp = 3000.0
 vision_range = 1000.0
 attack_range_short = 0.0
 attack_range_long = 0.0

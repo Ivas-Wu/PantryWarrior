@@ -4,14 +4,11 @@ extends State
 signal previous
 signal idle
 
-var flip : bool = false
-	
 func _enter_state() -> void:
 	set_physics_process(true)
 	player.hit_box.already_hit = false
 	#flip animation to face direction player is facing
-	flip = player.animated_sprite_2d.flip_h
-	flip_scale()
+	player.attack_animation.flip_h = player.get_flip_direction()
 	#take first attack in the queue
 	var attack = player.attack_queue[0]
 	#handle animations
@@ -43,16 +40,11 @@ func _exit_state() -> void:
 	player.attack_animation.visible = false
 	player.animation_player.play("RESET")
 	player.hit_box_col.set_deferred("disabled",true)
-	flip_scale()
 	set_physics_process(false)
 
 func _physics_process(delta):
 	player.velocity = Vector2.ZERO
 	player.move_and_slide()
-
-func flip_scale():
-	if flip:
-		player.scale.x *= -1
 
 func prev():
 	set_physics_process(false)

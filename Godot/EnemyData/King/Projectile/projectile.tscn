@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://EnemyData/King/Projectile/bounce_projectile.gd" id="1_ki54l"]
 [ext_resource type="Texture2D" uid="uid://bynubta3dqi0l" path="res://EnemyData/King/Projectile/Projectile-Sheet.png" id="2_lq4q8"]
-[ext_resource type="Script" path="res://EnemyData/EnemyHitBox.gd" id="3_myh15"]
+[ext_resource type="Script" path="res://EnemyData/Basic/Default/EnemyHitBox.gd" id="3_myh15"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_grn6c"]
 radius = 4.5

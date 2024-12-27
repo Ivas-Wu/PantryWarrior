@@ -37,12 +37,21 @@ var random_number : float
 var max_invulnerablity_frames : int
 var pushed : bool = false
 
+var current_sprite = null
+
 func _ready():
 	pass
 
 func _process(delta):
 	pass
 
+#Getters code refactor
+func get_current_sprite():
+	return current_sprite if current_sprite else animated_sprite_2d
+	
+func get_flip_direction():
+	return get_current_sprite().flip_h
+	
 func handle_knockback(source_location: Vector2, knock_back: int): pass
 func take_damage(damage: float) -> bool: return false
 func handle_stun(duration: float): pass
@@ -69,7 +78,7 @@ func add_gravity(delta):
 
 func flip_animation(input_axis):
 	if input_axis:
-		animated_sprite_2d.flip_h = input_axis < 0
+		get_current_sprite().flip_h = input_axis < 0
 
 func handle_speed(input_axis, delta):
 	if input_axis:

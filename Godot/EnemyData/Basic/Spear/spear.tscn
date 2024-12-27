@@ -1,0 +1,201 @@
+[gd_scene load_steps=25 format=3 uid="uid://cxcii8c7butp7"]
+
+[ext_resource type="Script" path="res://EnemyData/Basic/generic_enemy.gd" id="1_ihfct"]
+[ext_resource type="Resource" uid="uid://clh4ab1fniynp" path="res://EnemyData/Basic/Spear/movement.tres" id="2_fdpjp"]
+[ext_resource type="Resource" uid="uid://cgafs2bsjp5my" path="res://EnemyData/Basic/Spear/stats.tres" id="3_jrya3"]
+[ext_resource type="Texture2D" uid="uid://cysltmbae73rf" path="res://EnemyData/SpriteSheets/Spear/StabOutlined-Sheet.png" id="5_tdbdb"]
+[ext_resource type="Texture2D" uid="uid://cxqq821rxgji4" path="res://EnemyData/SpriteSheets/Spear/WalkingOutlined-Sheet.png" id="7_2p20y"]
+[ext_resource type="Script" path="res://EnemyData/Basic/States/aggro_state_generic.gd" id="8_x5xjj"]
+[ext_resource type="Script" path="res://EnemyData/Basic/States/attack_state_generic.gd" id="9_liwoy"]
+[ext_resource type="Texture2D" uid="uid://b44sje7umy57o" path="res://EnemyData/SpriteSheets/Spear/RunningOutlined-Sheet.png" id="9_tpsc4"]
+[ext_resource type="Script" path="res://finite_state_machine.gd" id="10_57ixl"]
+[ext_resource type="Script" path="res://EnemyData/Basic/States/damaged_state_generic.gd" id="10_cvpuj"]
+[ext_resource type="Script" path="res://EnemyData/Basic/States/idle_state_generic.gd" id="11_blljl"]
+[ext_resource type="Script" path="res://EnemyData/Basic/States/wander_state_generic.gd" id="12_3b0f2"]
+[ext_resource type="Script" path="res://EnemyData/Basic/Default/EnemyHurtBox.gd" id="16_vh2us"]
+[ext_resource type="Script" path="res://EnemyData/Basic/Default/EnemyHitBox.gd" id="17_1rcdi"]
+[ext_resource type="Script" path="res://character_general/hit_box_collision_base.gd" id="18_1ytcj"]
+[ext_resource type="PackedScene" uid="uid://d2lcx734h0ln8" path="res://EnemyData/health_bar.tscn" id="19_8ftmj"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tqkol"]
+size = Vector2(28, 30)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dr10h"]
+size = Vector2(13, 30)
+
+[sub_resource type="Animation" id="Animation_170pl"]
+resource_name = "Idle"
+
+[sub_resource type="Animation" id="Animation_uqy5u"]
+resource_name = "Wander"
+
+[sub_resource type="Animation" id="Animation_m3pax"]
+resource_name = "Run"
+
+[sub_resource type="Animation" id="Animation_nj50b"]
+resource_name = "Attack"
+
+[sub_resource type="Animation" id="Animation_44fi2"]
+resource_name = "Damaged"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_njsl3"]
+_data = {
+"Attack": SubResource("Animation_nj50b"),
+"Damaged": SubResource("Animation_44fi2"),
+"Idle": SubResource("Animation_170pl"),
+"Run": SubResource("Animation_m3pax"),
+"Wander": SubResource("Animation_uqy5u")
+}
+
+[node name="Spear" type="CharacterBody2D" node_paths=PackedStringArray("navigation_agent_2d", "coyote_jump_timer", "movement_update_buffer", "stun_timer", "attack_cd", "harzard_detector", "harzard_detector_col", "character_collision_polygon", "hit_box", "hit_box_col", "hurt_box", "hurt_box_col")]
+collision_layer = 16
+collision_mask = 5
+script = ExtResource("1_ihfct")
+navigation_agent_2d = NodePath("NavigationAgent2D")
+coyote_jump_timer = NodePath("Timers/CoyoteJumpTimer")
+movement_update_buffer = NodePath("Timers/MovementUpdateBuffer")
+stun_timer = NodePath("Timers/StunTimer")
+attack_cd = NodePath("Timers/AttackCoolDown")
+movement_data = ExtResource("2_fdpjp")
+stat_data = ExtResource("3_jrya3")
+harzard_detector = NodePath("HarzardDetector")
+harzard_detector_col = NodePath("HarzardDetector/CollisionShape2D")
+character_collision_polygon = NodePath("CollisionPolygon")
+hit_box = NodePath("HitBox")
+hit_box_col = NodePath("HitBox/CollisionShape2D")
+hurt_box = NodePath("HurtBox")
+hurt_box_col = NodePath("HurtBox/CollisionPolygon2D")
+exp_on_kill = 100
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+target_desired_distance = 30.0
+
+[node name="EnemyFinder" type="RayCast2D" parent="."]
+position = Vector2(0, -8)
+target_position = Vector2(-80, 0)
+collision_mask = 3
+
+[node name="Ground" type="RayCast2D" parent="."]
+position = Vector2(0, -8)
+
+[node name="AttackRange" type="RayCast2D" parent="."]
+position = Vector2(1, -8)
+target_position = Vector2(25, 0)
+collision_mask = 3
+
+[node name="Timers" type="Node" parent="."]
+
+[node name="CoyoteJumpTimer" type="Timer" parent="Timers"]
+wait_time = 0.1
+one_shot = true
+
+[node name="StunTimer" type="Timer" parent="Timers"]
+one_shot = true
+
+[node name="MovementUpdateBuffer" type="Timer" parent="Timers"]
+wait_time = 0.5
+one_shot = true
+
+[node name="AttackCoolDown" type="Timer" parent="Timers"]
+wait_time = 0.5
+one_shot = true
+
+[node name="FiniteStateMachine" type="Node" parent="."]
+script = ExtResource("10_57ixl")
+
+[node name="generic_enemy_aggro_state" type="Node" parent="FiniteStateMachine"]
+script = ExtResource("8_x5xjj")
+
+[node name="generic_enemy_attack_state" type="Node" parent="FiniteStateMachine"]
+script = ExtResource("9_liwoy")
+
+[node name="generic_enemy_damaged_state" type="Node" parent="FiniteStateMachine"]
+script = ExtResource("10_cvpuj")
+
+[node name="generic_enemy_idle_state" type="Node" parent="FiniteStateMachine"]
+script = ExtResource("11_blljl")
+
+[node name="generic_enemy_wander_state" type="Node" parent="FiniteStateMachine"]
+script = ExtResource("12_3b0f2")
+
+[node name="HurtBox" type="Area2D" parent="."]
+visible = false
+collision_layer = 256
+collision_mask = 32
+script = ExtResource("16_vh2us")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="HurtBox"]
+visible = false
+position = Vector2(0, -11.5)
+polygon = PackedVector2Array(-6, -18.5, -6, 11.5, 8, 11.5, 7, -11.5, 1, -18.5)
+
+[node name="HitBox" type="Area2D" parent="." node_paths=PackedStringArray("parent")]
+collision_layer = 128
+collision_mask = 64
+script = ExtResource("17_1rcdi")
+damage = 100
+knock_back = 8.0
+parent = NodePath("..")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+position = Vector2(-1, -15)
+shape = SubResource("RectangleShape2D_tqkol")
+disabled = true
+script = ExtResource("18_1ytcj")
+
+[node name="HealthBar" parent="." instance=ExtResource("19_8ftmj")]
+offset_left = -6.0
+offset_top = -30.0
+offset_right = 6.0
+offset_bottom = -26.0
+
+[node name="CollisionPolygon" type="CollisionPolygon2D" parent="."]
+position = Vector2(4, -12)
+polygon = PackedVector2Array(-8, 12, -10, 10, -14, -5, -10, -18, -2, -18, 3, -11, 4, 8, 2, 12)
+
+[node name="HarzardDetector" type="Area2D" parent="."]
+visible = false
+collision_layer = 16
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HarzardDetector"]
+position = Vector2(0.5, -15)
+shape = SubResource("RectangleShape2D_dr10h")
+
+[node name="Attack" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(9, -20)
+texture = ExtResource("5_tdbdb")
+hframes = 7
+
+[node name="Wander" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(0, -24)
+texture = ExtResource("7_2p20y")
+hframes = 16
+
+[node name="Run" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(0, -24)
+texture = ExtResource("9_tpsc4")
+hframes = 8
+
+[node name="Idle" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(0, -24)
+texture = ExtResource("9_tpsc4")
+hframes = 8
+
+[node name="Damaged" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(0, -24)
+texture = ExtResource("9_tpsc4")
+hframes = 8
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_njsl3")
+}
+
+[connection signal="area_entered" from="HurtBox" to="." method="_on_hurt_box_area_entered"]
+[connection signal="area_entered" from="HarzardDetector" to="." method="_on_harzard_detector_area_entered"]

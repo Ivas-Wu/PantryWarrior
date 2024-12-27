@@ -63,7 +63,7 @@ position = Vector2(688, -32)
 shape = SubResource("RectangleShape2D_0vir7")
 
 [node name="Player" parent="." instance=ExtResource("4_0aciv")]
-position = Vector2(-109, -241)
+position = Vector2(-632, 0)
 
 [node name="King" parent="." instance=ExtResource("5_lscpi")]
 position = Vector2(-5, -239)

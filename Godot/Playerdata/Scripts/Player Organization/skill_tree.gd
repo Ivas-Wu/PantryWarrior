@@ -51,7 +51,7 @@ var skills_list = [
 	[22, 2, "res://icon.svg", ["Dash", unlock_string("dash")], "DASH", 0, []],
 	[23, 2, "res://icon.svg", ["Wall Jump I", unlock_string("wall jump")], "WALL_JUMP", 0, []],
 	[24, 3, "res://icon.svg", ["Triple Jump", unlock_string("triple jump")], "TRIPLE_JUMP", 0, []],
-	[25, 2, "res://icon.svg", ["Charged Jump", unlock_string("charged jump (hold down while jumping to charge, release down to jump)")], "CHARGED_JUMP", 0, []],
+	[25, 1, "res://icon.svg", ["Charged Jump", unlock_string("charged jump (hold down while jumping to charge, release down to jump)")], "CHARGED_JUMP", 0, []],
 	
 	[26, 2, "res://icon.svg", ["True Sight", ability_string("True Sight", "(Passive)")], "TRUE_SIGHT", 0, []],
 	[27, 2, "res://icon.svg", ["Medic", ability_string("Health Regeneration", "(1/sec)")], "HEALTH_REGEN", 1, []],

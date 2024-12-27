@@ -127,6 +127,7 @@ func calculate_character_stats():
 	calculate_stats.calculate_agility()
 	calculate_stats.calculate_offense()
 	calculate_stats.calculate_defense()
+	set_health_bar()
 	if skill_handler.skill_variables[skill_handler.SkillVariables.HEALTH_REGEN] > 0: 
 		health_regen_timer.start()
 		health_regen_timer.timeout.connect(heal.bind(skill_handler.skill_variables[skill_handler.SkillVariables.HEALTH_REGEN]))

@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://cf5xfl8a2kggl" path="res://Collectibles/Heart/heart.tscn" id="5_sjjjk"]
 [ext_resource type="PackedScene" uid="uid://b5pnitf8agbaw" path="res://Collectibles/Upgrade/upgrade.tscn" id="6_sr3yk"]
 [ext_resource type="PackedScene" uid="uid://cpcjq1gqxeewa" path="res://Hazards/spikes.tscn" id="7_7uxfp"]
-[ext_resource type="PackedScene" uid="uid://bc430eqauqkbh" path="res://EnemyData/enemy.tscn" id="8_o86ri"]
+[ext_resource type="PackedScene" uid="uid://bc430eqauqkbh" path="res://EnemyData/Basic/Default/enemy.tscn" id="8_o86ri"]
 [ext_resource type="PackedScene" uid="uid://c8fqbcrpmtjmt" path="res://Playerdata/player.tscn" id="9_lkiyg"]
 [ext_resource type="Script" path="res://Playerdata/Scripts/HurtBox.gd" id="10_2d57q"]
 [ext_resource type="PackedScene" uid="uid://ckkhml8ccoswj" path="res://World/Interactive/PlatformMoving/platform.tscn" id="10_hjpvs"]

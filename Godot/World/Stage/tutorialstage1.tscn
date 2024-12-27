@@ -81,16 +81,16 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(488, 0, 0, 0, 0, -144, 488, -144)])
 source_geometry_group_name = &"navigation_polygon_source_group"
 
-[sub_resource type="NavigationPolygon" id="NavigationPolygon_gs8gj"]
-vertices = PackedVector2Array(502, -10, 106, -10, 106, -118, 502, -118)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(512, 0, 512, -128, 96, -128, 96, 0)])
-source_geometry_group_name = &"navigation_polygon_source_group"
-
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_kmgx3"]
 vertices = PackedVector2Array(686, -10, 2, -10, 2, -54, 686, -54)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(-8, -64, -8, 0, 696, 0, 696, -64)])
+source_geometry_group_name = &"navigation_polygon_source_group"
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_gs8gj"]
+vertices = PackedVector2Array(502, -10, 106, -10, 106, -118, 502, -118)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(512, 0, 512, -128, 96, -128, 96, 0)])
 source_geometry_group_name = &"navigation_polygon_source_group"
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_22qjn"]
@@ -117,21 +117,28 @@ script = ExtResource("1_x1fjd")
 crumb = NodePath("Area2D")
 
 [node name="TextureRect" type="TextureRect" parent="."]
-visible = false
 z_index = -2
-offset_left = -496.0
-offset_top = -1296.0
-offset_right = 2464.0
-offset_bottom = 308.0
+offset_left = -728.0
+offset_top = -2144.0
+offset_right = 4040.0
+offset_bottom = 440.0
 texture = ExtResource("2_mqy67")
 
-[node name="ColorRect" type="ColorRect" parent="."]
-visible = false
+[node name="ColorRect2" type="ColorRect" parent="."]
 z_index = -2
-offset_left = -120.0
-offset_top = -1096.0
-offset_right = 890.0
-offset_bottom = 600.0
+offset_left = -776.0
+offset_top = -1672.0
+offset_right = 1241.0
+offset_bottom = 912.0
+scale = Vector2(2.36731, 0.981322)
+color = Color(0.0941176, 0.0941176, 0.0941176, 0.6)
+
+[node name="ColorRect" type="ColorRect" parent="."]
+z_index = -2
+offset_left = -536.0
+offset_top = -1808.0
+offset_right = 1360.0
+offset_bottom = 540.0
 scale = Vector2(2.36731, 0.981322)
 color = Color(0.360784, 0.360784, 0.360784, 0.6)
 
@@ -177,7 +184,7 @@ offset_left = 1256.0
 offset_top = -432.0
 offset_right = 1336.0
 offset_bottom = -476.0
-input = &"Up"
+override = "Yeah idk man this is a test"
 
 [node name="EXP" parent="Tutorial" instance=ExtResource("3_vtbqv")]
 z_index = -1
@@ -185,14 +192,14 @@ offset_left = 1120.0
 offset_top = -720.0
 offset_right = 936.0
 offset_bottom = -828.0
-input = &"Attack"
+override = "If you defeat enemies you get EXP"
 
 [node name="jump3" parent="Tutorial" instance=ExtResource("3_vtbqv")]
 offset_left = 2080.0
 offset_top = -1224.0
 offset_right = 1848.0
 offset_bottom = -1348.0
-input = &"Attack"
+override = "Collecting the crumb ends the stage "
 
 [node name="Static" type="Node" parent="."]
 
@@ -218,7 +225,7 @@ position = Vector2(2584, -251)
 position = Vector2(2504, -288)
 
 [node name="Player" parent="." instance=ExtResource("8_kswyr")]
-position = Vector2(8, 208)
+position = Vector2(1216, -744)
 
 [node name="Area2D" parent="." instance=ExtResource("9_17vbu")]
 position = Vector2(2136, -1152)
@@ -355,17 +362,11 @@ position = Vector2(1728, -240)
 [node name="enemy_spawner" type="Node" parent="EnemyZone"]
 script = ExtResource("13_yo4gm")
 enemy_type = 1
-total_count = 5
+total_count = 3
 
 [node name="navigation_properties" type="NavigationRegion2D" parent="EnemyZone/enemy_spawner"]
 position = Vector2(1176, -1136)
 navigation_polygon = SubResource("NavigationPolygon_hqhje")
-script = ExtResource("14_5o2et")
-max_spawns = 3
-
-[node name="navigation_properties2" type="NavigationRegion2D" parent="EnemyZone/enemy_spawner"]
-position = Vector2(512, -960)
-navigation_polygon = SubResource("NavigationPolygon_gs8gj")
 script = ExtResource("14_5o2et")
 max_spawns = 3
 
@@ -374,6 +375,17 @@ position = Vector2(1304, -768)
 navigation_polygon = SubResource("NavigationPolygon_kmgx3")
 script = ExtResource("14_5o2et")
 max_spawns = 2
+
+[node name="enemy_spawner2" type="Node" parent="EnemyZone"]
+script = ExtResource("13_yo4gm")
+enemy_type = 2
+total_count = 3
+
+[node name="navigation_properties2" type="NavigationRegion2D" parent="EnemyZone/enemy_spawner2"]
+position = Vector2(512, -960)
+navigation_polygon = SubResource("NavigationPolygon_gs8gj")
+script = ExtResource("14_5o2et")
+max_spawns = 3
 
 [node name="NavigationRegion2D3" type="NavigationRegion2D" parent="EnemyZone"]
 position = Vector2(1320, -768)

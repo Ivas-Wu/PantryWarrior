@@ -17,8 +17,9 @@ func save():
 		ResourceSaver.save(saved_stats, saved_stats_files)
 	if ResourceLoader.exists(unlocked_abilities_file):
 		var unlocked_abilities = ResourceLoader.load(unlocked_abilities_file)
-		var temp_dict_arr = []
+		var temp_dict_arr = unlocked_abilities.ability_index_list
 		for key in player.skill_handler.unlocked_abilities:
-			temp_dict_arr.append(key)
+			if not key in temp_dict_arr:
+				temp_dict_arr.append(key)
 		unlocked_abilities.ability_index_list = temp_dict_arr
 		ResourceSaver.save(unlocked_abilities, unlocked_abilities_file)
