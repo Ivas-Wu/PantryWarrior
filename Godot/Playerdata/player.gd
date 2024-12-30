@@ -46,8 +46,8 @@ var stablity : float = 1 # knock back on you
 
 #changes as you play
 var attack_queue : Array = []
-
-func _ready():
+	
+func child_init():
 	calculate_character_stats()
 	reset_values()
 	set_health_bar()
@@ -117,8 +117,7 @@ func reset_values():
 	set_collision_shape()
 	
 	#Prevent bugs
-	animated_sprite_2d.visible = true
-	attack_animation.visible = false
+	current_sprite = animated_sprite_2d
 	animation_player.set_speed_scale(1)
 	animation_player.stop()
 	fsm.change_state(idle_state)
@@ -140,8 +139,7 @@ func _physics_process(delta):
 		air_jump = max_air_jump
 		pushed = false
 	handle_physics(input_axis, delta)
-	if not is_attacking():
-		handle_speed(input_axis, delta)
+	handle_speed(input_axis, delta)
 	handle_damage()
 	flip_animation(input_axis)
 	set_hurtbox_col()
@@ -151,18 +149,9 @@ func handle_damage():
 		invulnerability_frames -= 1
 		if invulnerability_frames == 0:
 			enable_hurtbox()
-			if not is_attacking():
-				animated_sprite_2d.visible = true
-			else:
-				attack_animation.visible = true
+			sprite_script.get_current_sprite(animated_sprite_2d).visible = true
 		else:
-			if not is_attacking():
-				animated_sprite_2d.visible = not animated_sprite_2d.visible
-			else:
-				attack_animation.visible = not attack_animation.visible
-
-func is_attacking():
-	return fsm.state == attack_state
+			sprite_script.get_current_sprite(animated_sprite_2d).visible = not sprite_script.get_current_sprite(animated_sprite_2d).visible
 
 func take_damage(damage) -> bool:
 	var is_dead = false

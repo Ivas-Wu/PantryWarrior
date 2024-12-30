@@ -43,7 +43,7 @@ var in_safety: bool = false
 var projectile_count: int = 5
 var invul: bool = false
 
-func _ready():
+func child_init():
 	player = get_tree().get_first_node_in_group("Player")
 	set_states()
 	hp = 400

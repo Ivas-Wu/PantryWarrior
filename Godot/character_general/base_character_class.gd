@@ -2,6 +2,7 @@ class_name base_character_class
 extends CharacterBody2D
 
 #exports
+#movement
 @export var movement_data: Resource
 @export var stat_data: Resource
 @export var harzard_detector: Area2D
@@ -10,14 +11,15 @@ extends CharacterBody2D
 @export var wall_left: RayCast2D
 @export var wall_right: RayCast2D
 
+#hitboxes
 @export var hit_box: hitbox_base
 @export var hit_box_col: hitbox_collision_shape_base
 @export var hurt_box: Area2D
 @export var hurt_box_col: CollisionPolygon2D
 @export var animated_sprite_2d : AnimatedSprite2D
 
+#character specifics
 @export var exp_on_kill : int = 0
-
 @export var hit_effect: PackedScene = null
 
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -38,19 +40,24 @@ var max_invulnerablity_frames : int
 var pushed : bool = false
 
 var current_sprite = null
+var sprite_script : animation_handler
+var allow_flip : bool = true
 
-func _ready():
-	pass
+func _ready(): 
+	init()
+	child_init()
+	
+func init(): #don't overload this one
+	sprite_script = animation_handler.new()
+	sprite_script.character = self
+	
+func child_init(): pass #overload this one
 
 func _process(delta):
 	pass
-
-#Getters code refactor
-func get_current_sprite():
-	return current_sprite if current_sprite else animated_sprite_2d
 	
 func get_flip_direction():
-	return get_current_sprite().flip_h
+	return sprite_script.get_current_sprite(animated_sprite_2d).flip_h
 	
 func handle_knockback(source_location: Vector2, knock_back: int): pass
 func take_damage(damage: float) -> bool: return false
@@ -77,8 +84,8 @@ func add_gravity(delta):
 		velocity.y += gravity * delta * movement_data.gravity_scale
 
 func flip_animation(input_axis):
-	if input_axis:
-		get_current_sprite().flip_h = input_axis < 0
+	if input_axis && allow_flip:
+		sprite_script.get_current_sprite(animated_sprite_2d).flip_h = input_axis < 0
 
 func handle_speed(input_axis, delta):
 	if input_axis:

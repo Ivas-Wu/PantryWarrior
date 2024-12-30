@@ -1,4 +1,4 @@
-[gd_scene load_steps=91 format=3 uid="uid://cypcocvbiby87"]
+[gd_scene load_steps=92 format=3 uid="uid://cypcocvbiby87"]
 
 [ext_resource type="Script" path="res://Playerdata/player.gd" id="1_pypjj"]
 [ext_resource type="Resource" uid="uid://1oj14qi0n73h" path="res://Playerdata/Resource/DefaultMovementData.tres" id="2_os55f"]
@@ -30,6 +30,7 @@
 [ext_resource type="Script" path="res://Playerdata/Scripts/save_game.gd" id="19_28qog"]
 [ext_resource type="Script" path="res://Playerdata/States/PlummetState.gd" id="19_lpxuq"]
 [ext_resource type="Script" path="res://Playerdata/Scripts/Player Organization/skill_handler.gd" id="21_vog3e"]
+[ext_resource type="Script" path="res://character_general/animation_handler.gd" id="22_ptmyo"]
 [ext_resource type="Script" path="res://Playerdata/States/WallJumpingState.gd" id="31_hi03v"]
 
 [sub_resource type="Resource" id="Resource_sppp2"]
@@ -808,7 +809,6 @@ scale = Vector2(1, 0.770833)
 polygon = PackedVector2Array(-3, -19.4595, 6, -19.4595, 6, 3.89189, -3, 3.89189)
 
 [node name="HitBox" type="Area2D" parent="CharacterAttributes" node_paths=PackedStringArray("parent", "source_col_shape")]
-visible = false
 collision_layer = 32
 collision_mask = 256
 script = ExtResource("8_crlak")
@@ -818,7 +818,6 @@ parent = NodePath("../..")
 source_col_shape = NodePath("CollisionShape2D")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterAttributes/HitBox"]
-visible = false
 position = Vector2(10.475, -9)
 scale = Vector2(2.8, 6.5)
 shape = SubResource("RectangleShape2D_setf6")
@@ -930,6 +929,9 @@ script = ExtResource("19_28qog")
 
 [node name="skill_handler" type="Node" parent="Scripts"]
 script = ExtResource("21_vog3e")
+
+[node name="animation_handler" type="Node" parent="Scripts"]
+script = ExtResource("22_ptmyo")
 
 [node name="States" type="Node" parent="."]
 script = ExtResource("11_b02sp")

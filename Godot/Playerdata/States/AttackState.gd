@@ -7,13 +7,16 @@ signal idle
 func _enter_state() -> void:
 	set_physics_process(true)
 	player.hit_box.already_hit = false
-	#flip animation to face direction player is facing
-	player.attack_animation.flip_h = player.get_flip_direction()
+	if player.sprite_script.set_current_sprite(player.attack_animation):
+		player.hit_box.scale.x = -abs(player.hit_box.scale.x)
+	else:
+		player.hit_box.scale.x = abs(player.hit_box.scale.x)
+		
+	player.allow_flip = false
+	
 	#take first attack in the queue
 	var attack = player.attack_queue[0]
-	#handle animations
-	player.animated_sprite_2d.visible = false
-	player.attack_animation.visible = true
+
 	match attack:
 		"Attack":
 			handle_basic_attack()
@@ -36,10 +39,11 @@ func _enter_state() -> void:
 func _exit_state() -> void:
 	player.enable_hurtbox()
 	player.attack_queue.pop_front()
-	player.animated_sprite_2d.visible = true
-	player.attack_animation.visible = false
-	player.animation_player.play("RESET")
 	player.hit_box_col.set_deferred("disabled",true)
+	player.allow_flip = true
+	
+	player.sprite_script.set_current_sprite(player.animated_sprite_2d) # update to happen at the start of states
+	player.animation_player.play("RESET")
 	set_physics_process(false)
 
 func _physics_process(delta):

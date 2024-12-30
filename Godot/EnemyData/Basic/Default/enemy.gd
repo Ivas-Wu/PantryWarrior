@@ -29,7 +29,7 @@ var player : Player
 var direction : Vector2
 var current_direction : int
 
-func _ready():
+func child_init():
 	enemy_idle_state.found.connect(fsm.change_state.bind(enemy_aggro_state))
 	enemy_idle_state.wander.connect(fsm.change_state.bind(enemy_wander_state))
 	
@@ -48,7 +48,6 @@ func _ready():
 	jump = movement_data.jump_velocity
 	speed = movement_data.speed
 	reset_values()
-
 
 func reset_values():
 	current_hp = hp

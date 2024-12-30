@@ -43,7 +43,7 @@ var player : Player
 var current_animation_sprite : Sprite2D = null
 var override_movement : bool = false
 
-func _ready():
+func child_init():
 	sprite_2d.visible = false
 	player = get_tree().get_first_node_in_group("Player")
 	set_states()

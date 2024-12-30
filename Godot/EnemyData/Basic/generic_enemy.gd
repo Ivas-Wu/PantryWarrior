@@ -31,27 +31,18 @@ var player : Player
 var direction : Vector2
 var current_direction : int
 
-func _ready():
-	enemy_idle_state.found.connect(fsm.change_state.bind(enemy_aggro_state))
-	enemy_idle_state.wander.connect(fsm.change_state.bind(enemy_wander_state))
-	
-	enemy_wander_state.found.connect(fsm.change_state.bind(enemy_aggro_state))
-	enemy_wander_state.stopped.connect(fsm.change_state.bind(enemy_idle_state))
-	
-	enemy_aggro_state.lost.connect(fsm.change_state.bind(enemy_wander_state))
-	enemy_aggro_state.attack.connect(fsm.change_state.bind(enemy_attack_state))
-	
-	enemy_attack_state.aggro.connect(fsm.change_state.bind(enemy_aggro_state))
-	
-	enemy_damaged_state.out.connect(fsm.change_state.bind(enemy_wander_state))
+func child_init():
+	set_states()
+	set_stats()
+	reset_values()
+
+func set_stats():
 	player = get_tree().get_first_node_in_group("Player")
 	hp = stat_data.hp
 	acceleration = movement_data.acceleration
 	jump = movement_data.jump_velocity
 	speed = movement_data.speed
-	reset_values()
-
-
+	
 func reset_values():
 	current_hp = hp
 	velocity = Vector2.ZERO
@@ -62,6 +53,20 @@ func reset_values():
 	health_bar.max_value = hp
 	set_healthbar()
 
+func set_states():
+	enemy_idle_state.found.connect(fsm.change_state.bind(enemy_aggro_state))
+	enemy_idle_state.wander.connect(fsm.change_state.bind(enemy_wander_state))
+	
+	enemy_wander_state.found.connect(fsm.change_state.bind(enemy_aggro_state))
+	enemy_wander_state.stopped.connect(fsm.change_state.bind(enemy_idle_state))
+	
+	enemy_aggro_state.lost.connect(fsm.change_state.bind(enemy_idle_state))
+	enemy_aggro_state.attack.connect(fsm.change_state.bind(enemy_attack_state))
+	
+	enemy_attack_state.aggro.connect(fsm.change_state.bind(enemy_aggro_state))
+	
+	enemy_damaged_state.out.connect(fsm.change_state.bind(enemy_idle_state))
+	
 func _physics_process(delta):
 	random_number = rng.randf()
 	input_axis = get_input_axis(direction)
@@ -83,12 +88,12 @@ func get_input_axis(direction_axis: Vector2) -> int:
 	elif direction_axis.x < 0 : ia = -1
 	return ia
 
-func handle_jump(direction_jump: Vector2):
-	if direction_jump.y * direction_jump.y < 400: direction_jump.y = 0
-	var can_jump = is_on_floor() or coyote_jump_timer.time_left > 0.0
-	var need_jump = rad_to_deg(direction_jump.angle()) < 0 - stat_data.max_walk_angle && rad_to_deg(direction_jump.angle()) > -180 + stat_data.max_walk_angle
-	if can_jump && need_jump:
-		velocity.y = movement_data.jump_velocity
+#func handle_jump(direction_jump: Vector2):
+	#if direction_jump.y * direction_jump.y < 400: direction_jump.y = 0
+	#var can_jump = is_on_floor() or coyote_jump_timer.time_left > 0.0
+	#var need_jump = rad_to_deg(direction_jump.angle()) < 0 - stat_data.max_walk_angle && rad_to_deg(direction_jump.angle()) > -180 + stat_data.max_walk_angle
+	#if can_jump && need_jump:
+		#velocity.y = movement_data.jump_velocity
 
 func handle_enemy_finder() -> bool:
 	var collision_object = enemy_finder_ray.get_collider()
