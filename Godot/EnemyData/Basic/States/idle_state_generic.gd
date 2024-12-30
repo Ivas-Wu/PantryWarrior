@@ -5,6 +5,7 @@ signal found
 signal wander
 
 @onready var actor = $"../.." as generic_enemy
+@onready var idle = $"../../Idle"
 
 func _ready():
 	set_physics_process(false)
@@ -12,6 +13,7 @@ func _ready():
 func _enter_state() -> void:
 	set_physics_process(true)
 	actor.animation_player.play("Idle") 
+	actor.sprite_script.set_current_sprite(idle)
 	actor.velocity = Vector2.ZERO
 
 func _exit_state() -> void:

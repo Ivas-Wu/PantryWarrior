@@ -6,6 +6,7 @@ signal stopped
 signal jump
 
 @onready var actor = $"../.." as generic_enemy
+@onready var wander = $"../../Wander"
 
 var prev_position : Vector2
 
@@ -16,6 +17,7 @@ func _enter_state() -> void:
 	set_physics_process(true)
 	actor.direction.x = 1 if actor.current_direction else -1
 	actor.animation_player.play("Wander")
+	actor.sprite_script.set_current_sprite(wander)
 	actor.speed *= 0.5
 
 func _exit_state() -> void:

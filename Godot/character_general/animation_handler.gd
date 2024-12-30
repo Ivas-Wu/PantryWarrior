@@ -15,12 +15,16 @@ func get_current_sprite(default = null):
 	
 func set_current_sprite(sprite):
 	var current = get_current_sprite()
-	current.visible = false
-	
-	var flipped = current.flip_h
-	character.current_sprite = sprite
-	character.current_sprite.flip_h = flipped
-	
+	var flipped  = false
+	if current:
+		current.visible = false
+		
+		flipped = current.flip_h
+		character.current_sprite = sprite
+		character.current_sprite.flip_h = flipped
+	else:
+		character.current_sprite = sprite
+		
 	get_current_sprite().visible = true
 	
 	return flipped

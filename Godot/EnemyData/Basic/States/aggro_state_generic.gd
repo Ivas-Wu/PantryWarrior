@@ -4,6 +4,7 @@ extends State
 signal lost
 signal attack
 @onready var actor = $"../.." as generic_enemy
+@onready var run = $"../../Run"
 
 func _ready():
 	set_physics_process(false)
@@ -12,6 +13,7 @@ func _enter_state() -> void:
 	set_physics_process(true)
 	actor.movement_update_buffer.stop()
 	actor.animation_player.play("Running")
+	actor.sprite_script.set_current_sprite(run)
 
 func _exit_state() -> void:
 	set_physics_process(false)

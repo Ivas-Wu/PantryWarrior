@@ -26,6 +26,7 @@ extends base_character_class
 @onready var attack_range_ray : RayCast2D = $AttackRange
 
 @onready var animation_player = $AnimationPlayer
+@onready var idle = $Idle
 
 var player : Player
 var direction : Vector2
@@ -139,3 +140,7 @@ func set_healthbar():
 	
 func handle_death():
 	queue_free()
+	
+func flip_animation(input_axis):
+	if input_axis:
+		sprite_script.get_current_sprite(idle).flip_h = input_axis < 0
